@@ -1,7 +1,7 @@
 import lineSphereSweep from './line-sphere-sweep.js'
-import pool            from './pool-vec2.js'
+import Pool            from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
 import * as vec2       from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
-import vec2SetLength   from './vec2-set-length.js'
+import vec2SetLength   from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/set-length.js'
 
 
 const VERY_CLOSE_DISTANCE = 0.05
@@ -38,18 +38,18 @@ function collideWithWorld (lines, pos, radius, vel, contact, collisionRecursionD
     // get nearest collision from line segments
     if (!lineSphereSweep(lines, pos, radius, vel, contact)) {
         // no collision, move the full distance
-        return vec2.add(pool.malloc(), pos, vel)
+        return vec2.add(Pool.malloc(), pos, vel)
     }
 
     // find the point of desired final location of the entity
-    const destinationPoint = vec2.add(pool.malloc(), pos, vel)
-    const newBasePoint = vec2.copy(pool.malloc(), pos)
+    const destinationPoint = vec2.add(Pool.malloc(), pos, vel)
+    const newBasePoint = vec2.copy(Pool.malloc(), pos)
 
     // only update if we are not already very close and if so, we only
     // move very close to the intersection, not the exact spot.
     const movementDistance = vec2.length(vel) * contact.time
     if (movementDistance >= VERY_CLOSE_DISTANCE) {
-        const V = vec2SetLength(pool.malloc(), vel, movementDistance - VERY_CLOSE_DISTANCE)
+        const V = vec2SetLength(Pool.malloc(), vel, movementDistance - VERY_CLOSE_DISTANCE)
 
         vec2.add(newBasePoint, pos, V)
 
@@ -59,7 +59,7 @@ function collideWithWorld (lines, pos, radius, vel, contact, collisionRecursionD
         vec2.scale(V, V, VERY_CLOSE_DISTANCE)
         vec2.subtract(contact.position, contact.position, V)
 
-        pool.free(V)
+        Pool.free(V)
     }
 
     // determine the sliding plane
@@ -67,20 +67,20 @@ function collideWithWorld (lines, pos, radius, vel, contact, collisionRecursionD
     // project the destination point onto the sliding plane
     const slidePlaneOrigin = contact.position
 
-    const slidePlaneNormal = vec2.subtract(pool.malloc(), newBasePoint, contact.position)
+    const slidePlaneNormal = vec2.subtract(Pool.malloc(), newBasePoint, contact.position)
     vec2.normalize(slidePlaneNormal, slidePlaneNormal)
 
     const planeDistance = signedDistanceTo(slidePlaneNormal, slidePlaneOrigin, destinationPoint)
 
-    const newDestinationPoint = vec2.scaleAndAdd(pool.malloc(), destinationPoint, slidePlaneNormal, -planeDistance)
+    const newDestinationPoint = vec2.scaleAndAdd(Pool.malloc(), destinationPoint, slidePlaneNormal, -planeDistance)
 
     // Generate slide vector. Becomes the new velocity vector in next iteration
-    const newVelocityVector = vec2.subtract(pool.malloc(), newDestinationPoint, contact.position)
+    const newVelocityVector = vec2.subtract(Pool.malloc(), newDestinationPoint, contact.position)
 
 
-    pool.free(destinationPoint)
-    pool.free(newDestinationPoint)
-    pool.free(slidePlaneNormal)
+    Pool.free(destinationPoint)
+    Pool.free(newDestinationPoint)
+    Pool.free(slidePlaneNormal)
 
     // dont recurse if the new velocity is very small
     if (vec2.length(newVelocityVector) < VERY_CLOSE_DISTANCE)

@@ -1,5 +1,5 @@
 import lineNormal from './line-normal.js'
-import pool       from './pool-vec2.js'
+import Pool       from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
 import segseg     from './segseg.js'
 import * as vec2  from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
 
@@ -10,8 +10,8 @@ const EPSILON = 1e-8
 export default function lineSweep (lines, start, delta, contact) {
     let nearest, nearestTime = 0
 
-    const isect = pool.malloc()  // the intersection if there is one
-    const end = pool.malloc(start[0] + delta[0], start[1] + delta[1])
+    const isect = Pool.malloc()  // the intersection if there is one
+    const end = Pool.malloc(start[0] + delta[0], start[1] + delta[1])
 
     for (let i=0; i < lines.length; i++) {
         const line = lines[i];
@@ -26,8 +26,8 @@ export default function lineSweep (lines, start, delta, contact) {
 
     let nearTime = nearestTime / vec2.length(delta)
     if (nearTime > 1) {
-        pool.free(isect)
-        pool.free(end)
+        Pool.free(isect)
+        Pool.free(end)
         return false
     }
 
@@ -49,8 +49,8 @@ export default function lineSweep (lines, start, delta, contact) {
         contact.time = nearTime
     }
 
-    pool.free(isect)
-    pool.free(end)
+    Pool.free(isect)
+    Pool.free(end)
 
     return !!nearest
 }

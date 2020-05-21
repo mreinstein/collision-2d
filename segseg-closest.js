@@ -5,7 +5,7 @@
 // https://www.mathworks.com/matlabcentral/fileexchange/32487-shortest-distance-between-two-line-segments
 
 import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
-import pool      from './pool-vec2.js'
+import Pool      from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
 
 
 const SMALL_NUM = 0.00000001 // anything that avoids division overflow
@@ -16,9 +16,9 @@ const SMALL_NUM = 0.00000001 // anything that avoids division overflow
 //    Return: the shortest distance between S1 and S2
 
 export default function dist3D_Segment_to_Segment (S1, S2, detail) {
-    const u = pool.malloc()
-    const v = pool.malloc()
-    const w = pool.malloc()
+    const u = Pool.malloc()
+    const v = Pool.malloc()
+    const w = Pool.malloc()
 
     vec2.subtract(u, S1[1], S1[0])
     vec2.subtract(v, S2[1], S2[0])
@@ -110,16 +110,16 @@ export default function dist3D_Segment_to_Segment (S1, S2, detail) {
     if (tc > 1)
         console.warn('WARNING: tc > 1:', tc)
 
-    const s1tmp = pool.malloc()
+    const s1tmp = Pool.malloc()
     vec2.scale(s1tmp, u, sc)
 
-    const s2tmp = pool.malloc()
+    const s2tmp = Pool.malloc()
     vec2.scale(s2tmp, v, tc)
 
-    const diff = pool.malloc()
+    const diff = Pool.malloc()
     vec2.subtract(diff, s1tmp, s2tmp)
 
-    const dP = pool.malloc()
+    const dP = Pool.malloc()
     vec2.add(dP, w, diff)
 
     const closestDistance = vec2.length(dP)
@@ -133,13 +133,13 @@ export default function dist3D_Segment_to_Segment (S1, S2, detail) {
     // get the difference of the two closest points
     //Vector   dP = w + (sc * u) - (tc * v);  // =  S1(sc) - S2(tc)
 
-    pool.free(u)
-    pool.free(v)
-    pool.free(w)
-    pool.free(s1tmp)
-    pool.free(s2tmp)
-    pool.free(diff)
-    pool.free(dP)
+    Pool.free(u)
+    Pool.free(v)
+    Pool.free(w)
+    Pool.free(s1tmp)
+    Pool.free(s2tmp)
+    Pool.free(diff)
+    Pool.free(dP)
 
     return closestDistance
 

@@ -1,5 +1,5 @@
 import TraceInfo from './TraceInfo.js'
-import pool      from './pool-vec2.js'
+import Pool      from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
 import toji      from './toji-tris.js'
 import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
 
@@ -9,7 +9,7 @@ const traceInfo = new TraceInfo()
 
 export default function linesSphereSweep (lines, position, radius, delta, contact) {
 
-    const endPoint = vec2.add(pool.malloc(), position, delta)
+    const endPoint = vec2.add(Pool.malloc(), position, delta)
 
     traceInfo.resetTrace(position, endPoint, radius)
 
@@ -29,7 +29,7 @@ export default function linesSphereSweep (lines, position, radius, delta, contac
         //contact.collider = line
     }
 
-    pool.free(endPoint)
+    Pool.free(endPoint)
 
     return traceInfo.collision    
 }
