@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+    <title>collision response experiments</title>
+    <meta name=theme-color content=#303F9F><meta name=viewport content="width=device-width,minimum-scale=1">
+    <style>
+        body {
+          background-color: whitesmoke;
+          padding: 10px;
+        }
+
+        canvas {
+          background-color: black;
+        }
+
+    </style>
+</head>
+<body>
+
+  <canvas width="600" height="600"></canvas>
+
+
+<script type="module">
+
+import collideAndSlide from './collide.js'
+import contact         from './contact.js'
+import * as vec2       from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
+
+
+const canvas = document.querySelector('canvas')
+const ctx = canvas.getContext('2d')
+
+const lines = [
+  [ [ 10, 10 ], [ 10, 590 ] ],
+  [ [ 590, 10 ], [ 10, 10 ] ],
+  [ [ 590, 590 ], [ 590, 10 ] ],
+  [ [ 10, 590 ],  [ 590, 590 ] ],
+
+  [ [ 0, 100 ], [ 100, 100 ] ],
+  [ [ 100, 100 ], [ 400, 400 ] ],
+
+  [ [ 480, 400 ], [ 500, 100 ] ]
+]
+
+let position = [ 200, 160 ]
+const sphereRadius = 20
+const move = [ 0, 0 ]
+const c = contact()
+
+const inputState = {
+  left: false,
+  right: false,
+  down: false,
+  up: false
+}
+
+
+window.addEventListener('keydown', function (ev) {
+  if (ev.key === 'e')
+    inputState.up = true
+
+  if (ev.key === 'd')
+    inputState.down = true
+
+  if (ev.key === 'f')
+    inputState.right = true
+
+  if (ev.key === 's')
+    inputState.left = true
+})
+
+window.addEventListener('keyup', function (ev) {
+  if (ev.key === 'e')
+    inputState.up = false
+
+  if (ev.key === 'd')
+    inputState.down = false
+
+  if (ev.key === 'f')
+    inputState.right = false
+
+  if (ev.key === 's')
+    inputState.left = false
+})
+
+
+function physics () {
+  // run physics logic
+  const velocity = 2
+
+  move[0] = 0
+  move[1] = 0
+  if (inputState.up)
+    move[1] -= (1 * velocity)
+  if (inputState.down)
+    move[1] += (1 * velocity)
+  if (inputState.left)
+    move[0] -= (1 * velocity)
+  if (inputState.right)
+    move[0] += (1 * velocity)
+
+  // update the physics based on move
+  if (move[0] !== 0 || move[1] !== 0 )
+    collideAndSlide(lines, position, sphereRadius, move, c)
+
+}
+
+
+function update () {
+  physics()
+
+  ctx.clearRect(0,0, 600, 600)
+
+  ctx.strokeStyle = 'white'
+  ctx.strokeWidth = 1 / devicePixelRatio
+
+  ctx.beginPath()
+
+  for (const line of lines) {
+    ctx.moveTo(line[0][0], line[0][1])
+    ctx.lineTo(line[1][0], line[1][1])
+  }
+
+  ctx.stroke()
+
+  ctx.beginPath()
+  ctx.strokeStyle = 'yellow'
+  ctx.ellipse(position[0], position[1], sphereRadius, sphereRadius, Math.PI / 4, 0, 2 * Math.PI)
+  ctx.stroke()
+
+  requestAnimationFrame(update)
+}
+
+
+requestAnimationFrame(update)
+
+//setInterval(update, 200)
+
+</script>
+</body>
+</html>

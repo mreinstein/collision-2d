@@ -1,0 +1,56 @@
+import lineNormal from './line-normal.js'
+import pool       from './pool-vec2.js'
+import segseg     from './segseg.js'
+import * as vec2  from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
+
+
+const EPSILON = 1e-8
+
+
+export default function lineSweep (lines, start, delta, contact) {
+    let nearest, nearestTime = 0
+
+    const isect = pool.malloc()  // the intersection if there is one
+    const end = pool.malloc(start[0] + delta[0], start[1] + delta[1])
+
+    for (let i=0; i < lines.length; i++) {
+        const line = lines[i];
+        if (segseg(start, end, line[0], line[1], isect)) {
+            const dist = vec2.distance(start, isect)
+            if (!nearest || dist < nearestTime) {
+                nearestTime = dist
+                nearest = line
+            }
+        }
+    }
+
+    let nearTime = nearestTime / vec2.length(delta)
+    if (nearTime > 1) {
+        pool.free(isect)
+        pool.free(end)
+        return false
+    }
+
+    if (nearTime <= EPSILON)
+        nearTime = 0
+
+    if (nearest) {
+        vec2.scaleAndAdd(contact.position, start, delta, nearTime)
+        contact.collider = nearest
+
+        // determine which normal is on the right side of the plane for the intersection
+        lineNormal(contact.normal, nearest[0], nearest[1])
+
+        // if dot product is less than 0, flip the normal 180 degrees
+        const dot = vec2.dot(delta, contact.normal)
+        if (dot > 0)
+            vec2.negate(contact.normal, contact.normal)
+
+        contact.time = nearTime
+    }
+
+    pool.free(isect)
+    pool.free(end)
+
+    return !!nearest
+}

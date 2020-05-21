@@ -1,0 +1,16 @@
+/*
+information related to a physics system collision.
+position is the point of contact between the two objects (or an estimation of it, in some sweep tests).
+normal is the surface normal at the point of contact.
+delta is the overlap between the two objects, and is a vector that can be added to the colliding object’s position to move it back to a non-colliding state.
+time is a fraction from 0 to 1 indicating how far along the line the collision occurred. (This is the t value for the line equation L(t) = A + t * (B - A))
+*/
+export default function contact () {
+    return {
+        collider : null,
+        position : [ 0, 0 ],
+        delta    : [ 0, 0 ],
+        normal   : [ 0, 0 ],
+        time     : 0
+    }
+}
