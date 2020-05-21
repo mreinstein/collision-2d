@@ -10,7 +10,7 @@ const SMALL_NUM = 0.00000001
 //
 //    Input:  two tracks Tr1 and Tr2
 //    Return: the time at which the two tracks are closest from 0..1
-export default function cpa_time (Tr1, Tr2) {
+export default function cpaTime (Tr1, Tr2) {
     const v1 = vec2.subtract(Pool.malloc(), Tr1[1], Tr1[0])
     const v2 = vec2.subtract(Pool.malloc(), Tr2[1], Tr2[0])
 

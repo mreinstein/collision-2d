@@ -14,14 +14,14 @@ import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
  *   Params
  *        pos1,  pos2   Coordinates of endpoints of one segment.
  *        pos3,  pos4   Coordinates of endpoints of other segment.
- *        intersection  array that gets filled in with the point of intersection
+ *        intersection  vec2 that gets filled in with the point of intersection
  *
  *   The value returned by the function is one of:
  *        false if there is no intersection or the lines are colinear
  *        true if there's an intersection
  */
 
- export default function segseg (pos1, pos2, pos3, pos4, intersection) {
+ export default function segmentSegmentOverlap (pos1, pos2, pos3, pos4, intersection) {
     // Compute a1, b1, c1, where line joining points 1 and 2
     // is "a1 x  +  b1 y  +  c1  =  0".
     const a1 = pos2[1] - pos1[1];

@@ -15,7 +15,7 @@ const SMALL_NUM = 0.00000001 // anything that avoids division overflow
 //    Input:  two 2D line segments S1 and S2
 //    Return: the shortest distance between S1 and S2
 
-export default function dist3D_Segment_to_Segment (S1, S2, detail) {
+export default function segSegClosest (S1, S2, detail) {
     const u = Pool.malloc()
     const v = Pool.malloc()
     const w = Pool.malloc()

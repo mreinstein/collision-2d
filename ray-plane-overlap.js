@@ -7,7 +7,7 @@ import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
 
 // returns the distance from the ray origin to the plane along the ray
 // @param v2 rVector must be normalized
-export default function intersectRayPlane (rOrigin, rVector, pOrigin, pNormal) {
+export default function rayPlaneOverlap (rOrigin, rVector, pOrigin, pNormal) {
     const d = -vec2.dot(pNormal, pOrigin)
     const numer = vec2.dot(pNormal, rOrigin) + d
     const denom = vec2.dot(pNormal, rVector)

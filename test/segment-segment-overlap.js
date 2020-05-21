@@ -1,9 +1,9 @@
-import t      from './assert.js';
-import segseg from '../segseg.js';
+import t      from './_assert.js'
+import segseg from '../segment-segment-overlap.js'
 
 
 
-const result = [ 0, 0 ];
+const result = [ 0, 0 ]
 
 
 /*

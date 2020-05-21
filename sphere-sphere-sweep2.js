@@ -12,11 +12,11 @@ const impulse = pool.malloc()
 const scaledImpulse = pool.malloc()
 
 
-// TODO: this code is totally untested! Before using this needs to be evaluated
+// TODO: this code is totally broken! needs fixing/re-work
 
 
 // collide 2 spherical rigid bodies, updating their positions and velocities
-export default function itemCollide (ball1, ball2) {
+export default function sphereSphereSweep2 (ball1, ball2) {
     const body1 = ball1.findComponent('rigidbody')
     const body2 = ball2.findComponent('rigidbody')
 

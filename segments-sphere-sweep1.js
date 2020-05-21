@@ -7,7 +7,7 @@ import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
 const traceInfo = new TraceInfo()
 
 
-export default function linesSphereSweep (lines, position, radius, delta, contact) {
+export default function segmentsSphereSweep1 (lines, position, radius, delta, contact) {
 
     const endPoint = vec2.add(Pool.malloc(), position, delta)
 

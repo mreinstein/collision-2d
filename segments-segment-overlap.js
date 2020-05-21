@@ -1,13 +1,13 @@
-import lineNormal from './line-normal.js'
+import lineNormal from './segment-normal.js'
 import Pool       from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
-import segseg     from './segseg.js'
+import segseg     from './segment-segment-overlap.js'
 import * as vec2  from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
 
 
 const EPSILON = 1e-8
 
 
-export default function lineSweep (lines, start, delta, contact) {
+export default function segmentsSegmentOverlap (lines, start, delta, contact) {
     let nearest, nearestTime = 0
 
     const isect = Pool.malloc()  // the intersection if there is one
