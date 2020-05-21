@@ -1,8 +1,7 @@
-import intersectRayPlane from './ray-planes-intersect.js'
-import lineSphereSweep   from './line-sphere-sweep.js'
-import pool              from './pool-vec2.js'
-import * as vec2         from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
-import vec2SetLength     from './vec2-set-length.js'
+import lineSphereSweep from './line-sphere-sweep.js'
+import pool            from './pool-vec2.js'
+import * as vec2       from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
+import vec2SetLength   from './vec2-set-length.js'
 
 
 const VERY_CLOSE_DISTANCE = 0.05
@@ -21,7 +20,6 @@ export default function collideAndSlide (lines, position, radius, delta, contact
     
     // TODO: handle gravity and movement separately
     // TODO: handle ellipsoid space
-    // TODO: 
     const p = collideWithWorld(lines, position, radius, delta, contact)
     vec2.copy(position, p)
 }

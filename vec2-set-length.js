@@ -1,5 +1,3 @@
-//import vec2GetAngle from './vec2-get-angle.js'
-
 
 function vec2GetAngle (vec2) {
   return Math.atan2(vec2[1], vec2[0])
