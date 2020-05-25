@@ -1,10 +1,5 @@
 # collision-2d
 
-a carefully curated collection of 2d javascript collision routines
-
-
-## why another collision package?
-
 There are many javascript collision routines and libraries for 2d. None satisifed all of these criteria:
 
 * consistent API interface
@@ -57,7 +52,7 @@ Here is the structure of a `contact` object:
 plural forms imply a collection. e.g., `segments-segment-ovelap` checks one line segment against a set of line segments. If there is more than one collision, the closest collision is set in the `contact` argument.
 
 
-## credit
+## credits
 
 Most of these collision checks were adapted from existing open source modules:
 
