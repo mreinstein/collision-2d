@@ -15,4 +15,18 @@ function deepEqual (a, b) {
 }
 
 
-export default { equal, deepEqual }
+function almostEqual (actual, expected, message='') {
+    if (Math.abs(actual - expected) > 1e-8)
+        equal(actual, expected, message);
+}
+
+
+function notNull (value) {
+    if (value === null) 
+        throw new Error("value is unexpectedly null")
+  
+    return value
+}
+
+
+export default { almostEqual, notNull, equal, deepEqual }

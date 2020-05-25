@@ -23,6 +23,7 @@ so here we are!
 * aabb-aabb-overlap
 * aabb-aabb-sweep1
 * aabb-aabb-sweep2
+* aabb-point-overlap
 * aabb-segment-overlap
 * ray-plane-overlap
 * segment-normal

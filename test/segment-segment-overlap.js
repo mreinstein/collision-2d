@@ -1,5 +1,5 @@
 import t      from './_assert.js'
-import segseg from '../segment-segment-overlap.js'
+import segseg from '../src/segment-segment-overlap.js'
 
 
 
