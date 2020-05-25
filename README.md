@@ -5,15 +5,15 @@ a carefully curated collection of 2d javascript collision routines
 
 ## why another collision package?
 
-over the years I've found dozens of collision routines and libraries for 2d.
-None that satisifed all of these criteria:
+There are many javascript collision routines and libraries for 2d. None satisifed all of these criteria:
 
-* consistent API interface - most of the collision routines are one-off and each is a special snowflake. No uniform interface means ugly integration, and converting between different representations
-* avoids generating memory garbage - most of the toy collision routines out in the wild don't specifically avoid creating memory garbage, which thrashes the javascript garbage collector
-* consistent vector/matrix representation - gl-matrix is the industry standard. use that!
-* is data-oriented and purely functional - does not spew state all over your application by wrapping up methods and data. All functions are pure and accept common data structures
-* avoids bloat - many of the collision routines available are part of a larger physics engine, and that brings a lot of bloat. Things like gravity, rigid body handling, and complex solvers are a separate problem that don't belong in collision handling routines. keep the concerns separate!
-* uses pure es modules - we have a way out of proprietary module and bundling systems now.
+* consistent API interface
+* doesn't generate garbage
+* consistent vector/matrix/line representation
+* is data-oriented
+* is purely functional
+* collisions only - no gravity, rigid body handling, or complex solvers
+* pure es modules
 
 so here we are!
 
@@ -57,3 +57,9 @@ Here is the structure of a `contact` object:
 plural forms imply a collection. e.g., `segments-segment-ovelap` checks one line segment against a set of line segments. If there is more than one collision, the closest collision is set in the `contact` argument.
 
 
+## credit
+
+Most of these collision checks were adapted from existing open source modules:
+
+* https://github.com/noonat/intersect
+* https://github.com/kevzettler/gl-swept-sphere-triangle
