@@ -1,5 +1,4 @@
-import sign      from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/sign.js'
-import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
+import { sign, vec2 } from './deps.js'
 
 
 /*

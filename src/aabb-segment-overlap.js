@@ -1,5 +1,4 @@
-import clamp from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/clamp.js'
-import sign  from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/sign.js'
+import { clamp, sign } from './deps.js'
 
 
 /*

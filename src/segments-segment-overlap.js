@@ -1,7 +1,6 @@
-import lineNormal from './segment-normal.js'
-import Pool       from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
-import segseg     from './segment-segment-overlap.js'
-import * as vec2  from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
+import { Pool, vec2 } from './deps.js'
+import lineNormal     from './segment-normal.js'
+import segseg         from './segment-segment-overlap.js'
 
 
 const EPSILON = 1e-8

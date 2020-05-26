@@ -1,4 +1,4 @@
-import clamp         from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/clamp.js'
+import { clamp }     from './deps.js'
 import intersectAABB from './aabb-aabb-overlap.js'
 import intersectLine from './aabb-segment-overlap.js'
 

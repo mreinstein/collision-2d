@@ -1,5 +1,5 @@
 // from https://github.com/kevzettler/gl-swept-sphere-triangle
-import * as vec2      from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
+import { vec2 }       from './deps.js'
 import TraceInfo      from './TraceInfo.js'
 import lineNormal     from './segment-normal.js'
 import pointInSegment from './segment-point-overlap.js'

@@ -1,7 +1,6 @@
-import TraceInfo from './TraceInfo.js'
-import Pool      from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
-import toji      from './toji-tris.js'
-import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
+import TraceInfo      from './TraceInfo.js'
+import { Pool, vec2 } from './deps.js'
+import toji           from './toji-tris.js'
 
 
 const traceInfo = new TraceInfo()

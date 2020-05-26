@@ -1,11 +1,6 @@
 // determine the closest point between 2 line segments.
 // from http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
-
-// this is another implementation I looked at but didn't use:
-// https://www.mathworks.com/matlabcentral/fileexchange/32487-shortest-distance-between-two-line-segments
-
-import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
-import Pool      from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
+import { Pool, vec2 } from './deps.js'
 
 
 const SMALL_NUM = 0.00000001 // anything that avoids division overflow

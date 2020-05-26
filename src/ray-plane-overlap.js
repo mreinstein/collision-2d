@@ -1,8 +1,4 @@
-import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
-
-
-// TODO: look at sphere-sphere sweep test:
-// http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php?page=2
+import { vec2 } from './deps.js'
 
 
 // returns the distance from the ray origin to the plane along the ray

@@ -1,6 +1,5 @@
-import intersects from './aabb-aabb-overlap.js'
-import Pool       from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
-import * as vec2  from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
+import intersects     from './aabb-aabb-overlap.js'
+import { Pool, vec2 } from './deps.js'
 
 
 // Sweep two moving AABBs to see if and when they first and last were overlapping

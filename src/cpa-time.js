@@ -1,5 +1,4 @@
-import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js'
-import Pool      from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/pool.js'
+import { Pool, vec2 } from './deps.js'
 
 
 const SMALL_NUM = 0.00000001

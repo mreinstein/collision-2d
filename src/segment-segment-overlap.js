@@ -1,5 +1,5 @@
 // adapted from https://github.com/tmpvar/segseg
-import * as vec2 from 'https://cdn.jsdelivr.net/npm/gl-matrix@3.3.0/esm/vec2.js';
+import { vec2 } from './deps.js'
 
 
 /*  Ported from Mukesh Prasad's public domain code:
