@@ -21,9 +21,14 @@ import { vec2 } from './deps.js'
  *        true if there's an intersection
  */
 
- export default function segmentSegmentOverlap (pos1, pos2, pos3, pos4, intersection) {
+ export default function segmentSegmentOverlap (segment1, segment2, intersection) {
     // Compute a1, b1, c1, where line joining points 1 and 2
     // is "a1 x  +  b1 y  +  c1  =  0".
+    const pos1 = segment1[0];
+    const pos2 = segment1[1];
+    const pos3 = segment2[0];
+    const pos4 = segment2[1];
+
     const a1 = pos2[1] - pos1[1];
     const b1 = pos1[0] - pos2[0];
     const c1 = pos2[0] * pos1[1] - pos1[0] * pos2[1];

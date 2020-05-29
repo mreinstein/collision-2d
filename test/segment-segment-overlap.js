@@ -2,7 +2,6 @@ import t      from './_assert.js'
 import segseg from '../src/segment-segment-overlap.js'
 
 
-
 const result = [ 0, 0 ]
 
 
@@ -19,7 +18,7 @@ const result = [ 0, 0 ]
 
 */
 
-t.equal(segseg([-10, 0], [10, 0], [0, 5], [0, -5], result), true)
+t.equal(segseg([ [-10, 0], [10, 0] ], [ [0, 5], [0, -5] ], result), true)
 t.deepEqual(result, [0, 0])
 
 
@@ -35,7 +34,7 @@ t.deepEqual(result, [0, 0])
                 (5, 0)
 
 */
-t.equal(segseg([5, 5], [5, 0], [5, 5], [10, 5], result), true)
+t.equal(segseg([ [ 5, 5], [5, 0] ], [ [5, 5], [10, 5] ], result), true)
 t.deepEqual(result, [5,5])
 
 
@@ -45,7 +44,7 @@ t.deepEqual(result, [5,5])
   (-10, 0) o----o--------o-----o  (10, 0)
 
 */
-t.equal(segseg([-10, 0], [10, 0], [-2, 0], [2, 0], result), false)
+t.equal(segseg([ [-10, 0], [10, 0] ], [ [-2, 0], [2, 0] ], result), false)
 
 
 /*
@@ -56,7 +55,7 @@ t.equal(segseg([-10, 0], [10, 0], [-2, 0], [2, 0], result), false)
   (-10, 0) o-------------o (10, 0)
 
 */
-t.equal(segseg([-10, 0], [10, 0], [-10, 5], [10, 5], result), false)
+t.equal(segseg([ [-10, 0], [10, 0] ], [ [-10, 5], [10, 5] ], result), false)
 
 
 /*
@@ -68,7 +67,7 @@ t.equal(segseg([-10, 0], [10, 0], [-10, 5], [10, 5], result), false)
               (0, 0)
 
 */
-t.equal(segseg([-10, 0], [0, 0], [-2, 5], [2, 0], result), false)
+t.equal(segseg([ [-10, 0], [0, 0] ], [ [-2, 5], [2, 0] ], result), false)
 
 
 /*
@@ -81,7 +80,7 @@ t.equal(segseg([-10, 0], [0, 0], [-2, 5], [2, 0], result), false)
               (0, 0)
 
 */
-t.equal(segseg([-10, 0], [0, 0], [-2, 5], [-2, 1], result), false)
+t.equal(segseg([ [-10, 0], [0, 0] ], [ [-2, 5], [-2, 1] ], result), false)
 
 
 /*
@@ -95,4 +94,4 @@ t.equal(segseg([-10, 0], [0, 0], [-2, 5], [-2, 1], result), false)
     (-25, -5)
 
 */
-t.equal(segseg([-10, 0], [0, 0], [-5, 5], [-25, -5], result), false)
+t.equal(segseg([ [-10, 0], [0, 0] ], [ [-5, 5], [-25, -5] ], result), false)

@@ -14,7 +14,7 @@ export default function segmentsSegmentOverlap (lines, start, delta, contact) {
 
     for (let i=0; i < lines.length; i++) {
         const line = lines[i];
-        if (segseg(start, end, line[0], line[1], isect)) {
+        if (segseg([ start, end ], line, isect)) {
             const dist = vec2.distance(start, isect)
             if (!nearest || dist < nearestTime) {
                 nearestTime = dist
