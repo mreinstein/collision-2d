@@ -17,22 +17,88 @@ so here we are!
 
 ### aabb-aabb-overlap
 
+
 ```javascript
 const c = contact()
-const collided = aabbAABBOverlap(rect, rect2, c)
+const collided = aabbAABBOverlap(aabb, aabb2, c)
 ```
 
-* aabb-aabb-sweep1
-* aabb-aabb-sweep2
-* aabb-point-overlap
-* aabb-segment-overlap
-* ray-plane-overlap
-* segment-normal
-* segment-point-overlap
-* segment-segment-overlap
-* segments-segment-overlap
-* segments-sphere-sweep1
-* sphere-sphere-sweep2
+
+### aabb-aabb-sweep1
+
+```javascript
+const c = contact()
+const collided = aabbAABBSweep1(aabb, aabb2, delta, c)
+```
+
+
+### aabb-aabb-sweep2
+
+```javascript
+const c = contact()
+const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, c)
+```
+
+
+### aabb-point-overlap
+
+```javascript
+const c = contact()
+const collided = aabbPointOverlap(aabb, point, c)
+```
+
+
+### aabb-segment-overlap
+
+```javascript
+const c = contact()
+const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, c)
+```
+
+
+### ray-plane-overlap
+
+```javascript
+const distanceFromRayOriginToPlane = rayPlaneOverlap(rayOrigin, rayVector, planeOrigin, planeNormal)
+```
+
+
+### segment-normal
+
+```javascript
+const normal = vec2.create()
+segmentNormal(normal, pos1, pos2)
+```
+
+
+### segment-point-overlap
+
+```javascript
+const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, setPoint1) // true or false
+```
+
+
+### segment-segment-overlap
+
+```javascript
+const segmentsOverlap = segmentSegmentOverlap(pos1, pos2, pos3, pos4, intersection) 
+```
+
+
+### segments-segment-overlap
+
+```javascript
+const c = contact()
+const segmentsOverlap = segmentsSegmentOverlap(segments, start, delta, c)
+```
+
+
+### segments-sphere-sweep1
+
+```javascript
+const c = contact()
+const collided = segmentsSphereSweep1(segments, position, radius, delta, c)
+```
 
 
 ## conventions
