@@ -74,7 +74,7 @@ segmentNormal(normal, pos1, pos2)
 ### segment-point-overlap
 
 ```javascript
-const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, setPoint1) // true or false
+const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
 ```
 
 
