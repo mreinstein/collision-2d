@@ -1,5 +1,5 @@
-import intersects     from './aabb-aabb-overlap.js'
-import { Pool, vec2 } from './deps.js'
+import aabbAABBOverlap from './aabb-aabb-overlap.js'
+import { Pool, vec2 }  from './deps.js'
 
 
 // Sweep two moving AABBs to see if and when they first and last were overlapping
@@ -9,7 +9,8 @@ import { Pool, vec2 } from './deps.js'
 // B previous state of AABB B
 // va displacment vector of A
 // vb displacement vector of B
-export default function aabbAABBSweep2 (A, va, B, vb) {
+// contact
+export default function aabbAABBSweep2 (A, va, B, vb, contact) {
   let u0 = 0 // normalized time of first collision
   let u1 = 0 // normalized time of second collision
 
@@ -23,8 +24,7 @@ export default function aabbAABBSweep2 (A, va, B, vb) {
   let u_1 = [ 1, 1 ] // last times of overlap along each axis
 
   // check if they were overlapping  on the previous frame
-  const collisionInfo = true
-  const collision = intersects(A, B, collisionInfo)
+  const collision = aabbAABBOverlap(A, B, contact)
   if (collision) {
     //u0 = u1 = 0
     return collision
@@ -66,15 +66,14 @@ export default function aabbAABBSweep2 (A, va, B, vb) {
        something.
   time a copy of sweep.hit.time or 1 if the object didn’t hit anything during
        the sweep. */
-  const hit = { time: 1, position: Pool.malloc() }
 
   // collision only occurs when the first time of overlap occurs before
   // the last time of overlap
-  if (u0 <= u1) {
-    hit.time = u0
-    hit.position[0] = (va[0] * u0) + ahalf[0]
-    hit.position[1] = (va[1] * u0) + ahalf[1]
+  if (u0 <= u1 && contact) {
+      contact.time = u0
+      contact.position[0] = (va[0] * u0) + ahalf[0]
+      contact.position[1] = (va[1] * u0) + ahalf[1]
   }
     
-  return hit
+  return u0 <= u1
 }
