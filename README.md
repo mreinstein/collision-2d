@@ -15,7 +15,13 @@ so here we are!
 
 ## available collision checks
 
-* aabb-aabb-overlap
+### aabb-aabb-overlap
+
+```javascript
+const c = contact()
+const collided = aabbAABBOverlap(rect, rect2, c)
+```
+
 * aabb-aabb-sweep1
 * aabb-aabb-sweep2
 * aabb-point-overlap
