@@ -82,7 +82,7 @@ const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, segPoint1) // tru
 
 ```javascript
 const intersectionPoint = vec2.create()
-if (segmentSegmentOverlap(segment1, segment2, intersectionPoint)) {
+if (segmentSegmentOverlap(segment1Point1, segment1Point2, segment2Point1, segment2Point2, intersectionPoint)) {
     // if we get here, intersectionPoint is filled in with where the 2 segments overlap
 }
 ```
