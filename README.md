@@ -133,3 +133,5 @@ Most of these collision checks were adapted from existing open source modules:
 
 * https://github.com/noonat/intersect
 * https://github.com/kevzettler/gl-swept-sphere-triangle
+* https://gist.github.com/toji/2802287
+* http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php
