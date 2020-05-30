@@ -68,55 +68,36 @@ The data structure populated when a collision occurs
 
 ## available collision checks
 
-### aabb-aabb-overlap
+```javascript
+const collided = aabbAABBOverlap(aabb, aabb2, contact)
+```
 
 
 ```javascript
 const c = contact()
-const collided = aabbAABBOverlap(aabb, aabb2, c)
+const collided = aabbAABBSweep1(aabb, aabb2, delta, contact)
 ```
 
-
-### aabb-aabb-sweep1
 
 ```javascript
-const c = contact()
-const collided = aabbAABBSweep1(aabb, aabb2, delta, c)
+const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, contact)
 ```
 
-
-### aabb-aabb-sweep2
 
 ```javascript
-const c = contact()
-const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, c)
+const collided = aabbPointOverlap(aabb, point, contact)
 ```
 
-
-### aabb-point-overlap
 
 ```javascript
-const c = contact()
-const collided = aabbPointOverlap(aabb, point, c)
+const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contact)
 ```
 
-
-### aabb-segment-overlap
-
-```javascript
-const c = contact()
-const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, c)
-```
-
-
-### ray-plane-overlap
 
 ```javascript
 const distanceFromRayOriginToPlane = rayPlaneOverlap(rayOrigin, rayVector, planeOrigin, planeNormal)
 ```
 
-
-### segment-normal
 
 ```javascript
 const normal = vec2.create()
@@ -124,14 +105,10 @@ segmentNormal(normal, pos1, pos2)
 ```
 
 
-### segment-point-overlap
-
 ```javascript
 const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
 ```
 
-
-### segment-segment-overlap
 
 ```javascript
 const intersectionPoint = vec2.create()
@@ -141,19 +118,13 @@ if (segmentSegmentOverlap(segment1Point1, segment1Point2, segment2Point1, segmen
 ```
 
 
-### segments-segment-overlap
-
 ```javascript
-const c = contact()
-const segmentsOverlap = segmentsSegmentOverlap(segments, start, delta, c)
+const segmentsOverlap = segmentsSegmentOverlap(segments, start, delta, contact)
 ```
 
 
-### segments-sphere-sweep1
-
 ```javascript
-const c = contact()
-const collided = segmentsSphereSweep1(segments, position, radius, delta, c)
+const collided = segmentsSphereSweep1(segments, position, radius, delta, contact)
 ```
 
 
