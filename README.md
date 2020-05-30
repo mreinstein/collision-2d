@@ -12,6 +12,59 @@ There are many javascript collision routines and libraries for 2d. None satisife
 
 so here we are!
 
+## entities
+
+The collision routines all use these entity definitions
+
+
+### point
+
+a point is a 2d vector, which is represented as an array with 2 values:
+```javascript
+
+const position = [ 200, 150 ] // x: 200, y: 150
+
+```
+
+We use the fantastic `gl-matrix` `vec2` for representing these.
+
+
+### aabb
+
+an axially aligned bounding box
+```javascript
+const aabb = {
+    position: [ 200, 100 ],  // top left corner of the AABB
+    width: 50,
+    height: 50
+}
+```
+
+###  segment
+
+a line segment consists of 2 `point`s
+```javascript
+const segment = [
+    [ 0, 0 ],   // starting point of line
+    [ 100, 0 ]  // ending point of line
+]
+```
+
+
+### contact
+
+The data structure populated when a collision occurs
+
+```javascript
+{
+    collider : null,     // reference to the object that was collided with
+    position : [ 0, 0 ], // the exact position of the collision
+    delta    : [ 0, 0 ], // a vector that can be applied to get out of the colliding state
+    normal   : [ 0, 0 ], // the collision normal vector
+    time     : 0         // the time of the collision, from 0..1
+}
+```
+
 
 ## available collision checks
 
@@ -108,17 +161,6 @@ const collided = segmentsSphereSweep1(segments, position, radius, delta, c)
 
 All collision checking functions return a boolean indicating if there was a collision. They also accept an optional `contact` argument, which gets filled in if there is an actual collision.
 
-Here is the structure of a `contact` object:
-
-```javascript
-{
-    collider : null,     // reference to the object that was collided with
-    position : [ 0, 0 ], // the exact position of the collision
-    delta    : [ 0, 0 ], // a vector that can be applied to get out of the colliding state
-    normal   : [ 0, 0 ], // the collision normal vector
-    time     : 0         // the time of the collision, from 0..1
-}
-```
 
 "sweep" tests indicate at least 1 of the objects is moving. the number indicates how many objects are moving. e.g., `aabb-aabb-sweep2` means we are comparing 2 aabbs, both of which are moving.
 
