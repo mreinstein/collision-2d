@@ -74,7 +74,6 @@ const collided = aabbAABBOverlap(aabb, aabb2, contact)
 
 
 ```javascript
-const c = contact()
 const collided = aabbAABBSweep1(aabb, aabb2, delta, contact)
 ```
 
