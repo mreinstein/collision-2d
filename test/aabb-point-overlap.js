@@ -1,9 +1,9 @@
-import assert         from './_assert.js'
+//import assert         from './_assert.js'
 import intersectPoint from '../src/aabb-point-overlap.js'
 
 
 // should return null when not colliding
-const aabb = {
+let aabb = {
     position: [ -8, -8 ],
     width: 16,
     height: 16
@@ -30,9 +30,10 @@ points.forEach(point => {
 
 
 // should return hit when colliding
-const aabb = new AABB(new Point(0, 0), new Point(8, 8))
+aabb = new AABB(new Point(0, 0), new Point(8, 8))
 const point = new Point(4, 4)
 assert.notNull(intersectPoint(aabb, point, hit))
+
 
 /*
 // should set hit pos and normal to nearest edge of box

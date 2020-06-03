@@ -20,8 +20,7 @@ export default function aabbAABBSweep1 (aabb, aabb2, delta, contact) {
   if (delta[0] === 0 && delta[1] === 0)
     return intersectAABB(aabb, aabb2, contact)
 
-  const aabb2Pos = [ aabb2.position[0] + aabb2.width/2, aabb2.position[1] + aabb2.height/2 ]
-  const result = intersectLine(aabb, aabb2Pos, delta, aabb2.width/2, aabb2.height/2, contact)
+  const result = intersectLine(aabb, aabb2.position, delta, aabb2.width/2, aabb2.height/2, contact)
   if (result)
     contact.time = clamp(contact.time - EPSILON, 0, 1)
 

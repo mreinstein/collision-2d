@@ -20,8 +20,8 @@ export default function aabbSegmentOverlap (rect, pos, delta, paddingX, paddingY
     let signY = sign(scaleY)
     let halfx = rect.width / 2
     let halfy = rect.height / 2
-    let posx = rect.position[0] + halfx
-    let posy = rect.position[1] + halfy
+    let posx = rect.position[0]
+    let posy = rect.position[1]
     let nearTimeX = (posx - signX * (halfx + paddingX) - pos[0]) * scaleX
     let nearTimeY = (posy - signY * (halfy + paddingY) - pos[1]) * scaleY
     let farTimeX = (posx + signX * (halfx + paddingX) - pos[0]) * scaleX
@@ -33,8 +33,8 @@ export default function aabbSegmentOverlap (rect, pos, delta, paddingX, paddingY
     if (nearTimeX > farTimeY || nearTimeY > farTimeX)
         return false
 
-    let nearTime = nearTimeX > nearTimeY ? nearTimeX : nearTimeY
-    let farTime = farTimeX < farTimeY ? farTimeX : farTimeY
+    const nearTime = nearTimeX > nearTimeY ? nearTimeX : nearTimeY
+    const farTime = farTimeX < farTimeY ? farTimeX : farTimeY
 
     if (nearTime >= 1 || farTime <= 0)
         return false

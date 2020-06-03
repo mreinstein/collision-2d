@@ -34,7 +34,7 @@ We use the fantastic `gl-matrix` `vec2` for representing these.
 an axially aligned bounding box
 ```javascript
 const aabb = {
-    position: [ 200, 100 ],  // top left corner of the AABB
+    position: [ 200, 100 ],  // center point of the AABB
     width: 50,
     height: 50
 }

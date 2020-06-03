@@ -17,16 +17,14 @@ create an intersection point on the edge of the box.
 */
 export default function aabbPointOverlap (aabb, point, contact=null) {
     const halfX = aabb.width / 2
-    const posX = aabb.position[0] + halfX
 
-    const dx = point[0] - posX
+    const dx = point[0] - aabb.position[0]
     const px = halfX - Math.abs(dx)
     if (px <= 0)
         return false
 
     const halfY = aabb.height / 2
-    const posY = aabb.position[1] + halfY
-    const dy = point[1] - posY
+    const dy = point[1] - aabb.position[1]
     const py = halfY - Math.abs(dy)
     if (py <= 0)
         return false
@@ -36,14 +34,14 @@ export default function aabbPointOverlap (aabb, point, contact=null) {
             const sx = sign(dx)
             vec2.set(contact.delta, px * sx, 0)
             vec2.set(contact.normal, sx, 0)
-            contact.position[0] = posX + (halfX * sx)
+            contact.position[0] = aabb.position[0] + (halfX * sx)
             contact.position[1] = point[1]
         } else {
             const sy = sign(dy)
             vec2.set(contact.delta, 0, py * sy)
             vec2.set(contact.normal, 0, sy)
             contact.position[0] = point[0]
-            contact.position[1] = posY + (halfY * sy)
+            contact.position[1] = aabb.position[1] + (halfY * sy)
         }
 
         contact.time = 1
