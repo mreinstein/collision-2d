@@ -3,6 +3,7 @@ import { vec2 } from './deps.js'
 
 // returns the distance from the ray origin to the plane along the ray
 // @param v2 rVector must be normalized
+// @return Number the distance from the ray origin to the plane along the ray
 export default function rayPlaneOverlap (rOrigin, rVector, pOrigin, pNormal) {
     const d = -vec2.dot(pNormal, pOrigin)
     const numer = vec2.dot(pNormal, rOrigin) + d
