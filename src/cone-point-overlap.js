@@ -11,6 +11,7 @@ const delta = vec2.create()
 // @param number fieldOfView angle of cone in degrees
 // @param number maxDistance  max length of cone
 
+// TODO: consider passing the cone data as individual elements rather than a struct
 
 /*
 Determine if a point is within a cone

@@ -3,7 +3,7 @@
 There are many javascript collision routines and libraries for 2d. None satisifed all of these criteria:
 
 * consistent API interface
-* doesn't generate garbage
+* doesn't generate memory garbage
 * consistent vector/matrix/line representation
 * is data-oriented
 * is purely functional
