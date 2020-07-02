@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <title>collision-2d examples</title>
+    <meta name=theme-color content=#303F9F><meta name=viewport content="width=device-width,minimum-scale=1">
+    <style>
+        body {
+          font-family: monospace;
+          background-color: #2d66af;
+          text-align: center;
+          padding: 60px 0px;
+        }
+
+        canvas {
+            padding: 5px 6px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<script type="module">
+
+import aabbAabbOverlap from './figures/aabb-aabb-overlap.js'
+import aabbAabbSweep1 from './figures/aabb-aabb-sweep1.js'
+import aabbPoint       from './figures/aabb-point-overlap.js'
+import aabbSeg         from './figures/aabb-segment-overlap.js'
+
+
+function createExample (impl) {
+    const canvas = document.createElement('canvas')
+
+    if (!canvas)
+        return
+
+    document.body.appendChild(canvas)
+
+    const width = (canvas.width = 450)
+    const height = (canvas.height = 180)
+    const context = canvas.getContext('2d')
+
+    if (!context)
+        return
+
+    context.translate(0.5, 0.5)
+
+    return impl.init(context, width, height)
+}
+
+
+let last = 0
+
+
+function animate (t) {
+    const dt = (t - (last || t)) / 1000
+    last = t
+    
+    aabbPoint.draw(example, dt)
+    aabbSeg.draw(example2, dt)
+    aabbAabbOverlap.draw(example3, dt)
+    aabbAabbSweep1.draw(example4, dt)
+
+    requestAnimationFrame(animate)
+}
+
+
+const example = createExample(aabbPoint)
+const example2 = createExample(aabbSeg)
+const example3 = createExample(aabbAabbOverlap)
+const example4 = createExample(aabbAabbSweep1)
+
+requestAnimationFrame(animate)
+
+</script>
+
+</body>
+</html>
