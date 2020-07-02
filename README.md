@@ -144,6 +144,9 @@ plural forms imply a collection. e.g., `segments-segment-ovelap` checks one line
 Most of these collision checks were adapted from existing open source modules:
 
 * https://github.com/noonat/intersect
+* The diagrams are modified from noonat: https://noonat.github.io/intersect/
 * https://github.com/kevzettler/gl-swept-sphere-triangle
 * https://gist.github.com/toji/2802287
 * http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php
+* http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
+
