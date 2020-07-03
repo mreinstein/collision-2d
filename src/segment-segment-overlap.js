@@ -5,6 +5,12 @@
 // segseg(50, -50, -50, 50, 63.517, -7.843, -3,922, 31.759)
 
 
+// TOOD: consider investigating other functions for this. Maybe one of them
+// will handle negative values. e.g., maybe this?
+//    https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
+//    https://cp-algorithms.com/geometry/segments-intersection.html
+
+
 // adapted from https://github.com/tmpvar/segseg/blob/master/index.js
 import { vec2 } from './deps.js'
 
