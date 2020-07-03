@@ -96,9 +96,10 @@ import { vec2 } from './deps.js'
     x = b1 * c2 - b2 * c1;
     y = a2 * c1 - a1 * c2;
 
-    vec2.set(intersection,
-            ( x < 0 ? x : x ) / denom,
-            ( y < 0 ? y : y ) / denom)
+    if (intersection)
+        vec2.set(intersection,
+                ( x < 0 ? x : x ) / denom,
+                ( y < 0 ? y : y ) / denom)
 
     return true
 }
