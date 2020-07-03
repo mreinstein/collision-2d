@@ -54,9 +54,6 @@ function draw (data, dt) {
 
     data.sweepBoxes.forEach((box, i) => {
         const delta = vec2.scale([], data.sweepDeltas[i], factor)
-        //const delta = [ data.sweepDeltas[i][0], data.sweepDeltas[i][1] ]
-        //delta[0] = delta[0] * factor
-        //delta[1] = delta[1] * factor
         const c = contact()
         const sweep = aabbAabbSweep1(data.staticBox, box, delta, c)
         const length = vec2.length(delta)

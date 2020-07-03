@@ -23,9 +23,10 @@
 <script type="module">
 
 import aabbAabbOverlap from './figures/aabb-aabb-overlap.js'
-import aabbAabbSweep1 from './figures/aabb-aabb-sweep1.js'
+import aabbAabbSweep1  from './figures/aabb-aabb-sweep1.js'
 import aabbPoint       from './figures/aabb-point-overlap.js'
 import aabbSeg         from './figures/aabb-segment-overlap.js'
+import aabbAabbSweep2  from './figures/aabb-aabb-sweep2.js'
 
 
 function createExample (impl) {
@@ -60,6 +61,7 @@ function animate (t) {
     aabbSeg.draw(example2, dt)
     aabbAabbOverlap.draw(example3, dt)
     aabbAabbSweep1.draw(example4, dt)
+    aabbAabbSweep2.draw(example5, dt)
 
     requestAnimationFrame(animate)
 }
@@ -69,6 +71,7 @@ const example = createExample(aabbPoint)
 const example2 = createExample(aabbSeg)
 const example3 = createExample(aabbAabbOverlap)
 const example4 = createExample(aabbAabbSweep1)
+const example5 = createExample(aabbAabbSweep2)
 
 requestAnimationFrame(animate)
 

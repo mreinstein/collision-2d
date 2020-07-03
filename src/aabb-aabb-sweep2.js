@@ -1,4 +1,5 @@
 import aabbAABBOverlap from './aabb-aabb-overlap.js'
+import aabbAabbSweep1  from './aabb-aabb-sweep1.js' 
 import { Pool, vec2 }  from './deps.js'
 
 
@@ -11,69 +12,29 @@ import { Pool, vec2 }  from './deps.js'
 // vb displacement vector of B
 // contact
 export default function aabbAABBSweep2 (A, va, B, vb, contact) {
-  let u0 = 0 // normalized time of first collision
-  let u1 = 0 // normalized time of second collision
+    const delta = vec2.subtract([], vb, va)
+    const hit = aabbAabbSweep1(A, B, delta, contact)
 
-  // the problem is solved in A's frame of reference
+    if (hit) {
+       // tweak collision position
+       
+       contact.position[0] = A.position[0] + va[0] * contact.time
+       contact.position[1] = A.position[1] + va[1] * contact.time
 
-  // relative velocity (in normalized time)
-  const v = Pool.malloc()
-  vec2.subtract(v, vb, va)
+       const pos2 = Pool.malloc()
+       pos2[0] = B.position[0] + vb[0] * contact.time
+       pos2[1] = B.position[1] + vb[1] * contact.time
 
-  let u_0 = [ 0, 0 ] // first times of overlap along each axis
-  let u_1 = [ 1, 1 ] // last times of overlap along each axis
+       const dir = vec2.subtract(Pool.malloc(), pos2, contact.position)
+       const amt = vec2.scale(Pool.malloc(), dir, 0.5)
 
-  // check if they were overlapping  on the previous frame
-  const collision = aabbAABBOverlap(A, B, contact)
-  if (collision) {
-    //u0 = u1 = 0
-    return collision
-  }
+       contact.position[0] += amt[0]
+       contact.position[1] += amt[1]
 
-  // there is no movement, can't collide
-  if (vec2.length(v) === 0)
-    return collision
+       Pool.free(dir)
+       Pool.free(amt)
+       Pool.free(pos2)
+    }
 
-  const apos = [ A.position[0], A.position[1] ]
-  const bpos = [ B.position[0], B.position[1] ]
-
-  const ahalf = [ A.width / 2, A.height / 2 ]
-  const bhalf = [ B.width / 2, B.height / 2 ]
-
-  // find the possible first and last times of overlap along each axis
-  for (let i = 0; i < 2; i++) {
-    let aMax = apos[i] + ahalf[i]
-    let aMin = apos[i] - ahalf[i]
-    let bMax = bpos[i] + bhalf[i]
-    let bMin = bpos[i] - bhalf[i]
-
-    if (aMax < bMin && v[i] < 0)
-      u_0[i] = (aMax - bMin) / v[i]
-    else if (bMax < aMin && v[i] > 0)
-      u_0[i] = (aMin - bMax) / v[i]
-
-    if (bMax > aMin && v[i] < 0)
-      u_1[i] = (aMin - bMax) / v[i]
-    else if (aMax > bMin && v[i] > 0)
-      u_1[i] = (aMax - bMin) / v[i]
-  }
-
-  u0 = Math.max(u_0[0], u_0[1])   // possible first time of overlap
-  u1 = Math.min(u_1[0], u_1[1])   // possible last time of overlap
-
-  /*
-  pos  the furthest point the object A reached along the swept path before it hit
-       something.
-  time a copy of sweep.hit.time or 1 if the object didn’t hit anything during
-       the sweep. */
-
-  // collision only occurs when the first time of overlap occurs before
-  // the last time of overlap
-  if (u0 <= u1 && contact) {
-      contact.time = u0
-      contact.position[0] = (va[0] * u0) + ahalf[0]
-      contact.position[1] = (va[1] * u0) + ahalf[1]
-  }
-    
-  return u0 <= u1
+    return hit
 }
