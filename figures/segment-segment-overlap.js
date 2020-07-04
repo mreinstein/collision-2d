@@ -1,5 +1,4 @@
 import common                from './common.js'
-import contact               from '../src/contact.js'
 import segmentSegmentOverlap from '../src/segment-segment-overlap.js'
 import { vec2 }              from '../src/deps.js'
 
@@ -31,15 +30,20 @@ function draw (data, dt) {
         Math.sin(data.angle) * 32,
         Math.cos(data.angle) * 32
     ]
-   
-    const intersection = [ 0, 0 ]
-    let hit = segmentSegmentOverlap(pos1, pos2, data.line[0], data.line[1], intersection)
 
     common.drawSegment(data, data.line[0], data.line[1], '#666')
-    common.drawSegment(data, pos1, pos2, '#666')
+    
 
-    if (hit)
+    const intersection = [ 0, 0 ]
+    if (segmentSegmentOverlap(pos1, pos2, data.line[0], data.line[1], intersection)) {
         common.drawPoint(data, intersection, '#ff0', '', 2)
+        common.drawSegment(data, pos1, intersection, '#ff0')
+        common.drawSegment(data, pos2, intersection, '#f00')
+    }
+    else {
+        common.drawSegment(data, pos1, pos2, '#0f0')
+    }
+
 }
 
 

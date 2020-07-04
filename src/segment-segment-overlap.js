@@ -2,11 +2,6 @@ import segmentPointOverlap from './segment-point-overlap.js'
 import { vec2 }            from './deps.js'
 
 
-function SAME_SIGNS (a, b) {
-    return a ^ b >= 0
-}
-
-
 /*  Ported from Mukesh Prasad's public domain code:
  *    http://www.realtimerendering.com/resources/GraphicsGems/gemsii/xlines.c
  *
@@ -55,7 +50,7 @@ function segmentSegmentOverlap (pos1, pos2, pos3, pos4, intersection) {
 
     // Check signs of r3 and r4.  If both point 3 and point 4 lie on
     // same side of line 1, the line segments do not intersect.
-    if ( r3 !== 0 && r4 !== 0 && SAME_SIGNS(r3, r4)) {
+    if ( r3 !== 0 && r4 !== 0 && ((r3 >= 0 && r4 >= 0) || (r3 < 0 && r4 < 0))) {   
         return false; // no intersection
     }
 
@@ -72,7 +67,7 @@ function segmentSegmentOverlap (pos1, pos2, pos3, pos4, intersection) {
     // Check signs of r1 and r2.  If both point 1 and point 2 lie
     // on same side of second line segment, the line segments do
     // not intersect.
-    if (r1 !== 0 && r2 !== 0 && SAME_SIGNS(r1, r2))
+    if (r1 !== 0 && r2 !== 0 && ((r1 >= 0 && r2 >= 0) || (r1 < 0 && r2 < 0)))
         return false; // no intersections
 
     // Line segments intersect: compute intersection point.
