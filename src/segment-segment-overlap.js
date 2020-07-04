@@ -1,22 +1,14 @@
-// NOTE: this doesn't work on values in the -y or -x dimensions. this also seems to affect
-// http://www.realtimerendering.com/resources/GraphicsGems/gemsii/xlines.c
-//
-// e.g., this won't work:
-// segseg(50, -50, -50, 50, 63.517, -7.843, -3,922, 31.759)
+import segmentPointOverlap from './segment-point-overlap.js'
+import { vec2 }            from './deps.js'
 
 
-// TOOD: consider investigating other functions for this. Maybe one of them
-// will handle negative values. e.g., maybe this?
-//    https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
-//    https://cp-algorithms.com/geometry/segments-intersection.html
-
-
-// adapted from https://github.com/tmpvar/segseg/blob/master/index.js
-import { vec2 } from './deps.js'
+function SAME_SIGNS (a, b) {
+    return a ^ b >= 0
+}
 
 
 /*  Ported from Mukesh Prasad's public domain code:
- *    http://tog.acm.org/resources/GraphicsGems/gemsii/xlines.c
+ *    http://www.realtimerendering.com/resources/GraphicsGems/gemsii/xlines.c
  *
  *   This function computes whether two line segments,
  *   respectively joining the input points (pos1) -- (pos2)
@@ -34,8 +26,7 @@ import { vec2 } from './deps.js'
  *        true if there's an intersection
  */
 
- export default function segmentSegmentOverlap (pos1, pos2, pos3, pos4, intersection) {
-
+function segmentSegmentOverlap (pos1, pos2, pos3, pos4, intersection) {
     let x1 = pos1[0];
     let y1 = pos1[1];
     let x2 = pos2[0];
@@ -60,11 +51,12 @@ import { vec2 } from './deps.js'
     // Compute r3 and r4.
     r3 = a1 * x3 + b1 * y3 + c1;
     r4 = a1 * x4 + b1 * y4 + c1;
+    
 
     // Check signs of r3 and r4.  If both point 3 and point 4 lie on
     // same side of line 1, the line segments do not intersect.
-    if ( r3 !== 0 && r4 !== 0 && ((r3 >= 0 && r4 >= 0) || (r3 < 0 && r4 < 0))) {
-        return; // no intersection
+    if ( r3 !== 0 && r4 !== 0 && SAME_SIGNS(r3, r4)) {
+        return false; // no intersection
     }
 
 
@@ -80,16 +72,15 @@ import { vec2 } from './deps.js'
     // Check signs of r1 and r2.  If both point 1 and point 2 lie
     // on same side of second line segment, the line segments do
     // not intersect.
-    if (r1 !== 0 && r2 !== 0 && ((r1 >= 0 && r2 >= 0) || (r1 < 0 && r2 < 0))) {
-        return; // no intersections
-    }
+    if (r1 !== 0 && r2 !== 0 && SAME_SIGNS(r1, r2))
+        return false; // no intersections
 
     // Line segments intersect: compute intersection point.
     denom = a1 * b2 - a2 * b1;
 
-    if ( denom === 0 ) {
+    // colinear
+    if ( denom === 0 )
         return true;
-    }
 
     offset = denom < 0 ? - denom / 2 : denom / 2;
 
@@ -102,4 +93,34 @@ import { vec2 } from './deps.js'
                 ( y < 0 ? y : y ) / denom)
 
     return true
+}
+
+
+export default function overlap (pos1, pos2, pos3, pos4, intersection) {
+    if (segmentSegmentOverlap(pos1, pos2, pos3, pos4, intersection))
+        return true
+
+    // when we get here, the 2 segments don't overlap, but one of the segment's points
+    // may lie on the other segment. compare all 4 points to see if any lie on the other segment
+    if (segmentPointOverlap(pos1, pos3, pos4)) {
+        vec2.copy(intersection, pos1)
+        return true
+    }
+
+    if (segmentPointOverlap(pos2, pos3, pos4)) {
+        vec2.copy(intersection, pos2)
+        return true
+    }
+
+    if (segmentPointOverlap(pos3, pos1, pos2)) {
+        vec2.copy(intersection, pos3)
+        return true
+    }
+
+    if (segmentPointOverlap(pos4, pos1, pos2)) {
+        vec2.copy(intersection, pos4)
+        return true
+    }
+
+    return false
 }
