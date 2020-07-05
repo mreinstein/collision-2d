@@ -16,22 +16,32 @@ so here we are!
 ## available collision checks
 
 
+### aabb-aabb overlap
+
+![alt text](docs/aabb-aabb-overlap.png "AABB-AABB overlap test")
+
 ```javascript
 const collided = aabbAABBOverlap(aabb, aabb2, contact)
 ```
 
+
+### aabb-aabb sweep 1
+
+![alt text](docs/aabb-aabb-sweep1.png "AABB-AABB sweep 1 test")
 
 ```javascript
 const collided = aabbAABBSweep1(aabb, aabb2, delta, contact)
 ```
 
 
+![alt text](docs/aabb-aabb-sweep2.png "AABB-AABB sweep 2 test")
+
 ```javascript
 const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, contact)
 ```
 
 
-### AABB-Point Overlap
+### aabb-point overlap
 
 ![alt text](docs/aabb-point-overlap.png "AABB-point overlap test")
 
@@ -39,6 +49,10 @@ const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, contact)
 const collided = aabbPointOverlap(aabb, point, contact)
 ```
 
+
+### aabb-segment overlap
+
+![alt text](docs/aabb-segment-overlap.png "AABB-segment overlap test")
 
 ```javascript
 const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contact)
