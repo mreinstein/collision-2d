@@ -82,9 +82,13 @@ const normal = segmentNormal(vec2.create(), pos1, pos2)
 ![alt text](docs/segment-point-overlap.png "segment-point overlap test")
 
 ```javascript
-const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
+const collided = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
 ```
 
+
+### segment-segment-overlap
+
+![alt text](docs/segment-segment-overlap.png "segment-segment overlap test")
 
 ```javascript
 const intersectionPoint = vec2.create()
@@ -94,9 +98,18 @@ if (segmentSegmentOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, inters
 ```
 
 
+### segments-segment-overlap
+
+![alt text](docs/segments-segment-overlap.png "segments-segment overlap test")
+
 ```javascript
-const segmentsOverlap = segmentsSegmentOverlap(segments, start, delta, contact)
+const collided = segmentsSegmentOverlap(segments, start, delta, contact)
 ```
+
+
+### segments-sphere-sweep
+
+![alt text](docs/segments-sphere-sweep.png "segments-sphere sweep test")
 
 
 ```javascript
