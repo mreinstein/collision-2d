@@ -12,6 +12,73 @@ There are many javascript collision routines and libraries for 2d. None satisife
 
 so here we are!
 
+
+## available collision checks
+
+
+```javascript
+const collided = aabbAABBOverlap(aabb, aabb2, contact)
+```
+
+
+```javascript
+const collided = aabbAABBSweep1(aabb, aabb2, delta, contact)
+```
+
+
+```javascript
+const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, contact)
+```
+
+
+### AABB-Point Overlap
+
+![alt text](docs/aabb-point-overlap.png "AABB-point overlap test")
+
+```javascript
+const collided = aabbPointOverlap(aabb, point, contact)
+```
+
+
+```javascript
+const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contact)
+```
+
+
+```javascript
+const distanceFromRayOriginToPlane = rayPlaneDistance(rayOrigin, rayVector, planeOrigin, planeNormal)
+```
+
+
+```javascript
+const normal = vec2.create()
+segmentNormal(normal, pos1, pos2)
+```
+
+
+```javascript
+const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
+```
+
+
+```javascript
+const intersectionPoint = vec2.create()
+if (segmentSegmentOverlap(segment1Point1, segment1Point2, segment2Point1, segment2Point2, intersectionPoint)) {
+    // if we get here, intersectionPoint is filled in with where the 2 segments overlap
+}
+```
+
+
+```javascript
+const segmentsOverlap = segmentsSegmentOverlap(segments, start, delta, contact)
+```
+
+
+```javascript
+const collided = segmentsSphereSweep1(segments, position, radius, delta, contact)
+```
+
+
 ## entities
 
 The collision routines all use these entity definitions
@@ -63,67 +130,6 @@ The data structure populated when a collision occurs
     normal   : [ 0, 0 ], // the collision normal vector
     time     : 0         // the time of the collision, from 0..1
 }
-```
-
-
-## available collision checks
-
-```javascript
-const collided = aabbAABBOverlap(aabb, aabb2, contact)
-```
-
-
-```javascript
-const collided = aabbAABBSweep1(aabb, aabb2, delta, contact)
-```
-
-
-```javascript
-const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, contact)
-```
-
-
-```javascript
-const collided = aabbPointOverlap(aabb, point, contact)
-```
-
-
-```javascript
-const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contact)
-```
-
-
-```javascript
-const distanceFromRayOriginToPlane = rayPlaneDistance(rayOrigin, rayVector, planeOrigin, planeNormal)
-```
-
-
-```javascript
-const normal = vec2.create()
-segmentNormal(normal, pos1, pos2)
-```
-
-
-```javascript
-const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
-```
-
-
-```javascript
-const intersectionPoint = vec2.create()
-if (segmentSegmentOverlap(segment1Point1, segment1Point2, segment2Point1, segment2Point2, intersectionPoint)) {
-    // if we get here, intersectionPoint is filled in with where the 2 segments overlap
-}
-```
-
-
-```javascript
-const segmentsOverlap = segmentsSegmentOverlap(segments, start, delta, contact)
-```
-
-
-```javascript
-const collided = segmentsSphereSweep1(segments, position, radius, delta, contact)
 ```
 
 

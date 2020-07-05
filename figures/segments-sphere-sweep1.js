@@ -39,8 +39,9 @@ function draw (data, dt) {
     const c = contact()
 
     if (segmentsSphereSweep1(data.lines, data.position, data.radius, delta, c)) {
-        common.drawPoint(data, c.position, '#ff0', '', 2)
+        
         common.drawCircle(data, data.position, data.radius, '#ff0')
+        common.drawPoint(data, c.position, '#ff0', '', 2)
 
         // bounce
         vec2.scale(data.velocity, c.normal, data.dx)
