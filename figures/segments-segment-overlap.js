@@ -1,15 +1,8 @@
-import common                from './common.js'
-import contact               from '../src/contact.js'
+import common                 from './common.js'
+import contact                from '../src/contact.js'
 import segmentsSegmentOverlap from '../src/segments-segment-overlap.js'
-import { vec2 }              from '../src/deps.js'
-
-
-/*
-function randomInt (min, max) {
-    const d = max - min
-    return min + Math.floor(d * Math.random())
-}
-*/
+import { vec2 }               from '../src/deps.js'
+//import randomInt              from 'https://cdn.jsdelivr.net/gh/mreinstein/random-gap@master/int.js'
 
 
 function init (context, width, height) {
@@ -68,7 +61,8 @@ function draw (data, dt) {
     ]
 
     const delta = vec2.subtract([], pos2, pos1)
-   
+    let len = vec2.length(delta)
+    const dir = vec2.normalize([], delta)
     
 
     for (const line of data.lines)
@@ -77,12 +71,19 @@ function draw (data, dt) {
     const c = contact()
 
     if (segmentsSegmentOverlap(data.lines, pos1, delta, c)) {
-        common.drawSegment(data, pos1, c.position, '#ff0')
-        common.drawSegment(data, pos2, c.position, '#f00')
+        vec2.subtract(dir, c.position, pos1)
+        len = vec2.length(dir)
+        vec2.normalize(dir, dir)
+        common.drawRay(data, pos1, dir, len, '#ff0')
+
+        vec2.subtract(dir, pos2, c.position)
+        len = vec2.length(dir)
+        vec2.normalize(dir, dir)
+        common.drawRay(data, c.position, dir, len, '#f00')
+        
         common.drawPoint(data, c.position, '#ff0', '', 2)
     } else {
-        //console.log('no hit')
-        common.drawSegment(data, pos1, pos2, '#0f0')
+        common.drawRay(data, pos1, dir, len, '#0f0')
     }
    
 }
