@@ -1,10 +1,5 @@
 # collision-2d
 
-             |               |
------------- | ------------- | -------------
-![alt text](docs/aabb-aabb-overlap.png "AABB-AABB overlap test") | ![alt text](docs/aabb-aabb-sweep1.png "AABB-AABB sweep 1 test") | ![alt text](docs/aabb-aabb-sweep2.png "AABB-AABB sweep 2 test")
-
-
 There are many javascript collision routines and libraries for 2d. None satisifed all of these criteria:
 
 * consistent API interface
