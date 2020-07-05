@@ -19,13 +19,13 @@ function drawAABB (data, box, color='#fff', thickness=1) {
 }
 
 
-function drawCircle (data, circle, color='#fff', thickness=1) {
+function drawCircle (data, center, radius, color='#fff', thickness=1) {
     const { origin, context } = data
 
-    const x = Math.floor(origin[0] + circle.pos[0])
-    const y = Math.floor(origin[1] + circle.pos[1])
+    const x = Math.floor(origin[0] + center[0])
+    const y = Math.floor(origin[1] + center[1])
     context.beginPath()
-    context.arc(x, y, circle.radius, 0, 2 * Math.PI, true)
+    context.arc(x, y, radius, 0, 2 * Math.PI, true)
     context.closePath()
     context.lineWidth = thickness
     context.strokeStyle = color
