@@ -98,22 +98,26 @@ export default function overlap (pos1, pos2, pos3, pos4, intersection) {
     // when we get here, the 2 segments don't overlap, but one of the segment's points
     // may lie on the other segment. compare all 4 points to see if any lie on the other segment
     if (segmentPointOverlap(pos1, pos3, pos4)) {
-        vec2.copy(intersection, pos1)
+        if (intersection)
+            vec2.copy(intersection, pos1)
         return true
     }
 
     if (segmentPointOverlap(pos2, pos3, pos4)) {
-        vec2.copy(intersection, pos2)
+        if (intersection)
+            vec2.copy(intersection, pos2)
         return true
     }
 
     if (segmentPointOverlap(pos3, pos1, pos2)) {
-        vec2.copy(intersection, pos3)
+        if (intersection)
+            vec2.copy(intersection, pos3)
         return true
     }
 
     if (segmentPointOverlap(pos4, pos1, pos2)) {
-        vec2.copy(intersection, pos4)
+        if (intersection)
+            vec2.copy(intersection, pos4)
         return true
     }
 
