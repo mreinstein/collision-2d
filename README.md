@@ -34,6 +34,8 @@ const collided = aabbAABBSweep1(aabb, aabb2, delta, contact)
 ```
 
 
+### aabb-aabb sweep 2
+
 ![alt text](docs/aabb-aabb-sweep2.png "AABB-AABB sweep 2 test")
 
 ```javascript
@@ -59,16 +61,25 @@ const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contac
 ```
 
 
+### ray-plane-distance
+
+![alt text](docs/ray-plane-distance.png "ray-plane distance")
+
 ```javascript
-const distanceFromRayOriginToPlane = rayPlaneDistance(rayOrigin, rayVector, planeOrigin, planeNormal)
+const distance = rayPlaneDistance(rayOrigin, rayVector, planeOrigin, planeNormal)
 ```
 
 
+### segment-normal
+
 ```javascript
-const normal = vec2.create()
-segmentNormal(normal, pos1, pos2)
+const normal = segmentNormal(vec2.create(), pos1, pos2)
 ```
 
+
+### segment-point-overlap
+
+![alt text](docs/segment-point-overlap.png "segment-point overlap test")
 
 ```javascript
 const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
@@ -77,7 +88,7 @@ const pointOverlapsSegment = segmentPointOverlap(p, segPoint0, segPoint1) // tru
 
 ```javascript
 const intersectionPoint = vec2.create()
-if (segmentSegmentOverlap(segment1Point1, segment1Point2, segment2Point1, segment2Point2, intersectionPoint)) {
+if (segmentSegmentOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, intersectionPoint)) {
     // if we get here, intersectionPoint is filled in with where the 2 segments overlap
 }
 ```
