@@ -6,7 +6,7 @@
     <style>
         body {
           font-family: monospace;
-          background-color: #2d66af;
+          background-color: white;
           text-align: center;
           padding: 60px 0px;
         }
@@ -40,6 +40,7 @@ import segmentPointOverlap    from './figures/segment-point-overlap.js'
 import segmentSegmentOverlap  from './figures/segment-segment-overlap.js'
 import segmentsSegmentOverlap from './figures/segments-segment-overlap.js'
 import segmentsSphereSweep1   from './figures/segments-sphere-sweep1.js'
+import rayPlaneDistance       from './figures/ray-plane-distance.js'
 
 
 function createExample (impl) {
@@ -79,6 +80,7 @@ function animate (t) {
     segmentSegmentOverlap.draw(example7, dt)
     segmentsSegmentOverlap.draw(example8, dt)
     segmentsSphereSweep1.draw(example9, dt)
+    rayPlaneDistance.draw(example10, dt)
     requestAnimationFrame(animate)
 }
 
@@ -92,6 +94,7 @@ const example6 = createExample(segmentPointOverlap)
 const example7 = createExample(segmentSegmentOverlap)
 const example8 = createExample(segmentsSegmentOverlap)
 const example9 = createExample(segmentsSphereSweep1)
+const example10 = createExample(rayPlaneDistance)
 
 requestAnimationFrame(animate)
 

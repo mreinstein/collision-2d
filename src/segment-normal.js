@@ -10,4 +10,6 @@ export default function segmentNormal (out, pos1, pos2) {
 
     vec2.set(out, dy, dx)  // normals: [ -dy, dx ]  [ dy, -dx ]
     vec2.normalize(out, out)
+
+    return out
 }

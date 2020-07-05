@@ -70,8 +70,11 @@ function drawRay (data, pos, dir, length, color='#fff', arrow=true, thickness=1)
 }
 
 
-function drawSegment (data, point1, point2, color='#fff', thickness=1) {
+function drawSegment (data, point1, point2, color='#fff', thickness=1, dashed=false) {
     const { origin, context } = data
+
+    if (dashed)
+        context.setLineDash([4, 6])
 
     const x1 = Math.floor(origin[0] + point1[0])
     const y1 = Math.floor(origin[1] + point1[1])
@@ -85,6 +88,9 @@ function drawSegment (data, point1, point2, color='#fff', thickness=1) {
     context.lineWidth = thickness
     context.strokeStyle = color
     context.stroke()
+
+    if (dashed)
+        context.setLineDash([])
 }
 
 
@@ -101,7 +107,7 @@ function init (context, width, height) {
 
 function clear (data) {
     const { context, width, height } = data
-    context.fillStyle = '#000'
+    context.fillStyle = '#202020'
     context.fillRect(0, 0, width, height)
 }
 

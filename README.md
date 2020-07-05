@@ -94,7 +94,7 @@ const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contac
 
 
 ```javascript
-const distanceFromRayOriginToPlane = rayPlaneOverlap(rayOrigin, rayVector, planeOrigin, planeNormal)
+const distanceFromRayOriginToPlane = rayPlaneDistance(rayOrigin, rayVector, planeOrigin, planeNormal)
 ```
 
 

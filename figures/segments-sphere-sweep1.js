@@ -3,10 +3,7 @@ import contact              from '../src/contact.js'
 import segmentsSphereSweep1 from '../src/segments-sphere-sweep1.js'
 import { vec2 }             from '../src/deps.js'
 import randomInt            from 'https://cdn.jsdelivr.net/gh/mreinstein/random-gap@master/int.js'
-//import setLength            from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/set-length.js'
 
-
-//const EPSILON = 1e-8
 
 function init (context, width, height) {
     
@@ -34,7 +31,6 @@ function init (context, width, height) {
 function draw (data, dt) {
     common.clear(data)
 
-    //console.log('v:', data.velocity)
     const delta = vec2.scale([], data.velocity, dt)
 
     for (const line of data.lines)
