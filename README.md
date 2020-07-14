@@ -192,6 +192,7 @@ Most of these collision checks were adapted from existing open source modules:
 * https://github.com/kevzettler/gl-swept-sphere-triangle
 * https://gist.github.com/toji/2802287
 * segment-point-overlap from https://gist.github.com/mattdesl/47412d930dcd8cd765c871a65532ffac
+* segment-segment overlap from https://github.com/tmpvar/segseg
 * http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php
 * http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
 
