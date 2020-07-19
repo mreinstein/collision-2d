@@ -1,8 +1,7 @@
 // from https://github.com/kevzettler/gl-swept-sphere-triangle
-import { vec2 }       from './deps.js'
+import { segpoint, vec2 } from './deps.js'
 import TraceInfo      from './TraceInfo.js'
 import lineNormal     from './segment-normal.js'
-import pointInSegment from './segment-point-overlap.js'
 
 
 var ta = vec2.create()
@@ -183,7 +182,7 @@ function traceSphereTriangle (a, b, trace) {
     vec2.add(planeIntersect, v, planeIntersect)
 
     // Is that point inside the triangle?
-    if (pointInSegment(planeIntersect, ta, tb)) {
+    if (segpoint(planeIntersect, ta, tb)) {
       trace.setCollision(t0, planeIntersect)
       // Collisions against the face will always be closer than vertex or edge collisions
       // so we can stop checking now.

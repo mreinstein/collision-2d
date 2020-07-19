@@ -1,7 +1,6 @@
 import common    from './common.js'
 import contact   from '../src/contact.js'
-import intersect from '../src/segment-point-overlap.js'
-import { vec2 }  from '../src/deps.js'
+import { segpoint, vec2 }  from '../src/deps.js'
 
 
 function init (context, width, height) {
@@ -25,7 +24,7 @@ function draw (data, dt) {
   
     common.drawSegment(data, data.line[0], data.line[1], '#666')
 
-    const overlaps = intersect(data.point, data.line[0], data.line[1])
+    const overlaps = segpoint(data.point, data.line[0], data.line[1])
 
     common.drawPoint(data, data.point, overlaps ? '#ff0' : '#0f0', '', 2)
 }
