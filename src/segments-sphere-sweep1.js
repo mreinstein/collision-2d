@@ -12,8 +12,14 @@ export default function segmentsSphereSweep1 (lines, position, radius, delta, co
 
     traceInfo.resetTrace(position, endPoint, radius)
 
-    for (const line of lines)
+    let collider = -1
+    for (let i=0; i < lines.length; i++) {
+        const line = lines[i]
+        const oldT = traceInfo.t
         toji.traceSphereTriangle(line[0], line[1], traceInfo)
+        if (traceInfo.collision && oldT !== traceInfo.t)
+            collider = i
+    }
 
     if (traceInfo.collision) {
         contact.time = traceInfo.t
@@ -24,8 +30,7 @@ export default function segmentsSphereSweep1 (lines, position, radius, delta, co
         vec2.negate(contact.delta, delta)
         vec2.scale(contact.delta, contact.delta, 1-contact.time)
 
-        // TODO: store collider reference
-        //contact.collider = line
+        contact.collider = (collider > -1) ? lines[collider] : undefined
     }
 
     Pool.free(endPoint)
