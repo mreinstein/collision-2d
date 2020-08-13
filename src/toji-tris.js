@@ -1,7 +1,7 @@
 // from https://github.com/kevzettler/gl-swept-sphere-triangle
-import { segpoint, vec2 } from './deps.js'
-import TraceInfo      from './TraceInfo.js'
-import lineNormal     from './segment-normal.js'
+import { clamp, segpoint, vec2 } from './deps.js'
+import TraceInfo                 from './TraceInfo.js'
+import lineNormal                from './segment-normal.js'
 
 
 var ta = vec2.create()
@@ -143,6 +143,7 @@ function traceSphereTriangle (a, b, trace) {
       t1 = 1.0
     }
   } else {
+
     // Calculate intersection interval:
     t0 = (-1.0-distToPlane) / normDotVel
     t1 = ( 1.0-distToPlane) / normDotVel
@@ -157,11 +158,9 @@ function traceSphereTriangle (a, b, trace) {
       // No collision possible
       return
     }
-    // Clamp to [0,1]
-    if (t0 < 0.0) t0 = 0.0
-    if (t1 < 0.0) t1 = 0.0
-    if (t0 > 1.0) t0 = 1.0
-    if (t1 > 1.0) t1 = 1.0
+    
+    t0 = clamp(t0, 0.0, 1.0)
+    t1 = clamp(t1, 0.0, 1.0)
   }
 
   // If the closest possible collision point is further away
