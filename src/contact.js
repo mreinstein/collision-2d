@@ -7,7 +7,9 @@ time is a fraction from 0 to 1 indicating how far along the line the collision o
 */
 export default function contact () {
     return {
+        // for segments-segment-overlap and segments-sphere-sweep1 this is set to the index in the array of line segments passed into the collision routine
         collider : null,
+
         position : [ 0, 0 ],
         delta    : [ 0, 0 ],
         normal   : [ 0, 0 ],

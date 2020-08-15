@@ -30,7 +30,7 @@ export default function segmentsSphereSweep1 (lines, position, radius, delta, co
         vec2.negate(contact.delta, delta)
         vec2.scale(contact.delta, contact.delta, 1-contact.time)
 
-        contact.collider = (collider > -1) ? lines[collider] : undefined
+        contact.collider = collider
     }
 
     Pool.free(endPoint)

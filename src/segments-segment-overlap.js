@@ -7,7 +7,7 @@ const EPSILON = 1e-8
 
 
 export default function segmentsSegmentOverlap (lines, start, delta, contact) {
-    let nearest, nearestTime = 0
+    let nearest, nearestTime = 0, nearestIdx = -1
 
     const isect = Pool.malloc()  // the intersection if there is one
     const end = Pool.malloc(start[0] + delta[0], start[1] + delta[1])
@@ -19,6 +19,7 @@ export default function segmentsSegmentOverlap (lines, start, delta, contact) {
             if (!nearest || dist < nearestTime) {
                 nearestTime = dist
                 nearest = line
+                nearestIdx = i
             }
         }
     }
@@ -35,7 +36,7 @@ export default function segmentsSegmentOverlap (lines, start, delta, contact) {
 
     if (nearest) {
         vec2.scaleAndAdd(contact.position, start, delta, nearTime)
-        contact.collider = nearest
+        contact.collider = nearestIdx
 
         // determine which normal is on the right side of the plane for the intersection
         lineNormal(contact.normal, nearest[0], nearest[1])

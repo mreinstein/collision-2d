@@ -106,6 +106,9 @@ if (segmentSegmentOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, inters
 const collided = segmentsSegmentOverlap(segments, start, delta, contact)
 ```
 
+if there is a collision, `contact.collider` will be an integer indicating which segment in the array collided.
+
+
 
 ### segments-sphere-sweep
 
@@ -115,6 +118,8 @@ const collided = segmentsSegmentOverlap(segments, start, delta, contact)
 ```javascript
 const collided = segmentsSphereSweep1(segments, position, radius, delta, contact)
 ```
+
+if there is a collision, `contact.collider` will be an integer indicating which segment in the array collided.
 
 
 ## entities
@@ -162,7 +167,11 @@ The data structure populated when a collision occurs
 
 ```javascript
 {
-    collider : null,     // reference to the object that was collided with
+    // for segments-segment-overlap and segments-sphere-sweep1 this is set to the index
+    // in the array of line segments passed into the collision routine
+    // for all other routines, collider is a reference to the colliding object itself
+    collider : null,
+
     position : [ 0, 0 ], // the exact position of the collision
     delta    : [ 0, 0 ], // a vector that can be applied to get out of the colliding state
     normal   : [ 0, 0 ], // the collision normal vector
