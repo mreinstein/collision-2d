@@ -106,11 +106,27 @@ if (segmentSegmentOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, inters
 const collided = segmentsSegmentOverlap(segments, start, delta, contact)
 ```
 
-if there is a collision, `contact.collider` will be an integer indicating which segment in the array collided.
+if there is a collision, `contact.collider` will be an integer indicating which segment in the `segments` array collided.
+
+
+### segments-segment-overlap-indexed
+
+```javascript
+const segs = [
+    [ p0, p1 ],
+    [ p2, p3 ],
+    [ p4, p5 ]
+]
+const segIdxs = [ 0, 2 ]  // only run the segmentsSegment intersection tests on [ p0, p1 ] and [ p4, p5]
+
+const collided = segmentsSegmentOverlapIndexed(segs, segIdxs, start, delta, contact)
+```
+
+if there is a collision, `contact.collider` will be an integer indicating which segment in the `segs` array collided.
 
 
 
-### segments-sphere-sweep
+### segments-sphere-sweep 1
 
 ![alt text](docs/segments-sphere-sweep.png "segments-sphere sweep test")
 
@@ -119,7 +135,24 @@ if there is a collision, `contact.collider` will be an integer indicating which 
 const collided = segmentsSphereSweep1(segments, position, radius, delta, contact)
 ```
 
-if there is a collision, `contact.collider` will be an integer indicating which segment in the array collided.
+if there is a collision, `contact.collider` will be an integer indicating which segment in the `segments` array collided.
+
+
+### segments-sphere-sweep-1-indexed
+
+```javascript
+const segs = [
+    [ p0, p1 ],
+    [ p2, p3 ],
+    [ p4, p5 ]
+]
+const segIdxs = [ 0, 2 ]  // only run the segmentsSphereSweep tests on [ p0, p1 ] and [ p4, p5 ]
+
+const collided = segmentsSphereSweep1(segments, segIdxs, position, radius, delta, contact)
+```
+
+if there is a collision, `contact.collider` will be an integer indicating which segment in the `segments` array collided.
+
 
 
 ## entities
@@ -190,6 +223,8 @@ All collision checking functions return a boolean indicating if there was a coll
 "overlap" tests don't take movement into account, and this is a static check to see if the 2 entities overlap.
 
 plural forms imply a collection. e.g., `segments-segment-ovelap` checks one line segment against a set of line segments. If there is more than one collision, the closest collision is set in the `contact` argument.
+
+"indexed" tests are the same as their non-indexed forms, except they take in an array of segment indexes to use. These are nice in that you can avoid having to build large arrays of line segments every frame, if you have things like dynamic line segments (platforms) or have a spatial culling algorithm that selects line segments to include.
 
 
 ## credits
