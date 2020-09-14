@@ -146,9 +146,9 @@ const segs = [
     [ p2, p3 ],
     [ p4, p5 ]
 ]
-const segIdxs = [ 0, 2 ]  // only run the segmentsSphereSweep tests on [ p0, p1 ] and [ p4, p5 ]
+const indices = [ 0, 2 ]  // only run the segmentsSphereSweep tests on [ p0, p1 ] and [ p4, p5 ]
 
-const collided = segmentsSphereSweep1(segments, segIdxs, position, radius, delta, contact)
+const collided = segmentsSphereSweep1(segments, indices, segmentCount, position, radius, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating which segment in the `segments` array collided.

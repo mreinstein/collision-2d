@@ -6,15 +6,16 @@ import toji           from './toji-tris.js'
 const traceInfo = new TraceInfo()
 
 
-export default function segmentsSphereSweep1Indexed (lines, indices, position, radius, delta, contact) {
+export default function segmentsSphereSweep1Indexed (lines, indices, lineCount, position, radius, delta, contact) {
 
     const endPoint = vec2.add(Pool.malloc(), position, delta)
 
     traceInfo.resetTrace(position, endPoint, radius)
 
     let collider = -1
-    for (const i of indices) {
-        const line = lines[i]
+    for (let i=0; i < lineCount; i++) {
+        const idx = indices[i]
+        const line = lines[idx]
         const oldT = traceInfo.t
         toji.traceSphereTriangle(line[0], line[1], traceInfo)
         if (traceInfo.collision && oldT !== traceInfo.t)
@@ -35,5 +36,5 @@ export default function segmentsSphereSweep1Indexed (lines, indices, position, r
 
     Pool.free(endPoint)
 
-    return traceInfo.collision    
+    return traceInfo.collision
 }
