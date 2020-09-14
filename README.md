@@ -148,6 +148,8 @@ const segs = [
 ]
 const indices = [ 0, 2 ]  // only run the segmentsSphereSweep tests on [ p0, p1 ] and [ p4, p5 ]
 
+const segmentCount = 2
+
 const collided = segmentsSphereSweep1(segments, indices, segmentCount, position, radius, delta, contact)
 ```
 
