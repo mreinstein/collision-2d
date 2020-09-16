@@ -6,14 +6,16 @@ import segseg         from './segment-segment-overlap.js'
 const EPSILON = 1e-8
 
 
-export default function segmentsSegmentOverlapIndexed (lines, indices, start, delta, contact) {
+export default function segmentsSegmentOverlapIndexed (lines, indices, lineCount, start, delta, contact) {
     let nearest, nearestTime = 0, nearestIdx = -1
 
     const isect = Pool.malloc()  // the intersection if there is one
     const end = Pool.malloc(start[0] + delta[0], start[1] + delta[1])
 
-    for (const i of indices) {
-        const line = lines[i];
+    for (let i=0; i < lineCount; i++) {
+        const idx = indices[i]
+        const line = lines[idx]
+
         if (segseg(start, end, line[0], line[1], isect)) {
             const dist = vec2.distance(start, isect)
             if (!nearest || dist < nearestTime) {

@@ -117,9 +117,11 @@ const segs = [
     [ p2, p3 ],
     [ p4, p5 ]
 ]
-const segIdxs = [ 0, 2 ]  // only run the segmentsSegment intersection tests on [ p0, p1 ] and [ p4, p5]
+const segIdxs = [ 0, 2 ]  // indices into the segs array
 
-const collided = segmentsSegmentOverlapIndexed(segs, segIdxs, start, delta, contact)
+const segmentCount = 2    // numer of indices to include. only run the segmentsSegment intersection tests on [ p0, p1 ] and [ p4, p5]
+
+const collided = segmentsSegmentOverlapIndexed(segs, segIdxs, segmentCount, start, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating which segment in the `segs` array collided.
@@ -146,9 +148,9 @@ const segs = [
     [ p2, p3 ],
     [ p4, p5 ]
 ]
-const indices = [ 0, 2 ]  // only run the segmentsSphereSweep tests on [ p0, p1 ] and [ p4, p5 ]
+const indices = [ 0, 2 ]  // indices into the segs array
 
-const segmentCount = 2
+const segmentCount = 2    // only run the segmentsSphereSweep tests on [ p0, p1 ] and [ p4, p5 ]
 
 const collided = segmentsSphereSweep1(segments, indices, segmentCount, position, radius, delta, contact)
 ```
