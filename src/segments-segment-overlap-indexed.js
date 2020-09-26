@@ -21,7 +21,7 @@ export default function segmentsSegmentOverlapIndexed (lines, indices, lineCount
             if (!nearest || dist < nearestTime) {
                 nearestTime = dist
                 nearest = line
-                nearestIdx = i
+                nearestIdx = idx
             }
         }
     }
