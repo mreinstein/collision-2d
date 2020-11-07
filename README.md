@@ -159,6 +159,14 @@ if there is a collision, `contact.collider` will be an integer indicating which 
 
 
 
+### sphere-sphere-overlap
+
+
+```javascript
+const collided = sphereSphereOverlap(centerA, radiusA, centerB, radiusB) // collided is true or false
+```
+
+
 ## entities
 
 The collision routines all use these entity definitions
