@@ -2,7 +2,7 @@ import common               from './common.js'
 import contact              from '../src/contact.js'
 import segmentsSphereSweep1 from '../src/segments-sphere-sweep1.js'
 import { vec2 }             from '../src/deps.js'
-import randomInt            from 'https://cdn.jsdelivr.net/gh/mreinstein/random-gap@master/int.js'
+import randomInt            from 'https://cdn.jsdelivr.net/gh/mreinstein/random-gap/int.js'
 
 
 function init (context, width, height) {
@@ -30,7 +30,7 @@ function init (context, width, height) {
 
 function draw (data, dt) {
     common.clear(data)
-
+   
     const delta = vec2.scale([], data.velocity, dt)
 
     for (const line of data.lines)
@@ -39,7 +39,6 @@ function draw (data, dt) {
     const c = contact()
 
     if (segmentsSphereSweep1(data.lines, data.position, data.radius, delta, c)) {
-        
         common.drawCircle(data, data.position, data.radius, '#ff0')
         common.drawPoint(data, c.position, '#ff0', '', 2)
 

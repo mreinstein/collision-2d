@@ -130,7 +130,7 @@ if there is a collision, `contact.collider` will be an integer indicating which 
 
 ### segments-sphere-sweep 1
 
-![alt text](docs/segments-sphere-sweep.png "segments-sphere sweep test")
+![alt text](docs/segments-sphere-sweep1.png "segments-sphere sweep test")
 
 
 ```javascript

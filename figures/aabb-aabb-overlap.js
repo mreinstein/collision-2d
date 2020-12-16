@@ -45,7 +45,6 @@ function draw (data, dt) {
     } else {
       common.drawAABB(data, data.box2, '#0f0')
     }
-   
 }
 
 
