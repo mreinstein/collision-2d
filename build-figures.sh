@@ -19,3 +19,5 @@ deno run --allow-read --allow-write --allow-run cli-figure-to-apng.ts --module f
 deno run --allow-read --allow-write --allow-run cli-figure-to-apng.ts --module figures/segments-segment-overlap.js --count 1200 --output docs/segments-segment-overlap.png
 
 deno run --allow-read --allow-write --allow-run cli-figure-to-apng.ts --module figures/segments-sphere-sweep1.js --count 122 --output docs/segments-sphere-sweep1.png
+
+deno run --allow-read --allow-write --allow-run cli-figure-to-apng.ts --module figures/sphere-sphere-overlap.js --count 245 --output docs/sphere-sphere-overlap.png

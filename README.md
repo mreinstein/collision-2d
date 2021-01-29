@@ -158,9 +158,9 @@ const collided = segmentsSphereSweep1(segments, indices, segmentCount, position,
 if there is a collision, `contact.collider` will be an integer indicating which segment in the `segments` array collided.
 
 
-
 ### sphere-sphere-overlap
 
+![alt text](docs/sphere-sphere-overlap.png "sphere-sphere overlap test")
 
 ```javascript
 const collided = sphereSphereOverlap(centerA, radiusA, centerB, radiusB) // collided is true or false
