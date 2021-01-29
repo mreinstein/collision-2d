@@ -167,6 +167,15 @@ const collided = sphereSphereOverlap(centerA, radiusA, centerB, radiusB) // coll
 ```
 
 
+### tri-point-overlap
+
+![alt text](docs/tri-point-overlap.png "triangle-point overlap test")
+
+```javascript
+const collided = triPointOverlap(v0, v1, v2, point) // collided is true or false
+```
+
+
 ## entities
 
 The collision routines all use these entity definitions
@@ -251,4 +260,4 @@ Most of these collision checks were adapted from existing open source modules:
 * segment-segment overlap from https://github.com/tmpvar/segseg
 * http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php
 * http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
-
+* https://observablehq.com/@kelleyvanevert/2d-point-in-triangle-test

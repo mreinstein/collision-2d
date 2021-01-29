@@ -94,6 +94,13 @@ function drawSegment (data, point1, point2, color='#fff', thickness=1, dashed=fa
 }
 
 
+function drawTriangle (data, point0, point1, point2, color='#fff', thickness=1, dashed=false) {
+    drawSegment(data, point0, point1, color, thickness, dashed)
+    drawSegment(data, point1, point2, color, thickness, dashed)
+    drawSegment(data, point2, point0, color, thickness, dashed)
+}
+
+
 function init (context, width, height) {
     return {
         context,
@@ -112,4 +119,4 @@ function clear (data) {
 }
 
 
-export default { drawAABB, drawCircle, drawPoint, drawRay, drawSegment, init, clear }
+export default { drawAABB, drawCircle, drawPoint, drawRay, drawSegment, drawTriangle, init, clear }
