@@ -12,6 +12,7 @@ export default function segmentsSphereEllipsoid1Indexed (lines, indices, lineCou
 
     const endPoint = vec2.add(Pool.malloc(), position, delta)
 
+    const radius = 1
     traceInfo.resetTrace(position, endPoint, radius)
 
     let collider = -1
