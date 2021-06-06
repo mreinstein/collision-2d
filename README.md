@@ -61,6 +61,16 @@ const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contac
 ```
 
 
+### aabb-segment sweep
+
+![alt text](docs/aabb-segment-sweep1.png "AABB-segment sweep test")
+
+```javascript
+const collided = aabbSegmentSweep(line, aabb2, delta, contact)
+```
+
+
+
 ### ray-plane-distance
 
 ![alt text](docs/ray-plane-distance.png "ray-plane distance")
@@ -261,3 +271,4 @@ Most of these collision checks were adapted from existing open source modules:
 * http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php
 * http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
 * https://observablehq.com/@kelleyvanevert/2d-point-in-triangle-test
+* aabb-segment sweep from https://gamedev.stackexchange.com/questions/29479/swept-aabb-vs-line-segment-2d
