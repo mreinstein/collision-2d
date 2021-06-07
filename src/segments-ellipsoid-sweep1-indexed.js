@@ -26,7 +26,7 @@ export default function segmentsSphereEllipsoid1Indexed (lines, indices, lineCou
 
         toji.traceSphereTriangle(p0, p1, traceInfo)
         if (traceInfo.collision && oldT !== traceInfo.t)
-            collider = i
+            collider = idx
     }
 
     if (traceInfo.collision) {
