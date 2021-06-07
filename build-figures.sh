@@ -1,5 +1,7 @@
 # generate animated pngs in docs/ from all of the examples in figures/
 
+deno run --allow-read --allow-write --allow-run --allow-net cli-figure-to-apng.ts --module figures/aabb-segments-sweep1-indexed.js --count 245 --output docs/aabb-segments-sweep1-indexed.png
+
 deno run --allow-read --allow-write --allow-run --allow-net cli-figure-to-apng.ts --module figures/aabb-segment-sweep1.js --count 245 --output docs/aabb-segment-sweep1.png
 
 deno run --allow-read --allow-write --allow-run --allow-net cli-figure-to-apng.ts --module figures/aabb-aabb-overlap.js --count 3000 --output docs/aabb-aabb-overlap.png

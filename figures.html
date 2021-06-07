@@ -37,6 +37,7 @@ import aabbPoint              from './figures/aabb-point-overlap.js'
 import aabbSeg                from './figures/aabb-segment-overlap.js'
 import aabbAabbSweep2         from './figures/aabb-aabb-sweep2.js'
 import aabbSegmentSweep1      from './figures/aabb-segment-sweep1.js'
+import aabbSegmentsSweep1Indexed from './figures/aabb-segments-sweep1-indexed.js'
 import rayPlaneDistance       from './figures/ray-plane-distance.js'
 import segmentPointOverlap    from './figures/segment-point-overlap.js'
 import segmentSegmentOverlap  from './figures/segment-segment-overlap.js'
@@ -87,6 +88,7 @@ function animate (t) {
     sphereSphereOverlap.draw(example11, dt)
     triPointOverlap.draw(example12, dt)
     aabbSegmentSweep1.draw(example13, dt)
+    aabbSegmentsSweep1Indexed.draw(example14, dt)
     
     requestAnimationFrame(animate)
 }
@@ -105,6 +107,7 @@ const example10 = createExample(rayPlaneDistance)
 const example11 = createExample(sphereSphereOverlap)
 const example12 = createExample(triPointOverlap)
 const example13 = createExample(aabbSegmentSweep1)
+const example14 = createExample(aabbSegmentsSweep1Indexed)
 
 requestAnimationFrame(animate)
 

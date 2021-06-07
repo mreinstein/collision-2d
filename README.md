@@ -43,6 +43,26 @@ const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, contact)
 ```
 
 
+### aabb-segment sweep
+
+![alt text](docs/aabb-segment-sweep1.png "AABB-segment sweep test")
+
+```javascript
+const collided = aabbSegmentSweep(line, aabb, delta, contact)
+```
+
+
+### aabb-segments sweep-indexed
+
+![alt text](docs/aabb-segments-sweep1-indexed.png "AABB-segments indexed sweep test")
+
+```javascript
+const collided = aabbSegmentsSweep1Index(segments, indices, segmentCount, aabb, delta, contact)
+```
+
+if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
+
+
 ### aabb-point overlap
 
 ![alt text](docs/aabb-point-overlap.png "AABB-point overlap test")
@@ -58,15 +78,6 @@ const collided = aabbPointOverlap(aabb, point, contact)
 
 ```javascript
 const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contact)
-```
-
-
-### aabb-segment sweep
-
-![alt text](docs/aabb-segment-sweep1.png "AABB-segment sweep test")
-
-```javascript
-const collided = aabbSegmentSweep(line, aabb2, delta, contact)
 ```
 
 
