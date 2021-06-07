@@ -19,7 +19,7 @@ export default function segmentsSphereSweep1Indexed (lines, indices, lineCount, 
         const oldT = traceInfo.t
         toji.traceSphereTriangle(line[0], line[1], traceInfo)
         if (traceInfo.collision && oldT !== traceInfo.t)
-            collider = i
+            collider = idx
     }
 
     if (traceInfo.collision) {
