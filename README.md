@@ -57,7 +57,7 @@ const collided = aabbSegmentSweep(line, aabb, delta, contact)
 ![alt text](docs/aabb-segments-sweep1-indexed.png "AABB-segments indexed sweep test")
 
 ```javascript
-const collided = aabbSegmentsSweep1Index(segments, indices, segmentCount, aabb, delta, contact)
+const collided = aabbSegmentsSweep1Indexed(segments, indices, segmentCount, aabb, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
@@ -127,7 +127,7 @@ if (segmentSegmentOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, inters
 const collided = segmentsSegmentOverlap(segments, start, delta, contact)
 ```
 
-if there is a collision, `contact.collider` will be an integer indicating which segment in the `segments` array collided.
+if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
 
 
 ### segments-segment-overlap-indexed
@@ -138,14 +138,14 @@ const segs = [
     [ p2, p3 ],
     [ p4, p5 ]
 ]
-const segIdxs = [ 0, 2 ]  // indices into the segs array
+const indices = [ 0, 2 ]  // indices into the segs array
 
 const segmentCount = 2    // numer of indices to include. only run the segmentsSegment intersection tests on [ p0, p1 ] and [ p4, p5]
 
-const collided = segmentsSegmentOverlapIndexed(segs, segIdxs, segmentCount, start, delta, contact)
+const collided = segmentsSegmentOverlapIndexed(segments, indices, segmentCount, start, delta, contact)
 ```
 
-if there is a collision, `contact.collider` will be an integer indicating which segment in the `segs` array collided.
+if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
 
 
 
@@ -158,7 +158,7 @@ if there is a collision, `contact.collider` will be an integer indicating which 
 const collided = segmentsSphereSweep1(segments, position, radius, delta, contact)
 ```
 
-if there is a collision, `contact.collider` will be an integer indicating which segment in the `segments` array collided.
+if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
 
 
 ### segments-sphere-sweep-1-indexed
@@ -176,7 +176,7 @@ const segmentCount = 2    // only run the segmentsSphereSweep tests on [ p0, p1 
 const collided = segmentsSphereSweep1(segments, indices, segmentCount, position, radius, delta, contact)
 ```
 
-if there is a collision, `contact.collider` will be an integer indicating which segment in the `segments` array collided.
+if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
 
 
 ### sphere-sphere-overlap
