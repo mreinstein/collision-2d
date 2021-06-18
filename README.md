@@ -87,7 +87,13 @@ const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contac
 ![alt text](docs/ray-plane-distance.png "ray-plane distance")
 
 ```javascript
-const distance = rayPlaneDistance(rayOrigin, rayVector, planeOrigin, planeNormal)
+import plane from 'plane.js'
+
+
+const p = plane.create()
+plane.fromPlane(p, planeOrigin, planeNormal)
+const distance = plane.rayDistance(p, rayOrigin, rayVector)
+
 ```
 
 
@@ -233,6 +239,19 @@ const segment = [
     [ 0, 0 ],   // starting point of line
     [ 100, 0 ]  // ending point of line
 ]
+```
+
+
+### plane
+
+a 2d plane
+
+````javascript
+{
+    origin: vec2.create(),
+    normal: vec2.create(),
+    D: 0,
+}
 ```
 
 
