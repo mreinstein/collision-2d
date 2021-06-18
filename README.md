@@ -13,6 +13,9 @@ There are many javascript collision routines and libraries for 2d. None satisife
 so here we are!
 
 
+Note: If you're looking for higher-level 2d collision handling routine for ellipsoids vs line segments, check out https://github.com/mreinstein/collide-and-slide-2d
+
+
 ## available collision checks
 
 
