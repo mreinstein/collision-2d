@@ -246,7 +246,7 @@ const segment = [
 
 a 2d plane
 
-````javascript
+```javascript
 {
     origin: vec2.create(),
     normal: vec2.create(),
