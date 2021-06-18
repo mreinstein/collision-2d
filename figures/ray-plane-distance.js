@@ -1,5 +1,5 @@
 import common          from './common.js'
-import rayPlaneOverlap from '../src/ray-plane-distance.js'
+import plane           from '../src/plane.js'
 import { vec2 }        from '../src/deps.js'
 import segmentNormal   from '../src/segment-normal.js'
 import setLength       from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/set-length.js'
@@ -48,8 +48,10 @@ function draw (data, dt) {
     
     const dir = vec2.normalize([], delta)
 
-    const distance = rayPlaneOverlap(pos1, dir, data.planeOrigin, data.planeNormal)
-    //console.log(distance)
+    const p = plane.create()
+    plane.fromPlane(p, data.planeOrigin, data.planeNormal)
+
+    const distance = plane.rayDistance(p, pos1, dir)
 
 
     //const len = vec2.length(delta)
