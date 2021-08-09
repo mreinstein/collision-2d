@@ -15,7 +15,7 @@ const lineAabbDist = vec2.create()
 const hitNormal = vec2.create()
 const normalizedDelta = vec2.create()
 
-const PADDING = 0.5
+const PADDING = 0.005
 
 // sweep a moving aabb against a line segment
 //
@@ -167,8 +167,8 @@ export default function aabbSegmentSweep1 (line, aabb, delta, contact) {
         return false
    
     if (contact) {
-        const deltaX = delta[0] * hitTime + (PADDING * -normalizedDelta[0])
-        const deltaY = delta[1] * hitTime + (PADDING * -normalizedDelta[1])
+        const deltaX = delta[0] * hitTime + (PADDING * hitNormal[0])
+        const deltaY = delta[1] * hitTime + (PADDING * hitNormal[1])
         vec2.set(contact.delta, deltaX, deltaY)
         vec2.add(contact.position, aabb.position, contact.delta)
         vec2.copy(contact.normal, hitNormal)
