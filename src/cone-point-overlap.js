@@ -5,35 +5,31 @@ import { vec2 } from './deps.js'
 const heading = vec2.create()
 const delta = vec2.create()
 
-// cone structure:
-// @param Vec2 position of cone origin
-// @param number rotation observer rotation in radians
-// @param number fieldOfView angle of cone in degrees
-// @param number maxDistance  max length of cone
-
-// TODO: consider passing the cone data as individual elements rather than a struct
 
 /*
 Determine if a point is within a cone
 
-@param Object cone
+@param Vec2 conePosition position of cone origin
+@param number coneRotation observer rotation in radians
+@param number coneFieldOfView angle of cone in degrees
+@param number coneMaxLength  max length of cone
 @param Object point  vec2 position of item being checked against cone
-@return bool true if point is in cone, false otherwise
+@return Bool true if point is in cone, false otherwise
 */
-export default function conePointOverlap (cone, point) {
-    if (vec2.distance(cone.position, point) > cone.maxDistance)
+export default function conePointOverlap (conePosition, coneRotation, coneFieldOfView, coneMaxLength, point) {
+    if (vec2.distance(conePosition, point) > coneMaxLength)
       return false
 
-    if (cone.fieldOfView >= 360)
+    if (coneFieldOfView >= 360)
       return true
 
-    vec2.set(heading, Math.cos(cone.rotation), Math.sin(cone.rotation))
-    vec2.subtract(delta, point, cone.position)
+    vec2.set(heading, Math.cos(coneRotation), Math.sin(coneRotation))
+    vec2.subtract(delta, point, conePosition)
     const dotProd = vec2.dot(delta, heading)
 
     // field of view is the total angle. divide by 2 because dot product
     // yields vector difference in either direction (clockwise or counter)
-    const maxDelta = cone.fieldOfView / 180
+    const maxDelta = coneFieldOfView / 180
 
     // dot product result indicates how similar the 2 vectors are:
     //   1 : exactly same
