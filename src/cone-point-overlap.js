@@ -1,9 +1,9 @@
-import { vec2 } from './deps.js'
+import { vec2 }  from './deps.js'
+import toRadians from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/src/to-radians.js'
 
 
 // static temp variables to avoid creating new ones each invocation
-const heading = vec2.create()
-const delta = vec2.create()
+const v1 = vec2.create(), v2 = vec2.create()
 
 
 /*
@@ -27,19 +27,9 @@ export default function conePointOverlap (conePosition, coneRotation, coneFieldO
 
     if (coneFieldOfView >= 360)
         return true
-
-    vec2.set(heading, Math.cos(coneRotation), Math.sin(coneRotation))
-    vec2.subtract(delta, point, conePosition)
-    const dotProd = vec2.dot(delta, heading)
-
-    // field of view is the total angle. divide by 2 because dot product
-    // yields vector difference in either direction (clockwise or counter)
-    const maxDelta = coneFieldOfView / 180
-
-    // dot product result indicates how similar the 2 vectors are:
-    //   1 : exactly same
-    // 0.5 : 60 degrees off
-    //   0 : perpendicular
-    //  -1 : exactly behind
-    return (1 - dotProd) <= maxDelta
+    
+    vec2.subtract(v1, point, conePosition)
+    vec2.set(v2, Math.cos(coneRotation), Math.sin(coneRotation))
+    const angle = vec2.angle(v1, v2)
+    return angle <= toRadians(coneFieldOfView/2)
 }
