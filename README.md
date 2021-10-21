@@ -197,6 +197,15 @@ const collided = sphereSphereOverlap(centerA, radiusA, centerB, radiusB) // coll
 ```
 
 
+### cone-point-overlap
+
+![alt text](docs/cone-point-overlap.png "cone-point overlap test")
+
+```javascript
+const collided = conePointOverlap(conePosition, coneRotation, coneFieldOfView, coneMinDistance, coneMaxDistance, point) // collided is true or false
+```
+
+
 ### tri-point-overlap
 
 ![alt text](docs/tri-point-overlap.png "triangle-point overlap test")

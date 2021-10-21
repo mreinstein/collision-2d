@@ -1,3 +1,5 @@
+import toRadians from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/src/to-radians.js'
+
 
 function drawAABB (data, box, color='#fff', thickness=1) {
     const { origin, context } = data
@@ -30,6 +32,29 @@ function drawCircle (data, center, radius, color='#fff', thickness=1) {
     context.lineWidth = thickness
     context.strokeStyle = color
     context.stroke()
+}
+
+
+function drawCone (data, conePosition, coneRotation, coneFieldOfView, minDistance, maxDistance) {
+    const { origin, context } = data
+
+    const x = Math.floor(origin[0] + conePosition[0])
+    const y = Math.floor(origin[1] + conePosition[1])
+
+    //console.log('max:', maxDistance, 'min:', minDistance)
+    //console.log('fov:', coneFieldOfView, ' rot:', coneRotation)
+    context.fillStyle = '#333'
+    context.beginPath()
+    context.moveTo(origin[0], origin[1])
+    context.arc(x, y, maxDistance, coneRotation-toRadians(coneFieldOfView/2), coneRotation+toRadians(coneFieldOfView/2), false)
+    context.fill()
+
+    if (minDistance > 0) {
+        context.fillStyle = '#202020'
+        context.beginPath()
+        context.arc(x, y, minDistance, 0, Math.PI*2, false)
+        context.fill()
+    }
 }
 
 
@@ -119,4 +144,4 @@ function clear (data) {
 }
 
 
-export default { drawAABB, drawCircle, drawPoint, drawRay, drawSegment, drawTriangle, init, clear }
+export default { drawAABB, drawCircle, drawCone, drawPoint, drawRay, drawSegment, drawTriangle, init, clear }
