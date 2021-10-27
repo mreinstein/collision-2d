@@ -135,7 +135,7 @@ if (overlaps) {
 import segmentSphereOverlap from 'segment-sphere-overlap.js'
 
 
-// declare 2 points that lie on an infinite ray
+// declare 2 points that lie on a line segment
 const p1 = [ 100, 100 ]
 const p2 = [ 200, 100 ]
 
@@ -148,9 +148,13 @@ const overlaps = segmentSphereOverlap(p1, p2, sphereCenter, sphereRadius, contac
 //   intersection1 = p1 + contact.mu1  * (p2 - p1)
 //   intersection2 = p1 + contact.mu2  * (p2 - p1)
 if (overlaps) {
+    // the segment interesects the sphere, intersectionCount is 1 or 2
+    // either mu1 or mu2 will be NaN if there's not 2 intersections
     console.log('intersection count:', contact.intersectionCount)
     console.log('sphere intersection time 1:', contact.mu1)
     console.log('sphere intersection time 2', contact.mu2)
+} else {
+    // no overlap, contact.intersectionCount is 0
 }
 ```
 
