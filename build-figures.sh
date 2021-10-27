@@ -29,3 +29,5 @@ deno run --allow-read --allow-write --allow-run --allow-net cli-figure-to-apng.t
 deno run --allow-read --allow-write --allow-run --allow-net cli-figure-to-apng.ts --module figures/tri-point-overlap.js --count 1200 --output docs/tri-point-overlap.png
 
 deno run --allow-read --allow-write --allow-run --allow-net cli-figure-to-apng.ts --module figures/cone-point-overlap.js --count 1200 --output docs/cone-point-overlap.png
+
+deno run --allow-read --allow-write --allow-run --allow-net cli-figure-to-apng.ts --module figures/ray-sphere-overlap.js --count 1200 --output docs/ray-sphere-overlap.png
