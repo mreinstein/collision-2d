@@ -102,6 +102,8 @@ const distance = plane.rayDistance(p, rayOrigin, rayVector)
 
 ### ray-sphere overlap
 
+![alt text](docs/ray-sphere-overlap.png "ray-sphere overlap test")
+
 ```javascript
 import raySphereOverlap from 'ray-sphere-overlap.js'
 
