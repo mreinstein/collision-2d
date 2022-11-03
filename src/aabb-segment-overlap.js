@@ -3,11 +3,13 @@ import { clamp, sign } from './deps.js'
 
 /*
 determine if a line segment intersects a bounding box
-http://noonat.github.io/intersect/#aabb-vs-segment
+https://noonat.github.io/intersect/#aabb-vs-segment
 
 @param object rect bounding box to check, with { position, width, height }
 @param vec2 pos line segment origin/start position
 @param vec2 delta line segment move/displacement vector
+@param number paddingX added to the radius of the bounding box
+@param number paddingY added to the radius of the bounding box
 @param object contact physics contact descriptor. filled when argument isn't null and a collision occurs
 @return bool true if they intersect, false otherwise
 */
@@ -30,6 +32,9 @@ export default function aabbSegmentOverlap (rect, pos, delta, paddingX, paddingY
     if (Number.isNaN(nearTimeY))
         nearTimeY = Infinity
 
+    if (Number.isNaN(farTimeY))
+        farTimeY = Infinity
+
     if (nearTimeX > farTimeY || nearTimeY > farTimeX)
         return false
 
@@ -38,6 +43,7 @@ export default function aabbSegmentOverlap (rect, pos, delta, paddingX, paddingY
 
     if (nearTime >= 1 || farTime <= 0)
         return false
+
 
     // if we don't have to provide details on the collision, it's sufficient to
     // return true, indicating the rectangles do intersect
