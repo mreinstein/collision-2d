@@ -2,7 +2,7 @@ import { sign, vec2 } from './deps.js'
 
 
 /*
-http://noonat.github.io/intersect/#aabb-vs-aabb
+https://noonat.github.io/intersect/#aabb-vs-aabb
 
 This test uses a separating axis test, which checks for overlaps between the
 two boxes on each axis. If either axis is not overlapping, the boxes aren’t

@@ -4,7 +4,7 @@ import { Pool, vec2 }  from './deps.js'
 
 
 // Sweep two moving AABBs to see if and when they first and last were overlapping
-// http://www.gamasutra.com/view/feature/131790/simple_intersection_tests_for_games.php?page=3
+// https://www.gamedeveloper.com/disciplines/simple-intersection-tests-for-games
 //
 // A previous state of AABB A
 // B previous state of AABB B

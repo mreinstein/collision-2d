@@ -8,7 +8,7 @@ const EPSILON = 1e-8
 /*
 finds the intersection of this box and another moving box, where the delta
 argument is the displacement vector of the moving box
-http://noonat.github.io/intersect/#aabb-vs-swept-aabb
+https://noonat.github.io/intersect/#aabb-vs-swept-aabb
 
 @param aabb the static box
 @param aabb2 the moving box
