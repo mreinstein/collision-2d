@@ -27,6 +27,13 @@ Note: If you're looking for higher-level 2d collision handling routine for ellip
 const collided = aabbAABBOverlap(aabb, aabb2, contact)
 ```
 
+### aabb-aabb contain
+
+```javascript
+// true when aabb1 fully contains aabb2 (2 is fully inside the bounds of 1)
+const contains = aabbAABBContain(aabb1, aabb2)
+```
+
 
 ### aabb-aabb sweep 1
 
