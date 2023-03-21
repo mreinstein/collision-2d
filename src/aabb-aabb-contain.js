@@ -1,5 +1,5 @@
 // returns true if A fully contains B (B is fully inside of the bounds of A)
-export function aabbAABBContain (a, b) {
+export default function aabbAABBContain (a, b) {
 	// B extends to the left of A
 	if (b.position[0] - (b.width/2) < a.position[0] - (a.width/2))
 		return false
