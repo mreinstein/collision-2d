@@ -1,4 +1,5 @@
-//import assert         from './_assert.js'
+import assert         from './_assert.js'
+import contact        from '../src/contact.js'
 import intersectPoint from '../src/aabb-point-overlap.js'
 
 
@@ -20,9 +21,7 @@ const points = [
     [ -16, 0 ]
 ]
 
-const hit = {
-
-}
+const hit = contact()
 
 points.forEach(point => {
     assert.equal(intersectPoint(aabb, point), false);
@@ -30,9 +29,8 @@ points.forEach(point => {
 
 
 // should return hit when colliding
-aabb = new AABB(new Point(0, 0), new Point(8, 8))
-const point = new Point(4, 4)
-assert.notNull(intersectPoint(aabb, point, hit))
+aabb.position = [ 0, 0 ]
+assert.equal(intersectPoint(aabb, [ 4, 4 ]), true)
 
 
 /*
