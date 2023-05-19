@@ -4,33 +4,30 @@ import TraceInfo       from './TraceInfo.js'
 import lineNormal      from './segment-normal.js'
 
 
-var ta = vec2.create()
-var tb = vec2.create()
+const ta = vec2.create()
+const tb = vec2.create()
 
-var norm = vec2.create()
+const norm = vec2.create()
 
-var v = vec2.create()
-var edge = vec2.create()
+const v = vec2.create()
+const edge = vec2.create()
 
-var planeIntersect = vec2.create()
-
-var pt0 = vec2.create()
-var pt1 = vec2.create()
+const planeIntersect = vec2.create()
 
 
 // TODO: Don't like the duality of returning a null or float, probably doesn't optimize nicely
 function getLowestRoot (a, b, c, maxR) {
-  var det = b * b - 4.0 * a * c
+  const det = b * b - 4.0 * a * c
 
   if (det < 0)
     return null
 
-  var sqrtDet = Math.sqrt(det)
-  var r1 = (-b - sqrtDet) / (2.0*a)
-  var r2 = (-b + sqrtDet) / (2.0*a)
+  const sqrtDet = Math.sqrt(det)
+  let r1 = (-b - sqrtDet) / (2.0*a)
+  let r2 = (-b + sqrtDet) / (2.0*a)
 
   if (r1 > r2) {
-    var tmp = r2
+    const tmp = r2
     r2 = r1
     r1 = tmp
   }
@@ -47,9 +44,9 @@ function getLowestRoot (a, b, c, maxR) {
 
 function testVertex (p, velSqrLen, t, start, vel, trace) {
     vec2.subtract(v, start, p)
-    var b = 2.0 * vec2.dot(vel, v)
-    var c = vec2.squaredLength(v) - 1.0
-    var newT = getLowestRoot(velSqrLen, b, c, t)
+    const b = 2.0 * vec2.dot(vel, v)
+    const c = vec2.squaredLength(v) - 1.0
+    const newT = getLowestRoot(velSqrLen, b, c, t)
     if (newT !== null) {
         trace.setCollision(newT, p)
         return newT
@@ -62,19 +59,19 @@ function testEdge (pa, pb, velSqrLen, t, start, vel, trace) {
   vec2.subtract(edge, pb, pa)
   vec2.subtract(v, pa, start)
 
-  var edgeSqrLen = vec2.squaredLength(edge)
-  var edgeDotVel = vec2.dot(edge, vel)
-  var edgeDotSphereVert = vec2.dot(edge, v)
+  const edgeSqrLen = vec2.squaredLength(edge)
+  const edgeDotVel = vec2.dot(edge, vel)
+  const edgeDotSphereVert = vec2.dot(edge, v)
 
-  var a = edgeSqrLen*-velSqrLen + edgeDotVel*edgeDotVel
-  var b = edgeSqrLen*(2.0*vec2.dot(vel, v))-2.0*edgeDotVel*edgeDotSphereVert
-  var c = edgeSqrLen*(1.0-vec2.squaredLength(v))+edgeDotSphereVert*edgeDotSphereVert
+  const a = edgeSqrLen*-velSqrLen + edgeDotVel*edgeDotVel
+  const b = edgeSqrLen*(2.0*vec2.dot(vel, v))-2.0*edgeDotVel*edgeDotSphereVert
+  const c = edgeSqrLen*(1.0-vec2.squaredLength(v))+edgeDotSphereVert*edgeDotSphereVert
 
   // Check for intersection against infinite line
-  var newT = getLowestRoot(a, b, c, t)
+  const newT = getLowestRoot(a, b, c, t)
   if (newT !== null && newT < trace.t) {
     // Check if intersection against the line segment:
-    var f = (edgeDotVel*newT-edgeDotSphereVert)/edgeSqrLen
+    const f = (edgeDotVel*newT-edgeDotSphereVert)/edgeSqrLen
     if (f >= 0.0 && f <= 1.0) {
       vec2.scale(v, edge, f)
       vec2.add(v, pa, v)
@@ -92,10 +89,12 @@ function testEdge (pa, pb, velSqrLen, t, start, vel, trace) {
  * @param {TraceInfo} trace TraceInfo containing the sphere path to trace
  */
 function traceSphereTriangle (a, b, trace) {
-  trace.tmpTri = [ a, b ]
-  var invRadius = trace.invRadius
-  var vel = trace.scaledVel
-  var start = trace.scaledStart
+  vec2.copy(trace.tmpTri[0], a)
+  vec2.copy(trace.tmpTri[0], b)
+
+  const invRadius = trace.invRadius
+  const vel = trace.scaledVel
+  const start = trace.scaledStart
 
   // Scale the triangle points so that we're colliding against a unit-radius sphere.
   vec2.scale(ta, a, invRadius)
@@ -103,8 +102,8 @@ function traceSphereTriangle (a, b, trace) {
 
   lineNormal(norm, ta, tb)
 
-  trace.tmpTriNorm = norm
-  var planeD = -(norm[0]*ta[0]+norm[1] *ta[1])
+  vec2.copy(trace.tmpTriNorm, norm)
+  const planeD = -(norm[0]*ta[0]+norm[1] *ta[1])
 
   // Colliding against the backface of the triangle
   if (vec2.dot(norm, trace.normVel) >= 0) {
@@ -120,15 +119,15 @@ function traceSphereTriangle (a, b, trace) {
   }
 
   // Get interval of plane intersection:
-  var t0, t1
-  var embedded = false
+  let t0, t1
+  let embedded = false
 
   // Calculate the signed distance from sphere
   // position to triangle plane
-  var distToPlane = vec2.dot(start, norm) + planeD
+  const distToPlane = vec2.dot(start, norm) + planeD
 
   // cache this as we’re going to use it a few times below:
-  var normDotVel = vec2.dot(norm, vel)
+  const normDotVel = vec2.dot(norm, vel)
 
   if (normDotVel === 0.0) {
     // Sphere is travelling parrallel to the plane:
@@ -149,7 +148,7 @@ function traceSphereTriangle (a, b, trace) {
     t1 = ( 1.0-distToPlane) / normDotVel
     // Swap so t0 < t1
     if (t0 > t1) {
-      var temp = t1
+      const temp = t1
       t1 = t0
       t0 = temp
     }
@@ -195,8 +194,8 @@ function traceSphereTriangle (a, b, trace) {
   }
   */
 
-  var velSqrLen = vec2.squaredLength(vel)
-  var t = trace.t
+  const velSqrLen = vec2.squaredLength(vel)
+  let t = trace.t
 
   // Check for collision againt the triangle vertices:
   t = testVertex(ta, velSqrLen, t, start, vel, trace)
