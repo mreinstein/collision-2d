@@ -1,10 +1,6 @@
-//import TraceInfo  from '../src/TraceInfo.js'
-import assert     from './_assert.js'
-import toji       from '../src/toji-tris.js'
+import assert from './_assert.js'
+import toji   from '../src/toji-tris.js'
 
-
-
-//assert.equal(aabbSegOverlap(aabb, seg[0], delta, paddingX, paddingY), false)
 
 const start = [ 0, 32 ]
 const end = [ 128, 32 ]

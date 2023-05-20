@@ -15,15 +15,15 @@ function deepEqual (a, b) {
 }
 
 
-function almostEqual (actual, expected, message='') {
-    if (Math.abs(actual - expected) > 1e-8)
-        equal(actual, expected, message);
+function almostEqual (actual, expected, epsilon=1e-8) {
+    if (Math.abs(actual - expected) > epsilon)
+        equal(actual, expected)
 }
 
 
 function notNull (value) {
     if (value === null) 
-        throw new Error("value is unexpectedly null")
+        throw new Error('value is unexpectedly null')
   
     return value
 }
