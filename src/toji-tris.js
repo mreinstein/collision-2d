@@ -165,6 +165,9 @@ function traceSphereTriangle (a, b, trace) {
   // If the closest possible collision point is further away
   // than an already detected collision then there's no point
   // in testing further.
+  //
+  // this is a cheaper way to sort time of intersections, by only 
+  // keeping the closest one.
   if (t0 >= trace.t)
       return
 
