@@ -32,8 +32,8 @@ export default function sphereSphereOverlap (centerA, radiusA, centerB, radiusB,
     }
 
     // delta is the overlap between the two spheres, and is a vector that can be added to 
-    // sphere B’s position to move them into a non-colliding state.
-    vec2.negate(contact.delta, _mtd)
+    // sphere A’s position to move them into a non-colliding state.
+    vec2.copy(contact.delta, _mtd)
 
     // position is the point of contact of these 2 spheres (assuming they no longer penetrate)
     vec2.normalize(contact.position, _delta)
