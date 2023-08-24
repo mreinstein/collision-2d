@@ -8,7 +8,7 @@ const p0 = vec2.create()
 const p1 = vec2.create()
 
 
-export default function segmentsSphereEllipsoid1Indexed (lines, indices, lineCount, position, ellipsoid, delta, contact) {
+export default function segmentsEllipsoid1Indexed (lines, indices, lineCount, position, ellipsoid, delta, contact) {
 
     const endPoint = vec2.add(Pool.malloc(), position, delta)
 
