@@ -4,6 +4,7 @@ import sign     from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/src/sign.j
 import { vec2 } from 'https://cdn.skypack.dev/pin/gl-matrix@v3.4.3-OSmwlRYK5GW1unkuAQkN/mode=imports,min/optimized/gl-matrix.js'
 import segseg   from 'https://cdn.jsdelivr.net/gh/tmpvar/segseg@1.0.0/index.js'
 import segpoint from 'https://cdn.jsdelivr.net/gh/tmpvar/segseg@1.0.0/segpoint.js'
+import contact  from 'https://cdn.jsdelivr.net/gh/mreinstein/collision-2d/src/contact.js'
 
 
-export { Pool, clamp, segseg, segpoint, sign, vec2 }
+export { Pool, clamp, contact, segseg, segpoint, sign, vec2 }
