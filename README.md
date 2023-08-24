@@ -259,8 +259,13 @@ if there is a collision, `contact.collider` will be an integer indicating the in
 ![alt text](docs/sphere-sphere-overlap.png "sphere-sphere overlap test")
 
 ```javascript
-const collided = sphereSphereOverlap(centerA, radiusA, centerB, radiusB) // collided is true or false
+const collided = sphereSphereOverlap(centerA, radiusA, centerB, radiusB, contact) // collided is true or false
 ```
+
+if there is a collision, `contact.delta` is a vector that can be added to sphere B’s position to move them into a non-colliding state.
+`contact.position` is the point of contact of these 2 spheres
+
+Note: `contact` is an optional parameter. if you only want to determine if the 2 spheres overlap, omit `contact` which will be faster.
 
 
 ### cone-point-overlap
