@@ -1,74 +1,108 @@
 import { vec2 } from './deps.js'
 
 
-const RESTITUTION = 0.85
+// from https://web.archive.org/web/20100629145557/http://www.gamasutra.com/view/feature/3383/simple_intersection_tests_for_games.php?page=2
 
-const delta = vec2.create()
-const mtd = vec2.create()
-const scaled = vec2.create()
-const v = vec2.create()
-const normalized = vec2.create()
-const impulse = vec2.create()
-const scaledImpulse = vec2.create()
+// tmp vars to avoid garbage collection
+const va = vec2.create()
+const vb = vec2.create()
+const AB = vec2.create()
+const vab = vec2.create()
+
+const _roots = { r1: NaN, r2: NaN }
 
 
-// collide 2 spherical rigid bodies, updating their positions and velocities
-export default function sphereSphereSweep2 (ball1, ball2) {
-    const body1 = ball1.rigidBody
-    const body2 = ball2.rigidBody
+/*
+const SCALAR ra, //radius of sphere A
+const VECTOR& A0, //previous position of sphere A
+const VECTOR& A1, //current position of sphere A
+const SCALAR rb, //radius of sphere B
+const VECTOR& B0, //previous position of sphere B
+const VECTOR& B1, //current position of sphere B
+SCALAR& u0, //normalized time of first collision
+SCALAR& u1 //normalized time of second collision
+*/
+export default function sphereSphereSweep2 (ra, A0, A1, rb, B0, B1, contact) {
+ 
+    vec2.subtract(va, A1, A0)
+    
+    vec2.subtract(vb, B1, B0)
 
-    vec2.subtract(delta, ball1.transform.position, ball2.transform.position)
+    vec2.subtract(AB, B0, A0)
 
-    const r = body1.radius + body2.radius
+    vec2.subtract(vab, vb, va)     // relative velocity (in normalized time)
 
-    const dist2 = vec2.dot(delta, delta)
 
-    if (dist2 > r*r)
-        return // they aren't colliding
+    const rab = ra + rb
 
-    let d = vec2.length(delta)
+    const a = vec2.dot(vab, vab)         // u*u coefficient
+    
 
-    if (d !== 0.0) {
-        // minimum translation distance to push balls apart after intersecting
-        vec2.scale(mtd, delta, ((body1.radius + body2.radius)-d)/d)
+    const b = 2 * vec2.dot(vab, AB)      // u coefficient
+
+    const c = vec2.dot(AB, AB) - rab*rab // constant term
+
+    // check if they're currently overlapping
+    if (vec2.dot(AB, AB) <= rab*rab) {
+        _roots.r1 = 0
+        _roots.r2 = 0
+
+        fillContactDeets(ra, A0, A1, rb, B0, B1, _roots, contact) 
+        return true
+    }
+
+    // check if they hit each other during the frame
+    if (QuadraticFormula( a, b, c, _roots)) {
+
+        if (_roots.r1 > _roots.r2) {
+            const tmp = _roots.r1
+            _roots.r1 = _roots.r2
+            _roots.r2 = tmp
+        }
+
+        fillContactDeets(ra, A0, A1, rb, B0, B1, _roots, contact)
+        return true
+    }
+
+    return false
+}
+
+
+const _delta = vec2.create()
+const _pos1 = vec2.create()
+const _pos2 = vec2.create()
+
+function fillContactDeets (ra, A0, A1, rb, B0, B1, roots, contact) {
+    contact.time = roots.r1
+
+    // final sphereA position
+    vec2.subtract(_delta, A1, A0)
+    vec2.scaleAndAdd(_pos1, A0, _delta, contact.time)
+
+    // final sphereB position
+    vec2.subtract(_delta, B1, B0)
+    vec2.scaleAndAdd(_pos2, B0, _delta, contact.time)
+
+    vec2.subtract(contact.position, _pos1, _pos2)
+    vec2.normalize(contact.position, contact.position)
+    vec2.scaleAndAdd(contact.position, _pos2, contact.position, rb)
+}
+
+
+// Return true if r1 and r2 are real
+// out.r1    first
+// out.r2    and second roots
+function QuadraticFormula (a, b, c, out) {
+ 
+    const q = b*b - 4*a*c
+
+    if ( q >= 0) {
+        const sq = Math.sqrt(q)
+        const d = 1 / (2*a)
+        out.r1 = ( -b + sq ) * d
+        out.r2 = ( -b - sq ) * d
+        return true   // real roots
     } else {
-        // Special case. Balls are exactly on top of each other. Prevent divide by zero.
-        d = body2.radius + body1.radius - 1.0
-        vec2.set(delta, body2.radius + body1.radius, 0.0)
-        vec2.scale(mtd, delta, ((body1.radius + body2.radius)-d)/d)
+        return false  // complex roots
     }
-
-    // resolve intersection
-    const im1 = (body1.mass !== 0) ? 1 / body1.mass : 1 / 500
-    const im2 = (body2.mass !== 0) ? 1 / body2.mass : 1 / 500
-
-    // push-pull them apart
-    // 0 mass means static body unmoved by collisions (doors, machines, etc.)
-    if (body1.mass !== 0)
-        vec2.scaleAndAdd(ball1.transform.position, ball1.transform.position, mtd, im1 / (im1 + im2))
-
-    if (body2.mass !== 0) {
-        vec2.scale(scaled, mtd, im2 / (im1 + im2))
-        vec2.subtract(ball2.transform.position, ball2.transform.position, scaled)
-    }
-
-    // impact speed
-    vec2.subtract(v, body1.velocity, body2.velocity)
-    vec2.normalize(normalized, mtd)
-    const vn = vec2.dot(v, normalized)
-
-    // sphere intersecting but moving away from each other already
-    if (vn > 0.0)
-        return
-
-    // collision impulse
-    const i = (-(1.0 + RESTITUTION) * vn) / (im1 + im2)
-    vec2.scale(impulse, mtd, i)
-
-    // change in momentum
-    if (body1.mass !== 0)
-        vec2.scaleAndAdd(body1.velocity, body1.velocity, impulse, im1)
-
-    if (body2.mass !== 0)
-        vec2.scaleAndAdd(body2.velocity, body2.velocity, impulse, -im2)
 }

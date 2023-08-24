@@ -268,6 +268,21 @@ if there is a collision, `contact.delta` is a vector that can be added to sphere
 Note: `contact` is an optional parameter. if you only want to determine if the 2 spheres overlap, omit `contact` which will be faster.
 
 
+### sphere-sphere-sweep2
+
+```javascript
+const collided = sphereSphereSweep2(radiusA, A0, A1, radiusB, B0, B1, contact)
+```
+
+* `A0` is the previous position of sphere A
+* `A1` is the new position of sphere A
+* `B0` is the previous position of sphere B
+* `B1` is the new position of sphere B
+
+If there is a collision `contact.position` will contain the point where the collision occurred. `contact.time` has the normalized time
+where the collision happened.
+
+
 ### cone-point-overlap
 
 ![alt text](docs/cone-point-overlap.png "cone-point overlap test")
