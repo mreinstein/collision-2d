@@ -91,7 +91,7 @@ function fillContactDeets (ra, A0, A1, rb, B0, B1, roots, contact) {
     vec2.normalize(contact.position, contact.position)
     vec2.scaleAndAdd(contact.position, _pos2, contact.position, rb)
 
-    vec2.subtract(contact.normal, _pos2, contact.position)
+    vec2.subtract(contact.normal, contact.position, _pos2)
     vec2.normalize(contact.normal, contact.normal)
 }
 
