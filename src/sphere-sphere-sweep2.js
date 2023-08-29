@@ -52,7 +52,7 @@ export default function sphereSphereSweep2 (ra, A0, A1, rb, B0, B1, contact) {
     }
 
     // check if they hit each other during the frame
-    if (QuadraticFormula( a, b, c, _roots)) {
+    if (QuadraticFormula(a, b, c, _roots)) {
 
         if (_roots.r1 > _roots.r2) {
             const tmp = _roots.r1
@@ -60,8 +60,12 @@ export default function sphereSphereSweep2 (ra, A0, A1, rb, B0, B1, contact) {
             _roots.r2 = tmp
         }
 
-        fillContactDeets(ra, A0, A1, rb, B0, B1, _roots, contact)
-        return true
+        // if r1 is greater than 1, that means the collision happened outside of the 
+        // t = [0..1] range that we're looking for (will interesect at a future time)
+        if (_roots.r1 <= 1) {
+           fillContactDeets(ra, A0, A1, rb, B0, B1, _roots, contact)
+            return true 
+        }
     }
 
     return false
