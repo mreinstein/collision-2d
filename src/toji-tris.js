@@ -1,6 +1,7 @@
 // from https://github.com/kevzettler/gl-swept-sphere-triangle
 import { clamp, vec2 } from './deps.js'
 import TraceInfo       from './TraceInfo.js'
+import getLowestRoot   from './get-lowest-root.js'
 import lineNormal      from './segment-normal.js'
 
 
@@ -13,33 +14,6 @@ const v = vec2.create()
 const edge = vec2.create()
 
 const planeIntersect = vec2.create()
-
-
-// TODO: Don't like the duality of returning a null or float, probably doesn't optimize nicely
-function getLowestRoot (a, b, c, maxR) {
-  const det = b * b - 4.0 * a * c
-
-  if (det < 0)
-    return null
-
-  const sqrtDet = Math.sqrt(det)
-  let r1 = (-b - sqrtDet) / (2.0*a)
-  let r2 = (-b + sqrtDet) / (2.0*a)
-
-  if (r1 > r2) {
-    const tmp = r2
-    r2 = r1
-    r1 = tmp
-  }
-
-  if (r1 > 0 && r1 < maxR)
-    return r1
-
-  if (r2 > 0 && r2 < maxR)
-    return r2
-
-  return null
-}
 
 
 function testVertex (p, velSqrLen, t, start, vel, trace) {

@@ -1,37 +1,33 @@
-export default function getLowestRoot (a, b, c, maxR, root={}) {
-    // Check if a solution exists
-    const determinant = b*b - 4.0 * a * c
+// TODO: Don't like the duality of returning a null or float, probably doesn't optimize nicely
+export default function getLowestRoot (a, b, c, maxR) {
+    // check if a solution exists
+    const det = b * b - 4.0 * a * c
 
-    // If determinant is negative it means no solutions.
-    if (determinant < 0.0)
-        return false
+    // if determinant is negative it means no solutions.
+    if (det < 0)
+        return null
 
     // calculate the two roots: (if determinant == 0 then
     // x1==x2 but let’s disregard that slight optimization)
-    const sqrtD = Math.sqrt(determinant)
-    let r1 = (-b - sqrtD) / (2*a)
-    let r2 = (-b + sqrtD) / (2*a)
+    const sqrtDet = Math.sqrt(det)
+    let r1 = (-b - sqrtDet) / (2.0*a)
+    let r2 = (-b + sqrtDet) / (2.0*a)
 
-    // Sort so x1 <= x2
+    // sort so x1 <= x2
     if (r1 > r2) {
-        let temp = r2
+        const tmp = r2
         r2 = r1
-        r1 = temp
+        r1 = tmp
     }
 
-    // Get lowest root:
-    if (r1 > 0 && r1 < maxR) {
-        root.value = r1
-        return true
-    }
+    // get lowest root:
+    if (r1 > 0 && r1 < maxR)
+        return r1
 
-    // It is possible that we want x2 - this can happen
-    // if x1 < 0
-    if (r2 > 0 && r2 < maxR) {
-        root.value = r2
-        return true
-    }
+    // it is possible that we want x2 - this can happen if x1 < 0
+    if (r2 > 0 && r2 < maxR)
+        return r2
 
     // No (valid) solutions
-    return false
+    return null
 }
