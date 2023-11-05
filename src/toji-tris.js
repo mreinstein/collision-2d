@@ -1,5 +1,5 @@
 // from https://github.com/kevzettler/gl-swept-sphere-triangle
-import { clamp, vec2 } from './deps.js'
+import { clamp, segpoint, vec2 } from './deps.js'
 import TraceInfo       from './TraceInfo.js'
 import getLowestRoot   from './get-lowest-root.js'
 import lineNormal      from './segment-normal.js'
@@ -149,11 +149,6 @@ function traceSphereTriangle (a, b, trace) {
   // during which it intersects with the triangle plane.
   // Collisions cannot happen outside that range.
 
-
-  // this was leftover from Toji's 3d collision code. I don't think
-  // we need this for the 2d case, so I disabled it.
-
-  /*
   // Check for collision againt the triangle face:
   if (!embedded) {
     // Calculate the intersection point with the plane
@@ -169,7 +164,6 @@ function traceSphereTriangle (a, b, trace) {
       return
     }
   }
-  */
 
   const velSqrLen = vec2.squaredLength(vel)
   let t = trace.t
