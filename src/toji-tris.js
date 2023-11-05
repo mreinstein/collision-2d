@@ -158,7 +158,8 @@ function traceSphereTriangle (a, b, trace) {
     vec2.add(planeIntersect, v, planeIntersect)
 
     // Is that point inside the triangle?
-    if (segpoint(planeIntersect, ta, tb)) {
+    const epsilon = 0
+    if (segpoint(planeIntersect, ta, tb, epsilon)) {
       trace.setCollision(t0, planeIntersect)
       // Collisions against the face will always be closer than vertex or edge collisions
       // so we can stop checking now.
