@@ -1,8 +1,9 @@
 // from https://github.com/kevzettler/gl-swept-sphere-triangle
-import { clamp, segpoint, vec2 } from './deps.js'
+import { clamp, vec2 } from './deps.js'
 import TraceInfo       from './TraceInfo.js'
 import getLowestRoot   from './get-lowest-root.js'
 import lineNormal      from './segment-normal.js'
+import segpoint        from 'https://cdn.jsdelivr.net/gh/tmpvar/segseg@8cca1e0/segpoint.js'
 
 
 const ta = vec2.create()
