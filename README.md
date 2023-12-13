@@ -16,6 +16,17 @@ so here we are!
 Note: If you're looking for higher-level 2d collision handling routine for ellipsoids vs line segments, check out https://github.com/mreinstein/collide-and-slide-2d
 
 
+## Testing
+
+All tests are in a folder unsurprisingly named `test/`. You can invoke any of them like this:
+
+```bash
+deno run test/<testname>.js
+```
+
+These tests will print nothing and return an exit code of 0 on success, or they'll bitch to `stdout` when they fail. 
+
+
 ## available collision checks
 
 
