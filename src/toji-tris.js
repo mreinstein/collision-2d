@@ -3,6 +3,7 @@ import { clamp, vec2 } from './deps.js'
 import TraceInfo       from './TraceInfo.js'
 import getLowestRoot   from './get-lowest-root.js'
 import lineNormal      from './segment-normal.js'
+import segpoint        from 'https://cdn.jsdelivr.net/gh/tmpvar/segseg@8cca1e0/segpoint.js'
 
 
 const ta = vec2.create()
@@ -149,11 +150,6 @@ function traceSphereTriangle (a, b, trace) {
   // during which it intersects with the triangle plane.
   // Collisions cannot happen outside that range.
 
-
-  // this was leftover from Toji's 3d collision code. I don't think
-  // we need this for the 2d case, so I disabled it.
-
-  /*
   // Check for collision againt the triangle face:
   if (!embedded) {
     // Calculate the intersection point with the plane
@@ -162,14 +158,14 @@ function traceSphereTriangle (a, b, trace) {
     vec2.add(planeIntersect, v, planeIntersect)
 
     // Is that point inside the triangle?
-    if (segpoint(planeIntersect, ta, tb)) {
+    const epsilon = 0
+    if (segpoint(planeIntersect, ta, tb, epsilon)) {
       trace.setCollision(t0, planeIntersect)
       // Collisions against the face will always be closer than vertex or edge collisions
       // so we can stop checking now.
       return
     }
   }
-  */
 
   const velSqrLen = vec2.squaredLength(vel)
   let t = trace.t
