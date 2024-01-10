@@ -1,16 +1,17 @@
-import TraceInfo      from './TraceInfo.js'
-import { Pool, vec2 } from './deps.js'
-import toji           from './toji-tris.js'
+import TraceInfo from './TraceInfo.js'
+import toji      from './toji-tris.js'
+import { vec2 }  from './deps.js'
 
 
 const traceInfo = new TraceInfo()
 const p0 = vec2.create()
 const p1 = vec2.create()
+const endPoint = vec2.create()
 
 
 export default function segmentsEllipsoid1Indexed (lines, indices, lineCount, position, ellipsoid, delta, contact) {
 
-    const endPoint = vec2.add(Pool.malloc(), position, delta)
+    vec2.add(endPoint, position, delta)
 
     const radius = 1
     traceInfo.resetTrace(position, endPoint, radius)
@@ -40,8 +41,6 @@ export default function segmentsEllipsoid1Indexed (lines, indices, lineCount, po
 
         contact.collider = collider
     }
-
-    Pool.free(endPoint)
 
     return traceInfo.collision
 }
