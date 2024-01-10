@@ -1,16 +1,18 @@
-import { Pool, vec2 } from './deps.js'
-import lineNormal     from './segment-normal.js'
-import segseg         from './segment-segment-overlap.js'
+import { vec2 }   from './deps.js'
+import lineNormal from './segment-normal.js'
+import segseg     from './segment-segment-overlap.js'
 
 
 const EPSILON = 1e-8
+
+const isect = vec2.create()  // the intersection if there is one
+const end = vec2.create()
 
 
 export default function segmentsSegmentOverlapIndexed (lines, indices, lineCount, start, delta, contact) {
     let nearest, nearestTime = 0, nearestIdx = -1
 
-    const isect = Pool.malloc()  // the intersection if there is one
-    const end = Pool.malloc(start[0] + delta[0], start[1] + delta[1])
+    vec2.set(end, start[0] + delta[0], start[1] + delta[1])
 
     for (let i=0; i < lineCount; i++) {
         const idx = indices[i]
@@ -27,11 +29,8 @@ export default function segmentsSegmentOverlapIndexed (lines, indices, lineCount
     }
 
     let nearTime = nearestTime / vec2.length(delta)
-    if (nearTime > 1) {
-        Pool.free(isect)
-        Pool.free(end)
+    if (nearTime > 1)
         return false
-    }
 
     if (nearTime <= EPSILON)
         nearTime = 0
@@ -50,9 +49,6 @@ export default function segmentsSegmentOverlapIndexed (lines, indices, lineCount
 
         contact.time = nearTime
     }
-
-    Pool.free(isect)
-    Pool.free(end)
 
     return !!nearest
 }

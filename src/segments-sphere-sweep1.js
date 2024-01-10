@@ -1,14 +1,15 @@
-import TraceInfo      from './TraceInfo.js'
-import { Pool, vec2 } from './deps.js'
-import toji           from './toji-tris.js'
+import TraceInfo from './TraceInfo.js'
+import toji      from './toji-tris.js'
+import { vec2 }  from './deps.js'
 
 
 const traceInfo = new TraceInfo()
+const endPoint = vec2.create()
 
 
 export default function segmentsSphereSweep1 (lines, position, radius, delta, contact) {
 
-    const endPoint = vec2.add(Pool.malloc(), position, delta)
+    vec2.add(endPoint, position, delta)
 
     traceInfo.resetTrace(position, endPoint, radius)
 
@@ -32,8 +33,6 @@ export default function segmentsSphereSweep1 (lines, position, radius, delta, co
 
         contact.collider = collider
     }
-
-    Pool.free(endPoint)
 
     return traceInfo.collision    
 }

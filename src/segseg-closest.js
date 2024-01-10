@@ -1,9 +1,17 @@
 // determine the closest point between 2 line segments.
 // from http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
-import { Pool, vec2 } from './deps.js'
+import { vec2 } from './deps.js'
 
 
 const SMALL_NUM = 0.00000001 // anything that avoids division overflow
+
+const u = vec2.create()
+const v = vec2.create()
+const w = vec2.create()
+const s1tmp = vec2.create()
+const s2tmp = vec2.malloc()
+const diff = vec2.malloc()
+const dP = vec2.malloc()
 
 
 // get the 2D minimum distance between 2 segments
@@ -11,10 +19,6 @@ const SMALL_NUM = 0.00000001 // anything that avoids division overflow
 //    Return: the shortest distance between S1 and S2
 
 export default function segSegClosest (S1, S2, detail) {
-    const u = Pool.malloc()
-    const v = Pool.malloc()
-    const w = Pool.malloc()
-
     vec2.subtract(u, S1[1], S1[0])
     vec2.subtract(v, S2[1], S2[0])
     vec2.subtract(w, S1[0], S2[0])
@@ -105,16 +109,12 @@ export default function segSegClosest (S1, S2, detail) {
     if (tc > 1)
         console.warn('WARNING: tc > 1:', tc)
 
-    const s1tmp = Pool.malloc()
     vec2.scale(s1tmp, u, sc)
 
-    const s2tmp = Pool.malloc()
     vec2.scale(s2tmp, v, tc)
 
-    const diff = Pool.malloc()
     vec2.subtract(diff, s1tmp, s2tmp)
 
-    const dP = Pool.malloc()
     vec2.add(dP, w, diff)
 
     const closestDistance = vec2.length(dP)
@@ -127,14 +127,6 @@ export default function segSegClosest (S1, S2, detail) {
     
     // get the difference of the two closest points
     //Vector   dP = w + (sc * u) - (tc * v);  // =  S1(sc) - S2(tc)
-
-    Pool.free(u)
-    Pool.free(v)
-    Pool.free(w)
-    Pool.free(s1tmp)
-    Pool.free(s2tmp)
-    Pool.free(diff)
-    Pool.free(dP)
 
     return closestDistance
 
