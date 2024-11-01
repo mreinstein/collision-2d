@@ -1,3 +1,6 @@
+import { vec2 } from 'gl-matrix'
+
+
 /*
 information related to a physics system collision.
 position is the point of contact between the two objects (or an estimation of it, in some sweep tests).
@@ -9,10 +12,9 @@ export default function contact () {
     return {
         // for segments-segment-overlap and segments-sphere-sweep1 this is set to the index in the array of line segments passed into the collision routine
         collider : null,
-
-        position : [ 0, 0 ],
-        delta    : [ 0, 0 ],
-        normal   : [ 0, 0 ],
+        position : vec2.create(),
+        delta    : vec2.create(),
+        normal   : vec2.create(),
         time     : 0
     }
 }

@@ -1,4 +1,4 @@
-import { vec2 } from './deps.js'
+import { vec2 } from 'gl-matrix'
 
 
 // static temp variables to avoid creating new ones each invocation
@@ -12,11 +12,11 @@ Determine if a point is inside a triangle
 
 https://observablehq.com/@kelleyvanevert/2d-point-in-triangle-test
 
-@param Array v0,v1,v2  3 points of the triangle expressed as vec2
+@param Array v0, v1, v2  3 points of the triangle expressed as vec2
 @param Array point     to check for containment within the triangle
 @returns bool true if the point is in the triangle, false otherwise
 */
-export default function triPointOverlap (v0, v1, v2, point) {
+export default function trianglePointOverlap (v0, v1, v2, point) {
     // compute vectors        
     vec2.sub(c, v2, v0)
     vec2.sub(b, v1, v0)

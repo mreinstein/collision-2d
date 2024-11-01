@@ -1,6 +1,6 @@
 import common              from './common.js'
 import sphereSphereOverlap from '../src/sphere-sphere-overlap.js'
-import { vec2 }            from '../src/deps.js'
+import { vec2 }            from 'gl-matrix'
 
 
 function init (context, width, height) {

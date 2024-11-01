@@ -1,4 +1,4 @@
-import { vec2 } from './deps.js'
+import { vec2 } from 'gl-matrix'
 
 
 // from http://paulbourke.net/geometry/circlesphere/raysphere.c

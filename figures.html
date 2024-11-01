@@ -29,6 +29,19 @@
 <body>
 
 
+<script type="importmap">
+  {
+    "imports": {
+      "@footgun/math-gap": "https://cdn.skypack.dev/@footgun/math-gap",
+      "clamp": "https://cdn.skypack.dev/clamp",
+      "gl-matrix": "https://cdn.skypack.dev/pin/gl-matrix@v3.4.3-OSmwlRYK5GW1unkuAQkN/mode=imports,min/optimized/gl-matrix.js",
+      "point-to-segment-2d": "https:/cdn.skypack.dev/point-to-segment-2d",
+      "segseg": "https://cdn.skypack.dev/segseg"
+    }
+  }
+</script>
+
+
 <script type="module">
 
 import aabbAabbOverlap        from './figures/aabb-aabb-overlap.js'
@@ -47,7 +60,7 @@ import segmentSphereOverlap      from './figures/segment-sphere-overlap.js'
 import segmentsSegmentOverlap    from './figures/segments-segment-overlap.js'
 import segmentsSphereSweep1      from './figures/segments-sphere-sweep1.js'
 import sphereSphereOverlap       from './figures/sphere-sphere-overlap.js'
-import triPointOverlap           from './figures/tri-point-overlap.js'
+import triPointOverlap           from './figures/triangle-point-overlap.js'
 
 
 function createExample (impl) {

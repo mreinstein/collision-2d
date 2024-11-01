@@ -1,5 +1,5 @@
-import { vec2 }  from './deps.js'
-import toRadians from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/src/to-radians.js'
+import { toRadians } from '@footgun/math-gap'
+import { vec2 }      from 'gl-matrix'
 
 
 // static temp variables to avoid creating new ones each invocation

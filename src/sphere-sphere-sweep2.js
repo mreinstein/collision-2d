@@ -1,5 +1,5 @@
 import getLowestRoot from './get-lowest-root.js'
-import { vec2 }      from './deps.js'
+import { vec2 }      from 'gl-matrix'
 
 
 // from https://web.archive.org/web/20100629145557/http://www.gamasutra.com/view/feature/3383/simple_intersection_tests_for_games.php?page=2

@@ -1,6 +1,6 @@
 import aabbAABBOverlap from './aabb-aabb-overlap.js'
 import aabbAabbSweep1  from './aabb-aabb-sweep1.js' 
-import { vec2 }        from './deps.js'
+import { vec2 }        from 'gl-matrix'
 
 
 const pos2 = vec2.create()

@@ -1,4 +1,5 @@
-import { clamp, sign } from './deps.js'
+import clamp    from 'clamp'
+import { sign } from '@footgun/math-gap'
 
 
 /*

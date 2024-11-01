@@ -1,6 +1,7 @@
 import common    from './common.js'
 import contact   from '../src/contact.js'
-import { segpoint, vec2 }  from '../src/deps.js'
+import segmentPointOverlap from '../src/segment-point-overlap.js'
+import { vec2 }   from 'gl-matrix'
 
 
 function init (context, width, height) {
@@ -24,7 +25,7 @@ function draw (data, dt) {
   
     common.drawSegment(data, data.line[0], data.line[1], '#666')
 
-    const overlaps = segpoint(data.point, data.line[0], data.line[1])
+    const overlaps = segmentPointOverlap(data.point, data.line[0], data.line[1])
 
     common.drawPoint(data, data.point, overlaps ? '#ff0' : '#0f0', '', 2)
 }

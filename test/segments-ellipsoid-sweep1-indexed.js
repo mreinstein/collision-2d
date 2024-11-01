@@ -1,7 +1,7 @@
 import Contact from '../src/contact.js'
 import assert  from './_assert.js'
 import sweep   from '../src/segments-ellipsoid-sweep1-indexed.js'
-import { vec2 } from '../src/deps.js'
+import { vec2 } from 'gl-matrix'
 
 
 const lines = [

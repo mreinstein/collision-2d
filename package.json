@@ -1,0 +1,33 @@
+{
+  "name": "@footgun/collision-2d",
+  "version": "0.1.0",
+  "description": "A collection of collision detection and response functions for 2D",
+  "main": "collision-2d.js",
+  "type": "module",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test ./test"
+  },
+  "keywords": [
+    "collision",
+    "2d",
+    "physics",
+    "geometry"
+  ],
+  "author": "Michael Reinstein",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mreinstein/collision-2d.git"
+  },
+  "dependencies": {
+    "@footgun/math-gap": "^0.1.0",
+    "clamp": "^1.0.1",
+    "gl-matrix": "^3.4.3",
+    "point-to-segment-2d": "^1.0.0",
+    "segseg": "^1.0.0"
+  }
+}

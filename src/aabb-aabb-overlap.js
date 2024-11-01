@@ -1,4 +1,5 @@
-import { sign, vec2 } from './deps.js'
+import { sign } from '@footgun/math-gap'
+import { vec2 } from 'gl-matrix'
 
 
 /*

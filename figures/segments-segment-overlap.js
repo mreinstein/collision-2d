@@ -1,7 +1,7 @@
 import common                 from './common.js'
 import contact                from '../src/contact.js'
 import segmentsSegmentOverlap from '../src/segments-segment-overlap.js'
-import { vec2 }               from '../src/deps.js'
+import { vec2 }               from 'gl-matrix'
 
 
 function init (context, width, height) {

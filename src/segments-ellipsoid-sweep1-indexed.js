@@ -1,6 +1,6 @@
 import TraceInfo from './TraceInfo.js'
 import toji      from './toji-tris.js'
-import { vec2 }  from './deps.js'
+import { vec2 }  from 'gl-matrix'
 
 
 const traceInfo = new TraceInfo()

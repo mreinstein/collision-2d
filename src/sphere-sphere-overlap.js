@@ -1,4 +1,5 @@
-import { contact, vec2 } from './deps.js'
+import contact  from './contact.js'
+import { vec2 } from 'gl-matrix'
 
 
 const _delta = vec2.create()

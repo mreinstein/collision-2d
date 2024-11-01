@@ -1,4 +1,4 @@
-import { vec2 } from './deps.js'
+import { vec2 } from 'gl-matrix'
 
 
 const EPSILON = 0.00000001

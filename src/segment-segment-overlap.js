@@ -1,4 +1,4 @@
-import { segseg } from './deps.js'
+import segseg from 'segseg'
 
 
 export default function segmentSegmentOverlap (pos1, pos2, pos3, pos4, intersection) {

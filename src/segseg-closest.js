@@ -1,6 +1,6 @@
 // determine the closest point between 2 line segments.
 // from http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
-import { vec2 } from './deps.js'
+import { vec2 } from 'gl-matrix'
 
 
 const SMALL_NUM = 0.00000001 // anything that avoids division overflow
@@ -9,9 +9,9 @@ const u = vec2.create()
 const v = vec2.create()
 const w = vec2.create()
 const s1tmp = vec2.create()
-const s2tmp = vec2.malloc()
-const diff = vec2.malloc()
-const dP = vec2.malloc()
+const s2tmp = vec2.create()
+const diff = vec2.create()
+const dP = vec2.create()
 
 
 // get the 2D minimum distance between 2 segments

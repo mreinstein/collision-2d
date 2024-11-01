@@ -2,7 +2,7 @@
 import aabbSegmentSweep1 from './aabb-segment-sweep1.js'
 import contact           from './contact.js'
 import copyContact       from './contact-copy.js'
-import { vec2 }          from './deps.js'
+import { vec2 }          from 'gl-matrix'
 
 
 const _tmpContact = contact()

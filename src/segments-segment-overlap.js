@@ -1,6 +1,6 @@
-import { vec2 }   from './deps.js'
 import lineNormal from './segment-normal.js'
 import segseg     from './segment-segment-overlap.js'
+import { vec2 }   from 'gl-matrix'
 
 
 const EPSILON = 1e-8

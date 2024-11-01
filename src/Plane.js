@@ -1,6 +1,6 @@
 // plane implementation adapted from Appendix B of http://www.peroxide.dk/papers/collision/collision.pdf
-import { vec2 }      from './deps.js'
 import segmentNormal from './segment-normal.js'
+import { vec2 }      from 'gl-matrix'
 
 
 function create () {

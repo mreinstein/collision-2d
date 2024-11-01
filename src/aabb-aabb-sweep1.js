@@ -1,6 +1,7 @@
-import { clamp, vec2 } from './deps.js'
-import intersectAABB   from './aabb-aabb-overlap.js'
-import intersectLine   from './aabb-segment-overlap.js'
+import clamp         from 'clamp'
+import intersectAABB from './aabb-aabb-overlap.js'
+import intersectLine from './aabb-segment-overlap.js'
+import { vec2 }      from 'gl-matrix'
 
 
 const EPSILON = 1e-8

@@ -1,4 +1,4 @@
-import toRadians from 'https://cdn.jsdelivr.net/gh/mreinstein/math-gap/src/to-radians.js'
+import { toRadians } from '@footgun/math-gap'
 
 
 function drawAABB (data, box, color='#fff', thickness=1) {

@@ -1,7 +1,7 @@
 import common           from './common.js'
 import contact          from '../src/contact.js'
 import aabbSegmentsSweep from '../src/aabb-segments-sweep1-indexed.js'
-import { vec2 }         from '../src/deps.js'
+import { vec2 }         from 'gl-matrix'
 
 
 function init (context, width, height) {

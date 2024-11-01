@@ -1,7 +1,8 @@
 // based on https://gamedev.stackexchange.com/questions/29479/swept-aabb-vs-line-segment-2d
 
 import segmentNormal  from './segment-normal.js'
-import { sign, vec2 } from './deps.js'
+import { sign } from '@footgun/math-gap'
+import { vec2 } from 'gl-matrix'
 
 
 const aabbCenter = vec2.create()

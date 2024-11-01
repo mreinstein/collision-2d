@@ -1,5 +1,5 @@
 import common          from './common.js'
-import triPointOverlap from '../src/tri-point-overlap.js'
+import triPointOverlap from '../src/triangle-point-overlap.js'
 
 
 function init (context, width, height) {

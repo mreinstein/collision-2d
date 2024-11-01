@@ -2,11 +2,10 @@
 
 There are many javascript collision routines and libraries for 2d. None satisifed all of these criteria:
 
-* consistent API interface
-* doesn't generate memory garbage
 * consistent vector/matrix/line representation
-* is data-oriented
-* is purely functional
+* doesn't generate memory garbage
+* is data-oriented and functional
+* consistent API interface
 * collisions only - no gravity, rigid body handling, or complex solvers
 * pure es modules
 
@@ -14,17 +13,6 @@ so here we are!
 
 
 Note: If you're looking for higher-level 2d collision handling routine for ellipsoids vs line segments, check out https://github.com/mreinstein/collide-and-slide-2d
-
-
-## Testing
-
-All tests are in a folder unsurprisingly named `test/`. You can invoke any of them like this:
-
-```bash
-deno run test/<testname>.js
-```
-
-These tests will print nothing and return an exit code of 0 on success, or they'll bitch to `stdout` when they fail. 
 
 
 ## available collision checks
@@ -35,14 +23,18 @@ These tests will print nothing and return an exit code of 0 on success, or they'
 ![alt text](docs/aabb-aabb-overlap.png "AABB-AABB overlap test")
 
 ```javascript
-const collided = aabbAABBOverlap(aabb, aabb2, contact)
+import { aabbOverlap } from '@footgun/collision-2d'
+
+const collided = aabbOverlap(aabb, aabb2, contact)
 ```
 
 ### aabb-aabb contain
 
 ```javascript
+import { aabbContain } from '@footgun/collision-2d'
+
 // true when aabb1 fully contains aabb2 (2 is fully inside the bounds of 1)
-const contains = aabbAABBContain(aabb1, aabb2)
+const contains = aabbContain(aabb1, aabb2)
 ```
 
 
@@ -51,7 +43,9 @@ const contains = aabbAABBContain(aabb1, aabb2)
 ![alt text](docs/aabb-aabb-sweep1.png "AABB-AABB sweep 1 test")
 
 ```javascript
-const collided = aabbAABBSweep1(aabb, aabb2, delta, contact)
+import { aabbSweep1 } from '@footgun/collision-2d'
+
+const collided = aabbSweep1(aabb, aabb2, delta, contact)
 ```
 
 
@@ -60,7 +54,9 @@ const collided = aabbAABBSweep1(aabb, aabb2, delta, contact)
 ![alt text](docs/aabb-aabb-sweep2.png "AABB-AABB sweep 2 test")
 
 ```javascript
-const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, contact)
+import { aabbSweep2 } from '@footgun/collision-2d'
+
+const collided = aabbSweep2(aabb, delta, aabb2, delta2, contact)
 ```
 
 
@@ -69,7 +65,9 @@ const collided = aabbAABBSweep2(aabb, delta, aabb2, delta2, contact)
 ![alt text](docs/aabb-segment-sweep1.png "AABB-segment sweep test")
 
 ```javascript
-const collided = aabbSegmentSweep(line, aabb, delta, contact)
+import { aabbSegSweep1 } from '@footgun/collision-2d'
+
+const collided = aabbSegSweep1(line, aabb, delta, contact)
 ```
 
 
@@ -78,7 +76,9 @@ const collided = aabbSegmentSweep(line, aabb, delta, contact)
 ![alt text](docs/aabb-segments-sweep1-indexed.png "AABB-segments indexed sweep test")
 
 ```javascript
-const collided = aabbSegmentsSweep1Indexed(segments, indices, segmentCount, aabb, delta, contact)
+import { aabbSegsSweep1Indexed } from '@footgun/collision-2d'
+
+const collided = aabbSegsSweep1Indexed(segments, indices, segmentCount, aabb, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
@@ -89,6 +89,8 @@ if there is a collision, `contact.collider` will be an integer indicating the in
 ![alt text](docs/aabb-point-overlap.png "AABB-point overlap test")
 
 ```javascript
+import { aabbPointOverlap } from '@footgun/collision-2d'
+
 const collided = aabbPointOverlap(aabb, point, contact)
 ```
 
@@ -98,7 +100,9 @@ const collided = aabbPointOverlap(aabb, point, contact)
 ![alt text](docs/aabb-segment-overlap.png "AABB-segment overlap test")
 
 ```javascript
-const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contact)
+import { aabbSegOverlap } from '@footgun/collision-2d'
+
+const collided = aabbSegOverlap(aabb, pos, delta, paddingX, paddingY, contact)
 ```
 
 
@@ -108,12 +112,11 @@ const collided = aabbSegmentOverlap(aabb, pos, delta, paddingX, paddingY, contac
 ![alt text](docs/ray-plane-distance.png "ray-plane distance")
 
 ```javascript
-import plane from 'plane.js'
+import { Plane } from '@footgun/collision-2d'
 
-
-const p = plane.create()
-plane.fromPlane(p, planeOrigin, planeNormal)
-const distance = plane.rayDistance(p, rayOrigin, rayVector)
+const p = Plane.create()
+Plane.fromPlane(p, planeOrigin, planeNormal)
+const distance = Plane.rayDistance(p, rayOrigin, rayVector)
 
 ```
 
@@ -123,7 +126,7 @@ const distance = plane.rayDistance(p, rayOrigin, rayVector)
 ![alt text](docs/ray-sphere-overlap.png "ray-sphere overlap test")
 
 ```javascript
-import raySphereOverlap from 'ray-sphere-overlap.js'
+import { raySphereOverlap } from '@footgun/collision-2d'
 
 
 // declare 2 points that lie on an infinite ray
@@ -150,7 +153,7 @@ if (overlaps) {
 ![alt text](docs/segment-sphere-overlap.png "segment-sphere overlap test")
 
 ```javascript
-import segmentSphereOverlap from 'segment-sphere-overlap.js'
+import { segSphereOverlap } from '@footgun/collision-2d'
 
 
 // declare 2 points that lie on a line segment
@@ -160,7 +163,7 @@ const p2 = [ 200, 100 ]
 const sphereCenter: [ 250, 100 ]
 const sphereRadius: 50
 const contact = { intersectionCount: 0, mu1: NaN, mu2: NaN }
-const overlaps = segmentSphereOverlap(p1, p2, sphereCenter, sphereRadius, contact)
+const overlaps = segSphereOverlap(p1, p2, sphereCenter, sphereRadius, contact)
 
 // mu1 and mu2 are the points along the line segment from p1 to p2 where the sphere intersection occurs:
 //   intersection1 = p1 + contact.mu1  * (p2 - p1)
@@ -180,7 +183,9 @@ if (overlaps) {
 ### segment-normal
 
 ```javascript
-const normal = segmentNormal(vec2.create(), pos1, pos2)
+import { segNormal } from '@footgun/collision-2d'
+
+const normal = segNormal(vec2.create(), pos1, pos2)
 ```
 
 
@@ -189,7 +194,9 @@ const normal = segmentNormal(vec2.create(), pos1, pos2)
 ![alt text](docs/segment-point-overlap.png "segment-point overlap test")
 
 ```javascript
-const collided = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
+import { segPointOverlap } from '@footgun/collision-2d'
+
+const collided = segPointOverlap(p, segPoint0, segPoint1) // true or false
 ```
 
 
@@ -198,8 +205,10 @@ const collided = segmentPointOverlap(p, segPoint0, segPoint1) // true or false
 ![alt text](docs/segment-segment-overlap.png "segment-segment overlap test")
 
 ```javascript
+import { segOverlap } from '@footgun/collision-2d'
+
 const intersectionPoint = vec2.create()
-if (segmentSegmentOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, intersectionPoint)) {
+if (segOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, intersectionPoint)) {
     // if we get here, intersectionPoint is filled in with where the 2 segments overlap
 }
 ```
@@ -210,7 +219,9 @@ if (segmentSegmentOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, inters
 ![alt text](docs/segments-segment-overlap.png "segments-segment overlap test")
 
 ```javascript
-const collided = segmentsSegmentOverlap(segments, start, delta, contact)
+import { segsSegOverlap } from '@footgun/collision-2d'
+
+const collided = segsSegOverlap(segments, start, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
@@ -219,6 +230,8 @@ if there is a collision, `contact.collider` will be an integer indicating the in
 ### segments-segment-overlap-indexed
 
 ```javascript
+import { segsSegOverlapIndexed } from '@footgun/collision-2d'
+
 const segs = [
     [ p0, p1 ],
     [ p2, p3 ],
@@ -228,7 +241,7 @@ const indices = [ 0, 2 ]  // indices into the segs array
 
 const segmentCount = 2    // numer of indices to include. only run the segmentsSegment intersection tests on [ p0, p1 ] and [ p4, p5]
 
-const collided = segmentsSegmentOverlapIndexed(segments, indices, segmentCount, start, delta, contact)
+const collided = segsSegOverlapIndexed(segments, indices, segmentCount, start, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
@@ -241,7 +254,9 @@ if there is a collision, `contact.collider` will be an integer indicating the in
 
 
 ```javascript
-const collided = segmentsSphereSweep1(segments, position, radius, delta, contact)
+import { segsSphereSweep1 } from '@footgun/collision-2d'
+
+const collided = segsSphereSweep1(segments, position, radius, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
@@ -250,6 +265,8 @@ if there is a collision, `contact.collider` will be an integer indicating the in
 ### segments-sphere-sweep-1-indexed
 
 ```javascript
+import { segsSphereSweep1Indexed } from '@footgun/collision-2d'
+
 const segs = [
     [ p0, p1 ],
     [ p2, p3 ],
@@ -259,7 +276,7 @@ const indices = [ 0, 2 ]  // indices into the segs array
 
 const segmentCount = 2    // only run the segmentsSphereSweep tests on [ p0, p1 ] and [ p4, p5 ]
 
-const collided = segmentsSphereSweep1(segments, indices, segmentCount, position, radius, delta, contact)
+const collided = segsSphereSweep1Indexed(segments, indices, segmentCount, position, radius, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
@@ -270,7 +287,9 @@ if there is a collision, `contact.collider` will be an integer indicating the in
 ![alt text](docs/sphere-sphere-overlap.png "sphere-sphere overlap test")
 
 ```javascript
-const collided = sphereSphereOverlap(centerA, radiusA, centerB, radiusB, contact) // collided is true or false
+import { sphereOverlap } from '@footgun/collision-2d'
+
+const collided = sphereOverlap(centerA, radiusA, centerB, radiusB, contact) // collided is true or false
 ```
 
 if there is a collision, `contact.delta` is a vector that can be added to sphere A’s position to move them into a non-colliding state.
@@ -282,7 +301,9 @@ Note: `contact` is an optional parameter. if you only want to determine if the 2
 ### sphere-sphere-sweep2
 
 ```javascript
-const collided = sphereSphereSweep2(radiusA, A0, A1, radiusB, B0, B1, contact)
+import { sphereSweep2 } from '@footgun/collision-2d'
+
+const collided = sphereSweep2(radiusA, A0, A1, radiusB, B0, B1, contact)
 ```
 
 * `A0` is the previous position of sphere A
@@ -299,16 +320,20 @@ where the collision happened.
 ![alt text](docs/cone-point-overlap.png "cone-point overlap test")
 
 ```javascript
+import { conePointOverlap } from '@footgun/collision-2d'
+
 const collided = conePointOverlap(conePosition, coneRotation, coneFieldOfView, coneMinDistance, coneMaxDistance, point) // collided is true or false
 ```
 
 
-### tri-point-overlap
+### triangle-point-overlap
 
-![alt text](docs/tri-point-overlap.png "triangle-point overlap test")
+![alt text](docs/triangle-point-overlap.png "triangle-point overlap test")
 
 ```javascript
-const collided = triPointOverlap(v0, v1, v2, point) // collided is true or false
+import { trianglePointOverlap } from '@footgun/collision-2d'
+
+const collided = trianglePointOverlap(v0, v1, v2, point) // collided is true or false
 ```
 
 

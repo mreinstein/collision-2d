@@ -1,6 +1,6 @@
 import common          from './common.js'
 import plane           from '../src/plane.js'
-import { vec2 }        from '../src/deps.js'
+import { vec2 }        from 'gl-matrix'
 import segmentNormal   from '../src/segment-normal.js'
 import setLength       from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/set-length.js'
 
@@ -28,7 +28,7 @@ function init (context, width, height) {
 function draw (data, dt) {
     common.clear(data)
 
-    window.d = data
+    //window.d = data
     data.angle += 0.5 * Math.PI * dt
     //data.angle = 6.8
 

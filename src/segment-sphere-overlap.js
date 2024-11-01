@@ -1,5 +1,5 @@
 import raySphereOverlap from './ray-sphere-overlap.js'
-import { vec2 }         from './deps.js'
+import { vec2 }         from 'gl-matrix'
 
 
 // Calculate the intersection of a line segment and a sphere
