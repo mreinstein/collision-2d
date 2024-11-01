@@ -1,4 +1,4 @@
-import Canvas, { CanvasRenderingContext2D, dataURLtoFile } from 'https://deno.land/x/canvas@v1.1.4/mod.ts'
+import Canvas, { CanvasRenderingContext2D, dataURLtoFile } from 'https://deno.land/x/canvas@v1.4.2/mod.ts'
 
 
 let m, c, o;
