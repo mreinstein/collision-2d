@@ -436,3 +436,4 @@ Most of these collision checks were adapted from existing open source modules:
 * http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
 * https://observablehq.com/@kelleyvanevert/2d-point-in-triangle-test
 * aabb-segment sweep from https://gamedev.stackexchange.com/questions/29479/swept-aabb-vs-line-segment-2d
+* PolylinePath implementation from Craig Reynold's seminal work on autonomous steering https://opensteer.sourceforge.net/
