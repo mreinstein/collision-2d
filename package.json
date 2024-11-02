@@ -11,7 +11,7 @@
   "scripts": {
     "build:figures": "./build-figures.sh",
     "prepublishOnly": "npm test",
-    "test": "node --test ./test"
+    "test": "node --test ./test/*.js"
   },
   "keywords": [
     "collision",
