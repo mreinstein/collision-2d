@@ -26,11 +26,11 @@
     "url": "git@github.com:mreinstein/collision-2d.git"
   },
   "dependencies": {
-    "@footgun/math-gap": "^0.1.0",
+    "@footgun/math-gap": "^0.2.0",
     "clamp": "^1.0.1",
     "gl-matrix": "^3.4.3",
     "point-to-segment-2d": "^1.0.0",
     "segseg": "^1.0.0",
-    "wgpu-matrix": "^3.3.0"
+    "wgpu-matrix": "^3.4.0"
   }
 }
