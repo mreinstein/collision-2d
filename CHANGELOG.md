@@ -1,3 +1,7 @@
+# 0.3.0
+* add Polygon-point checks
+
+
 # 0.2.0
 * add PolylinePath
 
