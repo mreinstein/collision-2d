@@ -30,6 +30,7 @@
     "clamp": "^1.0.1",
     "gl-matrix": "^3.4.3",
     "point-to-segment-2d": "^1.0.0",
+    "robust-point-in-polygon": "^1.0.3",
     "segseg": "^1.0.0",
     "wgpu-matrix": "^3.4.0"
   }
