@@ -1,6 +1,6 @@
 {
   "name": "@footgun/collision-2d",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A collection of collision detection and response functions for 2D",
   "main": "collision-2d.js",
   "type": "module",
