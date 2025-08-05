@@ -1,4 +1,4 @@
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 export default function segmentNormal (out, pos1, pos2) {
@@ -8,7 +8,7 @@ export default function segmentNormal (out, pos1, pos2) {
     if (dx !== 0)
         dx = -dx
 
-    vec2.set(out, dy, dx)  // normals: [ -dy, dx ]  [ dy, -dx ]
+    vec2.set(dy, dx, out)  // normals: [ -dy, dx ]  [ dy, -dx ]
     vec2.normalize(out, out)
 
     return out

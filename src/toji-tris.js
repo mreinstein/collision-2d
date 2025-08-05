@@ -4,7 +4,7 @@ import TraceInfo           from './TraceInfo.js'
 import getLowestRoot       from './get-lowest-root.js'
 import lineNormal          from './segment-normal.js'
 import segmentPointOverlap from './segment-point-overlap.js'
-import { vec2 }            from 'gl-matrix'
+import { vec2 }            from 'wgpu-matrix'
 
 
 const ta = vec2.create()
@@ -19,9 +19,9 @@ const planeIntersect = vec2.create()
 
 
 function testVertex (p, velSqrLen, t, start, vel, trace) {
-    vec2.subtract(v, start, p)
+    vec2.subtract(start, p, v)
     const b = 2.0 * vec2.dot(vel, v)
-    const c = vec2.squaredLength(v) - 1.0
+    const c = vec2.lengthSq(v) - 1.0
     const newT = getLowestRoot(velSqrLen, b, c, t)
     if (newT !== null) {
         trace.setCollision(newT, p)
@@ -32,16 +32,16 @@ function testVertex (p, velSqrLen, t, start, vel, trace) {
 
 
 function testEdge (pa, pb, velSqrLen, t, start, vel, trace) {
-  vec2.subtract(edge, pb, pa)
-  vec2.subtract(v, pa, start)
+  vec2.subtract(pb, pa, edge)
+  vec2.subtract(pa, start, v)
 
-  const edgeSqrLen = vec2.squaredLength(edge)
+  const edgeSqrLen = vec2.lengthSq(edge)
   const edgeDotVel = vec2.dot(edge, vel)
   const edgeDotSphereVert = vec2.dot(edge, v)
 
   const a = edgeSqrLen*-velSqrLen + edgeDotVel*edgeDotVel
   const b = edgeSqrLen*(2.0*vec2.dot(vel, v))-2.0*edgeDotVel*edgeDotSphereVert
-  const c = edgeSqrLen*(1.0-vec2.squaredLength(v))+edgeDotSphereVert*edgeDotSphereVert
+  const c = edgeSqrLen*(1.0-vec2.lengthSq(v))+edgeDotSphereVert*edgeDotSphereVert
 
   // Check for intersection against infinite line
   const newT = getLowestRoot(a, b, c, t)
@@ -49,8 +49,8 @@ function testEdge (pa, pb, velSqrLen, t, start, vel, trace) {
     // Check if intersection against the line segment:
     const f = (edgeDotVel*newT-edgeDotSphereVert)/edgeSqrLen
     if (f >= 0.0 && f <= 1.0) {
-      vec2.scale(v, edge, f)
-      vec2.add(v, pa, v)
+      vec2.scale(edge, f, v)
+      vec2.add(pa, v, v)
       trace.setCollision(newT, v)
       return newT
     }
@@ -65,20 +65,20 @@ function testEdge (pa, pb, velSqrLen, t, start, vel, trace) {
  * @param {TraceInfo} trace TraceInfo containing the sphere path to trace
  */
 function traceSphereTriangle (a, b, trace) {
-  vec2.copy(trace.tmpTri[0], a)
-  vec2.copy(trace.tmpTri[0], b)
+  vec2.copy(a, trace.tmpTri[0])
+  vec2.copy(b, trace.tmpTri[1])
 
   const invRadius = trace.invRadius
   const vel = trace.scaledVel
   const start = trace.scaledStart
 
   // Scale the triangle points so that we're colliding against a unit-radius sphere.
-  vec2.scale(ta, a, invRadius)
-  vec2.scale(tb, b, invRadius)
+  vec2.scale(a, invRadius, ta)
+  vec2.scale(b, invRadius, tb)
 
   lineNormal(norm, ta, tb)
 
-  vec2.copy(trace.tmpTriNorm, norm)
+  vec2.copy(norm, trace.tmpTriNorm)
   const planeD = -(norm[0]*ta[0]+norm[1] *ta[1])
 
   // Colliding against the backface of the triangle
@@ -154,9 +154,9 @@ function traceSphereTriangle (a, b, trace) {
   // Check for collision againt the triangle face:
   if (!embedded) {
     // Calculate the intersection point with the plane
-    vec2.subtract(planeIntersect, start, norm)
-    vec2.scale(v, vel, t0)
-    vec2.add(planeIntersect, v, planeIntersect)
+    vec2.subtract(start, norm, planeIntersect)
+    vec2.scale(vel, t0, v)
+    vec2.add(v, planeIntersect, planeIntersect)
 
     // Is that point inside the triangle?
     if (segmentPointOverlap(planeIntersect, ta, tb)) {
@@ -167,7 +167,7 @@ function traceSphereTriangle (a, b, trace) {
     }
   }
 
-  const velSqrLen = vec2.squaredLength(vel)
+  const velSqrLen = vec2.lengthSq(vel)
   let t = trace.t
 
   // Check for collision againt the triangle vertices:

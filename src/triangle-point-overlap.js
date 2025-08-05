@@ -1,4 +1,4 @@
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 // static temp variables to avoid creating new ones each invocation
@@ -18,9 +18,9 @@ https://observablehq.com/@kelleyvanevert/2d-point-in-triangle-test
 */
 export default function trianglePointOverlap (v0, v1, v2, point) {
     // compute vectors        
-    vec2.sub(c, v2, v0)
-    vec2.sub(b, v1, v0)
-    vec2.sub(p, point, v0)
+    vec2.sub(v2, v0, c)
+    vec2.sub(v1, v0, b)
+    vec2.sub(point, v0, p)
 
     // compute dot products
     const cc = vec2.dot(c, c)

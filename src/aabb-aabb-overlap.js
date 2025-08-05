@@ -1,5 +1,5 @@
 import { sign } from '@footgun/math-gap'
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 /*
@@ -42,8 +42,8 @@ export default function aabbAABBOverlap (rect, rect2, contact=null) {
     delta is the overlap between the two objects, and is a vector that can be added to the colliding object’s position to move it back to a non-colliding state.
     */
     contact.collider = rect
-    vec2.set(contact.delta, 0, 0)
-    vec2.set(contact.normal, 0, 0)
+    vec2.set(0, 0, contact.delta)
+    vec2.set(0, 0, contact.normal)
     contact.time = 0  // boxes overlap
 
     if (px < py) {

@@ -1,7 +1,7 @@
 import clamp         from 'clamp'
 import intersectAABB from './aabb-aabb-overlap.js'
 import intersectLine from './aabb-segment-overlap.js'
-import { vec2 }      from 'gl-matrix'
+import { vec2 }      from 'wgpu-matrix'
 
 
 const EPSILON = 1e-8
@@ -28,7 +28,7 @@ export default function aabbAABBSweep1 (aabb, aabb2, delta, contact) {
         //contact.position[0] = aabb2.position[0] + delta[0] * contact.time
         //contact.position[1] = aabb2.position[1] + delta[1] * contact.time
 
-        const direction = vec2.normalize([], delta)
+        const direction = vec2.normalize(delta)
       
         const halfX2 = aabb2.width / 2
         const halfY2 = aabb2.height / 2

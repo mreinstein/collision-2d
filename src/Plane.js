@@ -1,6 +1,6 @@
 // plane implementation adapted from Appendix B of http://www.peroxide.dk/papers/collision/collision.pdf
 import segmentNormal from './segment-normal.js'
-import { vec2 }      from 'gl-matrix'
+import { vec2 }      from 'wgpu-matrix'
 
 
 function create () {
@@ -14,8 +14,8 @@ function create () {
 
 // create a new plane from a normal and origin (a point on the plane)
 function fromPlane (out, origin, normal) {
-    vec2.copy(out.origin, origin)
-    vec2.copy(out.normal, normal)
+    vec2.copy(origin, out.origin)
+    vec2.copy(normal, out.normal)
     out.D = -(normal[0] * origin[0] + normal[1] * origin[1])
     return out
 }
@@ -23,7 +23,7 @@ function fromPlane (out, origin, normal) {
 
 // create a new plane from a line segment
 function fromSegment (out, p0, p1) {
-    vec2.copy(out.origin, p0)
+    vec2.copy(p0, out.origin)
     segmentNormal(out.normal, p0, p1)
     out.D = -(out.normal[0] * out.origin[0] + out.normal[1] * out.origin[1])
     return out

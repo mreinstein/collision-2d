@@ -1,4 +1,4 @@
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 export default function TraceInfo() {
@@ -29,13 +29,13 @@ TraceInfo.prototype.resetTrace = function(start, end, radius) {
   this.invRadius = 1/radius
   this.radius = radius
 
-  vec2.copy(this.start, start)
-  vec2.copy(this.end, end)
-  vec2.subtract(this.vel, end, start)
-  vec2.normalize(this.normVel, this.vel)
+  vec2.copy(start, this.start)
+  vec2.copy(end, this.end)
+  vec2.subtract(end, start, this.vel)
+  vec2.normalize(this.vel, this.normVel)
 
-  vec2.scale(this.scaledStart, start, this.invRadius)
-  vec2.scale(this.scaledVel, this.vel, this.invRadius)
+  vec2.scale(start, this.invRadius, this.scaledStart)
+  vec2.scale(this.vel, this.invRadius, this.scaledVel)
 
   this.velLength = vec2.length(this.vel)
 
@@ -46,25 +46,25 @@ TraceInfo.prototype.resetTrace = function(start, end, radius) {
 
 TraceInfo.prototype.setCollision = function(t, point) {
   this.collision = true
-  vec2.copy(this.intersectTri[0], this.tmpTri[0])
-  vec2.copy(this.intersectTri[1], this.tmpTri[1])
-  vec2.copy(this.intersectTriNorm, this.tmpTriNorm)
+  vec2.copy(this.tmpTri[0], this.intersectTri[0])
+  vec2.copy(this.tmpTri[1], this.intersectTri[1])
+  vec2.copy(this.tmpTriNorm, this.intersectTriNorm)
   if (t < this.t) {
     this.t = t
-    vec2.scale(this.intersectPoint, point, this.radius)
+    vec2.scale(point, this.radius, this.intersectPoint)
   }
 }
 
 
 // position of the sphere when it collided with the closest triangle
 TraceInfo.prototype.getTraceEndpoint = function(end) {
-  vec2.scale(this.tmp, this.vel, this.t)
-  vec2.add(end, this.start, this.tmp)
+  vec2.scale(this.vel, this.t, this.tmp)
+  vec2.add(this.start, this.tmp, end)
   return end
 }
 
 
 TraceInfo.prototype.getTraceDistance = function() {
-  vec2.scale(this.tmp, this.vel, this.t)
+  vec2.scale(this.vel, this.t, this.tmp)
   return vec2.length(this.tmp)
 }

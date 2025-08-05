@@ -1,13 +1,14 @@
-import Contact from '../src/contact.js'
-import assert  from './_assert.js'
-import sweep   from '../src/segments-ellipsoid-sweep1-indexed.js'
-import { vec2 } from 'gl-matrix'
+import Contact  from '../src/contact.js'
+import assert   from './_assert.js'
+import sweep    from '../src/segments-ellipsoid-sweep1-indexed.js'
+import { vec2 } from 'wgpu-matrix'
 
 
 const lines = [
 	[ [64.0, 128.0], [ 64.0, 0.0 ] ],
 	[ [0,0], [0, 128] ]
 ]
+
 const indices = [ 0, 1 ]
     
 const ellipsoid = [ 5, 10 ]
@@ -18,13 +19,13 @@ const contact = Contact()
 
  
 // convert the start and end positions into R3 ellipsoid space
-vec2.divide(position, position, ellipsoid)
-vec2.divide(delta, delta, ellipsoid)
+vec2.divide(position, ellipsoid, position)
+vec2.divide(delta, ellipsoid, delta)
 
 const collision = sweep(lines, indices, lineCount, position, ellipsoid, delta, contact)
 
 // convert the intersection point back to R3 (non-ellipsoid) space
-vec2.multiply(contact.position, contact.position, ellipsoid)
+vec2.multiply(contact.position, ellipsoid, contact.position)
 
 assert.equal(collision, true)
 assert.equal(contact.collider, 0)

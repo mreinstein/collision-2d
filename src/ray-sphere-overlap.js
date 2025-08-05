@@ -1,4 +1,4 @@
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 // from http://paulbourke.net/geometry/circlesphere/raysphere.c
@@ -21,7 +21,7 @@ const dp = [ 0, 0 ]
 // @returns Boolean true if there's an intersection, false otherwise
 export default function raySphereOverlap (p1, p2, sc, r, contact) {
 
-   vec2.subtract(dp, p2, p1)
+   vec2.subtract(p2, p1, dp)
    
    const a = dp[0] * dp[0] + dp[1] * dp[1]
    const b = 2 * (dp[0] * (p1[0] - sc[0]) + dp[1] * (p1[1] - sc[1]))
