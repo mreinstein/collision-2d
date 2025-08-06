@@ -1,6 +1,6 @@
 import common              from './common.js'
 import sphereSphereOverlap from '../src/sphere-sphere-overlap.js'
-import { vec2 }            from 'gl-matrix'
+import { vec2 }            from 'wgpu-matrix'
 
 
 function init (context, width, height) {
@@ -34,8 +34,8 @@ function draw (data, dt) {
 
     const factor = (Math.cos(data.angle) + 1) * 0.5 || 1e-8
 
-    const vA = vec2.scale([], data.sweepDeltas[0], factor)
-    const vB = vec2.scale([], data.sweepDeltas[1], factor)
+    const vA = vec2.scale(data.sweepDeltas[0], factor)
+    const vB = vec2.scale(data.sweepDeltas[1], factor)
 
     const centerA = data.sweepBoxes[0].position
     const radiusA = data.sweepBoxes[0].radius
@@ -43,8 +43,8 @@ function draw (data, dt) {
     const centerB = data.sweepBoxes[1].position
     const radiusB = data.sweepBoxes[1].radius
 
-    const tmp1 = vec2.add([], centerA, vA)
-    const tmp2 = vec2.add([], centerB, vB)
+    const tmp1 = vec2.add(centerA, vA)
+    const tmp2 = vec2.add(centerB, vB)
 
        
     const overlapping = sphereSphereOverlap(tmp1, radiusA, tmp2, radiusB)

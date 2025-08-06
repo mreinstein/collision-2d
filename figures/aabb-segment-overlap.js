@@ -1,7 +1,7 @@
 import common           from './common.js'
 import contact          from '../src/contact.js'
 import intersectSegment from '../src/aabb-segment-overlap.js'
-import { vec2 }         from 'gl-matrix'
+import { vec2 }         from 'wgpu-matrix'
 
 
 function init (context, width, height) {
@@ -40,7 +40,7 @@ function draw (data, dt) {
     const hit = intersectSegment(data.box, pos1, delta, paddingX, paddingY, c)
     
     const length = vec2.length(delta)
-    const dir = vec2.normalize([], delta) //[ delta[0], delta[1] ]
+    const dir = vec2.normalize(delta)
 
     common.drawAABB(data, data.box, '#666')
 

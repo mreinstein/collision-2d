@@ -1,6 +1,6 @@
 import lineNormal from './segment-normal.js'
 import segseg     from './segment-segment-overlap.js'
-import { vec2 }   from 'gl-matrix'
+import { vec2 }   from 'wgpu-matrix'
 
 
 const EPSILON = 1e-8
@@ -12,7 +12,7 @@ const end = vec2.create()
 export default function segmentsSegmentOverlapIndexed (lines, indices, lineCount, start, delta, contact) {
     let nearest, nearestTime = 0, nearestIdx = -1
 
-    vec2.set(end, start[0] + delta[0], start[1] + delta[1])
+    vec2.add(start, delta, end)
 
     for (let i=0; i < lineCount; i++) {
         const idx = indices[i]
@@ -36,7 +36,7 @@ export default function segmentsSegmentOverlapIndexed (lines, indices, lineCount
         nearTime = 0
 
     if (nearest) {
-        vec2.scaleAndAdd(contact.position, start, delta, nearTime)
+        vec2.addScaled(start, delta, nearTime, contact.position)
         contact.collider = nearestIdx
 
         // determine which normal is on the right side of the plane for the intersection

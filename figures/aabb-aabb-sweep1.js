@@ -1,7 +1,7 @@
 import common         from './common.js'
 import contact        from '../src/contact.js'
 import aabbAabbSweep1 from '../src/aabb-aabb-sweep1.js'
-import { vec2 }       from 'gl-matrix'
+import { vec2 }       from 'wgpu-matrix'
 
 
 function init (context, width, height) {
@@ -53,11 +53,11 @@ function draw (data, dt) {
     common.drawAABB(data, data.staticBox, '#666')
 
     data.sweepBoxes.forEach((box, i) => {
-        const delta = vec2.scale([], data.sweepDeltas[i], factor)
+        const delta = vec2.scale(data.sweepDeltas[i], factor)
         const c = contact()
         const sweep = aabbAabbSweep1(data.staticBox, box, delta, c)
         const length = vec2.length(delta)
-        const dir = vec2.normalize([], delta)
+        const dir = vec2.normalize(delta)
         
         common.drawAABB(data, box, '#666')
  

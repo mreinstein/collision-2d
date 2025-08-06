@@ -1,4 +1,4 @@
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 // this module was ported from OpenSteer's Pathway.cpp implementation
@@ -40,7 +40,7 @@ export function create (options={}) {
         // for the end of each segment
         if (i > 0) {
             // compute the segment length
-            normals[i] = vec2.subtract(vec2.create(), points[i], points[i-1])
+            vec2.subtract(points[i], points[i-1], normals[i])
             lengths[i] = vec2.length(normals[i])
 
             // find the normalized vector parallel to the segment
@@ -81,9 +81,9 @@ export function mapPointToPath (out, path, point) {
         d = tmpSegDistance.distance
         if ((minDistance === undefined) || d < minDistance) {
             minDistance = d
-            vec2.copy(out.onPath, tmpSegDistance.chosen) // set the point on the path
+            vec2.copy(tmpSegDistance.chosen, out.onPath) // set the point on the path
 
-            vec2.subtract(out.tangent, path.points[i], path.points[i-1])
+            vec2.subtract(path.points[i], path.points[i-1], out.tangent)
             vec2.normalize(out.tangent, out.tangent)
         }
     }
@@ -127,9 +127,9 @@ export function mapPathDistanceToPoint (out, path, pathDistance) {
         remaining = pathDistance % path.totalPathLength //fmod(pathDistance, totalPathLength)
     } else {
         if (pathDistance < 0)
-            return vec2.copy(out, path.points[0])
+            return vec2.copy(path.points[0], out)
         if (pathDistance >= path.totalPathLength)
-            return vec2.copy(out, path.points[path.pointCount-1])
+            return vec2.copy(path.points[path.pointCount-1], out)
     }
 
     // step through segments, subtracting off segment lengths until
@@ -142,7 +142,7 @@ export function mapPathDistanceToPoint (out, path, pathDistance) {
         } else {
             const ratio = remaining / segmentLength
             //result = interpolate(ratio, points[i-1], points[i])
-            vec2.lerp(out, path.points[i-1], path.points[i], ratio)
+            vec2.lerp(path.points[i-1], path.points[i], ratio, out)
             break
         }
     }
@@ -156,13 +156,13 @@ export function mapPathDistanceToPoint (out, path, pathDistance) {
 // computes distance from a point to a line segment
 function pointToSegmentDistance (out, point, ep0, ep1) {
 
-    vec2.subtract(segmentNormal, ep1, ep0)
+    vec2.subtract(ep1, ep0, segmentNormal)
     vec2.normalize(segmentNormal, segmentNormal)
 
     const segmentLength = vec2.distance(ep0, ep1)
 
     // convert the test point to be "local" to ep0
-    vec2.subtract(local, point, ep0)
+    vec2.subtract(point, ep0, local)
 
     // find the projection of "local" onto "segmentNormal"
     const segmentProjection = vec2.dot(segmentNormal, local)
@@ -170,22 +170,22 @@ function pointToSegmentDistance (out, point, ep0, ep1) {
     // handle boundary cases: when projection is not on segment, the
     // nearest point is one of the endpoints of the segment
     if (segmentProjection < 0) {
-        vec2.copy(out.chosen, ep0)
+        vec2.copy(ep0, out.chosen)
         out.segmentProjection = 0
         out.distance = vec2.distance(point, ep0)
         return out
     }
 
     if (segmentProjection > segmentLength) {
-        vec2.copy(out.chosen, ep1)
+        vec2.copy(ep1, out.chosen)
         out.segmentProjection = segmentLength
         out.distance = vec2.distance(point, ep1)
         return out
     }
 
     // otherwise nearest point is projection point on segment
-    vec2.scale(out.chosen, segmentNormal, segmentProjection)
-    vec2.add(out.chosen, out.chosen, ep0)
+    vec2.scale(segmentNormal, segmentProjection, out.chosen)
+    vec2.add(out.chosen, ep0, out.chosen)
 
     out.segmentProjection = segmentProjection
     out.distance = vec2.distance(point, out.chosen)

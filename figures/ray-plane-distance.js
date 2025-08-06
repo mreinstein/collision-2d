@@ -1,8 +1,8 @@
 import common          from './common.js'
 import plane           from '../src/plane.js'
-import { vec2 }        from 'gl-matrix'
+import { vec2 }        from 'wgpu-matrix'
 import segmentNormal   from '../src/segment-normal.js'
-import setLength       from 'https://cdn.jsdelivr.net/gh/mreinstein/vec2-gap/set-length.js'
+//import { setLength }   from '@footgun/vec2-gap'
 
 
 function init (context, width, height) {
@@ -42,11 +42,11 @@ function draw (data, dt) {
         Math.cos(data.angle) * 32
     ]
 
-    const delta = vec2.subtract([], pos2, pos1)
+    const delta = vec2.subtract(pos2, pos1)
 
     common.drawSegment(data, data.line[0], data.line[1], '#666', 1, true)
     
-    const dir = vec2.normalize([], delta)
+    const dir = vec2.normalize(delta)
 
     const p = plane.create()
     plane.fromPlane(p, data.planeOrigin, data.planeNormal)

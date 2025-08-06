@@ -1,5 +1,5 @@
 import getLowestRoot from './get-lowest-root.js'
-import { vec2 }      from 'gl-matrix'
+import { vec2 }      from 'wgpu-matrix'
 
 
 // from https://web.archive.org/web/20100629145557/http://www.gamasutra.com/view/feature/3383/simple_intersection_tests_for_games.php?page=2
@@ -23,13 +23,13 @@ SCALAR& u1 //normalized time of second collision
 */
 export default function sphereSphereSweep2 (ra, A0, A1, rb, B0, B1, contact) {
  
-    vec2.subtract(va, A1, A0)
+    vec2.subtract(A1, A0, va)
     
-    vec2.subtract(vb, B1, B0)
+    vec2.subtract(B1, B0, vb)
 
-    vec2.subtract(AB, B0, A0)
+    vec2.subtract(B0, A0, AB)
 
-    vec2.subtract(vab, vb, va)     // relative velocity (in normalized time)
+    vec2.subtract(vb, va, vab)     // relative velocity (in normalized time)
 
 
     const rab = ra + rb
@@ -69,18 +69,18 @@ function fillContactDeets (ra, A0, A1, rb, B0, B1, t, contact) {
     contact.time = t
 
     // final sphereA position
-    vec2.subtract(_delta, A1, A0)
-    vec2.scaleAndAdd(_pos1, A0, _delta, contact.time)
+    vec2.subtract(A1, A0, _delta)
+    vec2.addScaled(A0, _delta, contact.time, _pos1)
 
     // final sphereB position
-    vec2.subtract(_delta, B1, B0)
-    vec2.scaleAndAdd(_pos2, B0, _delta, contact.time)
+    vec2.subtract(B1, B0, _delta)
+    vec2.addScaled(B0, _delta, contact.time, _pos2)
 
-    vec2.subtract(contact.position, _pos1, _pos2)
+    vec2.subtract(_pos1, _pos2, contact.position)
     vec2.normalize(contact.position, contact.position)
-    vec2.scaleAndAdd(contact.position, _pos2, contact.position, rb)
+    vec2.addScaled(_pos2, contact.position, rb, contact.position)
 
-    vec2.subtract(contact.normal, contact.position, _pos2)
+    vec2.subtract(contact.position, _pos2, contact.normal)
     vec2.normalize(contact.normal, contact.normal)
 }
 

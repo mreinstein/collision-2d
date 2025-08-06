@@ -1,7 +1,7 @@
 import common    from './common.js'
 import contact   from '../src/contact.js'
 import segmentPointOverlap from '../src/segment-point-overlap.js'
-import { vec2 }   from 'gl-matrix'
+import { vec2 }   from 'wgpu-matrix'
 
 
 function init (context, width, height) {
@@ -21,7 +21,7 @@ function draw (data, dt) {
     common.clear(data)
 
     data.angle += 0.5 * Math.PI * dt
-    vec2.set(data.point,  Math.cos(data.angle * 0.4) * 32, Math.sin(data.angle) * 12)
+    vec2.set(Math.cos(data.angle * 0.4) * 32, Math.sin(data.angle) * 12, data.point)
   
     common.drawSegment(data, data.line[0], data.line[1], '#666')
 

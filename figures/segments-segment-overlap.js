@@ -1,7 +1,7 @@
 import common                 from './common.js'
 import contact                from '../src/contact.js'
 import segmentsSegmentOverlap from '../src/segments-segment-overlap.js'
-import { vec2 }               from 'gl-matrix'
+import { vec2 }               from 'wgpu-matrix'
 
 
 function init (context, width, height) {
@@ -32,9 +32,9 @@ function draw (data, dt) {
         Math.cos(data.angle) * 32
     ]
 
-    const delta = vec2.subtract([], pos2, pos1)
+    const delta = vec2.subtract(pos2, pos1)
     let len = vec2.length(delta)
-    const dir = vec2.normalize([], delta)
+    const dir = vec2.normalize(delta)
     
 
     for (const line of data.lines)
@@ -43,12 +43,12 @@ function draw (data, dt) {
     const c = contact()
 
     if (segmentsSegmentOverlap(data.lines, pos1, delta, c)) {
-        vec2.subtract(dir, c.position, pos1)
+        vec2.subtract(c.position, pos1, dir)
         len = vec2.length(dir)
         vec2.normalize(dir, dir)
         common.drawRay(data, pos1, dir, len, '#ff0')
 
-        vec2.subtract(dir, pos2, c.position)
+        vec2.subtract(pos2, c.position, dir)
         len = vec2.length(dir)
         vec2.normalize(dir, dir)
         common.drawRay(data, c.position, dir, len, '#f00')

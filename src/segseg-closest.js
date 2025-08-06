@@ -1,6 +1,6 @@
 // determine the closest point between 2 line segments.
 // from http://geomalgorithms.com/a07-_distance.html#dist3D_Segment_to_Segment
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 const SMALL_NUM = 0.00000001 // anything that avoids division overflow
@@ -19,9 +19,9 @@ const dP = vec2.create()
 //    Return: the shortest distance between S1 and S2
 
 export default function segSegClosest (S1, S2, detail) {
-    vec2.subtract(u, S1[1], S1[0])
-    vec2.subtract(v, S2[1], S2[0])
-    vec2.subtract(w, S1[0], S2[0])
+    vec2.subtract(S1[1], S1[0], u)
+    vec2.subtract(S2[1], S2[0], v)
+    vec2.subtract(S1[0], S2[0], w)
 
     //Vector   u = S1[1] - S1[0];
     //Vector   v = S2[1] - S2[0];
@@ -109,13 +109,13 @@ export default function segSegClosest (S1, S2, detail) {
     if (tc > 1)
         console.warn('WARNING: tc > 1:', tc)
 
-    vec2.scale(s1tmp, u, sc)
+    vec2.scale(u, sc, s1tmp)
 
-    vec2.scale(s2tmp, v, tc)
+    vec2.scale(v, tc, s2tmp)
 
-    vec2.subtract(diff, s1tmp, s2tmp)
+    vec2.subtract(s1tmp, s2tmp, diff)
 
-    vec2.add(dP, w, diff)
+    vec2.add(w, diff, dP)
 
     const closestDistance = vec2.length(dP)
 

@@ -1,6 +1,6 @@
 import aabbAABBOverlap from './aabb-aabb-overlap.js'
 import aabbAabbSweep1  from './aabb-aabb-sweep1.js' 
-import { vec2 }        from 'gl-matrix'
+import { vec2 }        from 'wgpu-matrix'
 
 
 const pos2 = vec2.create()
@@ -17,7 +17,7 @@ const amt = vec2.create()
 // vb displacement vector of B
 // contact
 export default function aabbAABBSweep2 (A, va, B, vb, contact) {
-    const delta = vec2.subtract([], vb, va)
+    const delta = vec2.subtract(vb, va)
     const hit = aabbAabbSweep1(A, B, delta, contact)
 
     if (hit) {
@@ -29,8 +29,8 @@ export default function aabbAABBSweep2 (A, va, B, vb, contact) {
        pos2[0] = B.position[0] + vb[0] * contact.time
        pos2[1] = B.position[1] + vb[1] * contact.time
 
-       vec2.subtract(dir, pos2, contact.position)
-       vec2.scale(amt, dir, 0.5)
+       vec2.subtract(pos2, contact.position, dir)
+       vec2.scale(dir, 0.5, amt)
 
        contact.position[0] += amt[0]
        contact.position[1] += amt[1]

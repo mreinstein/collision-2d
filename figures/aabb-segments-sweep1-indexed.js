@@ -1,7 +1,7 @@
 import common           from './common.js'
 import contact          from '../src/contact.js'
 import aabbSegmentsSweep from '../src/aabb-segments-sweep1-indexed.js'
-import { vec2 }         from 'gl-matrix'
+import { vec2 }         from 'wgpu-matrix'
 
 
 function init (context, width, height) {
@@ -49,7 +49,7 @@ function draw (data, dt) {
 
     const factor = (Math.cos(data.angle) + 1) * 0.5 || 1e-8
 
-    const delta = vec2.scale([], data.sweepDelta, factor)
+    const delta = vec2.scale(data.sweepDelta, factor)
     const c = contact()
 
     const box = data.sweepAABB
@@ -57,7 +57,7 @@ function draw (data, dt) {
 
     const sweep = aabbSegmentsSweep(data.staticLines, data.indices, data.lineCount, box, delta, c)
     const length = vec2.length(delta)
-    const dir = vec2.normalize([], delta)
+    const dir = vec2.normalize(delta)
 
     if (sweep) {
         // Draw a red box at the point where it was trying to move to

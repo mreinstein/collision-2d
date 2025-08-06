@@ -1,7 +1,7 @@
 import common         from './common.js'
 import contact        from '../src/contact.js'
 import aabbAabbSweep2 from '../src/aabb-aabb-sweep2.js'
-import { vec2 }       from 'gl-matrix'
+import { vec2 }       from 'wgpu-matrix'
 
 
 function init (context, width, height) {
@@ -43,8 +43,8 @@ function draw (data, dt) {
 
     const factor = (Math.cos(data.angle) + 1) * 0.5 || 1e-8
 
-    const vA = vec2.scale([], data.sweepDeltas[0], factor)
-    const vB = vec2.scale([], data.sweepDeltas[1], factor)
+    const vA = vec2.scale(data.sweepDeltas[0], factor)
+    const vB = vec2.scale(data.sweepDeltas[1], factor)
 
     const [ box1, box2 ] = data.sweepBoxes
 
@@ -55,14 +55,14 @@ function draw (data, dt) {
     if (sweep) {
         // Draw a red box at the point where it was trying to move to
         let length = vec2.length(vA)
-        let dir = vec2.normalize([], vA)
+        let dir = vec2.normalize(vA)
         common.drawRay(data, box1.position, dir, length, '#f00')
         data.tempBox.position[0] = box1.position[0] + vA[0]
         data.tempBox.position[1] = box1.position[1] + vA[1]
         common.drawAABB(data, data.tempBox, '#f00')
 
         length = vec2.length(vB)
-        dir = vec2.normalize([], vB)
+        dir = vec2.normalize(vB)
         common.drawRay(data, box2.position, dir, length, '#f00')
         data.tempBox.position[0] = box2.position[0] + vB[0]
         data.tempBox.position[1] = box2.position[1] + vB[1]
@@ -87,17 +87,17 @@ function draw (data, dt) {
         let length
 
         length = vec2.length(vA)
-        vec2.normalize(dir, vA)
+        vec2.normalize(vA, dir)
 
-        vec2.add(data.tempBox.position, box1.position, vA)
+        vec2.add(box1.position, vA, data.tempBox.position)
         common.drawAABB(data, data.tempBox, '#0f0')
         common.drawRay(data, box1.position, dir, length, '#0f0')
 
 
         length = vec2.length(vB)
-        vec2.normalize(dir, vB)
+        vec2.normalize(vB, dir)
 
-        vec2.add(data.tempBox.position, box2.position, vB)
+        vec2.add(box2.position, vB, data.tempBox.position)
         common.drawAABB(data, data.tempBox, '#0f0')
         common.drawRay(data, box2.position, dir, length, '#0f0')
     }

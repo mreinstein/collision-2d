@@ -1,5 +1,5 @@
 import { sign } from '@footgun/math-gap'
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 /*
@@ -33,14 +33,14 @@ export default function aabbPointOverlap (aabb, point, contact=null) {
     if (contact) {
         if (px < py) {
             const sx = sign(dx)
-            vec2.set(contact.delta, px * sx, 0)
-            vec2.set(contact.normal, sx, 0)
+            vec2.set(px * sx, 0, contact.delta)
+            vec2.set(sx, 0, contact.normal)
             contact.position[0] = aabb.position[0] + (halfX * sx)
             contact.position[1] = point[1]
         } else {
             const sy = sign(dy)
-            vec2.set(contact.delta, 0, py * sy)
-            vec2.set(contact.normal, 0, sy)
+            vec2.set(0, py * sy, contact.delta)
+            vec2.set(0, sy, contact.normal)
             contact.position[0] = point[0]
             contact.position[1] = aabb.position[1] + (halfY * sy)
         }

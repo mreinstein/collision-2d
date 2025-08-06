@@ -351,7 +351,7 @@ const position = [ 200, 150 ] // x: 200, y: 150
 
 ```
 
-We use the fantastic `gl-matrix` `vec2` for representing these.
+We use the fantastic `wgpu-matrix` `vec2` for representing these.
 
 
 ### aabb

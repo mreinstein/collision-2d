@@ -1,8 +1,7 @@
 import common               from './common.js'
 import contact              from '../src/contact.js'
 import segmentsSphereSweep1 from '../src/segments-sphere-sweep1.js'
-import { vec2 }             from 'gl-matrix'
-import randomInt            from 'https://cdn.jsdelivr.net/gh/mreinstein/random-gap/int.js'
+import { vec2 }             from 'wgpu-matrix'
 
 
 function init (context, width, height) {
@@ -14,7 +13,7 @@ function init (context, width, height) {
         //[ [ -50, 50 ], [ 50, 50 ] ]
     ]
 
-    const velocity = vec2.random([], 60)
+    const velocity = vec2.random(60)
 
     return {
         angle: 2.6,
@@ -31,7 +30,7 @@ function init (context, width, height) {
 function draw (data, dt) {
     common.clear(data)
    
-    const delta = vec2.scale([], data.velocity, dt)
+    const delta = vec2.scale(data.velocity, dt)
 
     for (const line of data.lines)
         common.drawSegment(data, line[0], line[1], '#666')
@@ -43,10 +42,10 @@ function draw (data, dt) {
         common.drawPoint(data, c.position, '#ff0', '', 2)
 
         // bounce
-        vec2.scale(data.velocity, c.normal, data.dx)
+        vec2.scale(c.normal, data.dx, data.velocity)
      
     } else {
-        vec2.add(data.position, data.position, delta)
+        vec2.add(data.position, delta, data.position)
         common.drawCircle(data, data.position, data.radius, '#0f0')
     }
    

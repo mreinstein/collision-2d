@@ -2,7 +2,7 @@
 
 import segmentNormal  from './segment-normal.js'
 import { sign } from '@footgun/math-gap'
-import { vec2 } from 'gl-matrix'
+import { vec2 } from 'wgpu-matrix'
 
 
 const aabbCenter = vec2.create()
@@ -27,14 +27,14 @@ const PADDING = 0.005
 //@return boolean true when the box hits the segment
 export default function aabbSegmentSweep1 (line, aabb, delta, contact) {
     
-    vec2.copy(aabbCenter, aabb.position)
-    vec2.set(aabbMin, aabb.position[0] - aabb.width/2, aabb.position[1] - aabb.height/2)
-    vec2.set(aabbMax, aabb.position[0] + aabb.width/2, aabb.position[1] + aabb.height/2)
+    vec2.copy(aabb.position, aabbCenter)
+    vec2.set(aabb.position[0] - aabb.width/2, aabb.position[1] - aabb.height/2, aabbMin)
+    vec2.set(aabb.position[0] + aabb.width/2, aabb.position[1] + aabb.height/2, aabbMax)
 
-    vec2.normalize(normalizedDelta, delta)
+    vec2.normalize(delta, normalizedDelta)
 
     // calculate line bounds
-    vec2.subtract(lineDir,line[1],line[0])
+    vec2.subtract(line[1], line[0], lineDir)
     if (lineDir[0] > 0) {
         // right
         lineMin[0] = line[0][0]
@@ -58,13 +58,13 @@ export default function aabbSegmentSweep1 (line, aabb, delta, contact) {
     }
 
     // get aabb's center to line[0] distance
-    vec2.subtract(lineAabbDist, line[0], aabbCenter)
+    vec2.subtract(line[0], aabbCenter, lineAabbDist)
 
     // get the line's normal
     // if the dot product of it and the delta is larger than 0,
     // it means the line's normal is facing away from the sweep
     segmentNormal(lineNormal, line[0], line[1])
-    vec2.copy(hitNormal, lineNormal)
+    vec2.copy(lineNormal, hitNormal)
 
     let hitTime = 0 // first overlap time
     let outTime = 1 // last overlap time
@@ -101,7 +101,7 @@ export default function aabbSegmentSweep1 (line, aabb, delta, contact) {
         if (hit >= hitTime && hit <= outTime) {
             // box is hitting the line on its end:
             // adjust the normal accordingly
-            vec2.set(hitNormal, 1, 0)
+            vec2.set(1, 0, hitNormal)
         }
         hitTime = Math.max(hit, hitTime)
 
@@ -114,7 +114,7 @@ export default function aabbSegmentSweep1 (line, aabb, delta, contact) {
         const out = (lineMax[0] - aabbMin[0]) / delta[0]
         outTime = Math.min(out, outTime)
         if (hit >= hitTime && hit <= outTime)
-            vec2.set(hitNormal, -1, 0)
+            vec2.set(-1, 0, hitNormal)
 
         hitTime = Math.max(hit, hitTime)
 
@@ -135,7 +135,7 @@ export default function aabbSegmentSweep1 (line, aabb, delta, contact) {
         const out = (lineMin[1] - aabbMax[1]) / delta[1]
         outTime = Math.min(out, outTime)
         if (hit >= hitTime && hit <= outTime)
-            vec2.set(hitNormal, 0, 1)
+            vec2.set(0, 1, hitNormal)
 
         hitTime = Math.max(hit, hitTime)
 
@@ -148,7 +148,7 @@ export default function aabbSegmentSweep1 (line, aabb, delta, contact) {
         const out = (lineMax[1] - aabbMin[1]) / delta[1]
         outTime = Math.min(out, outTime)
         if (hit >= hitTime && hit <= outTime)
-            vec2.set(hitNormal, 0, -1)
+            vec2.set(0, -1, hitNormal)
 
         hitTime = Math.max(hit, hitTime)
 
@@ -170,9 +170,9 @@ export default function aabbSegmentSweep1 (line, aabb, delta, contact) {
     if (contact) {
         const deltaX = delta[0] * hitTime + (PADDING * hitNormal[0])
         const deltaY = delta[1] * hitTime + (PADDING * hitNormal[1])
-        vec2.set(contact.delta, deltaX, deltaY)
-        vec2.add(contact.position, aabb.position, contact.delta)
-        vec2.copy(contact.normal, hitNormal)
+        vec2.set(deltaX, deltaY, contact.delta)
+        vec2.add(aabb.position, contact.delta, contact.position)
+        vec2.copy(hitNormal, contact.normal)
         contact.collider = line
         contact.time = hitTime
     }

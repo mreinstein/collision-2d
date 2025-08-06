@@ -1,6 +1,6 @@
 import TraceInfo from './TraceInfo.js'
 import toji      from './toji-tris.js'
-import { vec2 }  from 'gl-matrix'
+import { vec2 }  from 'wgpu-matrix'
 
 
 const traceInfo = new TraceInfo()
@@ -11,7 +11,7 @@ const endPoint = vec2.create()
 
 export default function segmentsEllipsoid1Indexed (lines, indices, lineCount, position, ellipsoid, delta, contact) {
 
-    vec2.add(endPoint, position, delta)
+    vec2.add(position, delta, endPoint)
 
     const radius = 1
     traceInfo.resetTrace(position, endPoint, radius)
@@ -22,8 +22,8 @@ export default function segmentsEllipsoid1Indexed (lines, indices, lineCount, po
         const line = lines[idx]
         const oldT = traceInfo.t
 
-        vec2.divide(p0, line[0], ellipsoid)
-        vec2.divide(p1, line[1], ellipsoid)
+        vec2.divide(line[0], ellipsoid, p0)
+        vec2.divide(line[1], ellipsoid, p1)
 
         toji.traceSphereTriangle(p0, p1, traceInfo)
         if (traceInfo.collision && oldT !== traceInfo.t)
@@ -33,11 +33,11 @@ export default function segmentsEllipsoid1Indexed (lines, indices, lineCount, po
     if (traceInfo.collision) {
         contact.time = traceInfo.t
 
-        vec2.copy(contact.position, traceInfo.intersectPoint)
-        vec2.copy(contact.normal, traceInfo.intersectTriNorm)
+        vec2.copy(traceInfo.intersectPoint, contact.position)
+        vec2.copy(traceInfo.intersectTriNorm, contact.normal)
 
-        vec2.negate(contact.delta, delta)
-        vec2.scale(contact.delta, contact.delta, 1-contact.time)
+        vec2.negate(delta, contact.delta)
+        vec2.scale(contact.delta, 1-contact.time, contact.delta)
 
         contact.collider = collider
     }
