@@ -23,6 +23,7 @@ const points = [
 
 const hit = contact()
 
+// should return false when not colliding
 points.forEach(point => {
     assert.equal(intersectPoint(aabb, point), false);
 })
@@ -33,38 +34,35 @@ aabb.position = [ 0, 0 ]
 assert.equal(intersectPoint(aabb, [ 4, 4 ]), true)
 
 
-/*
 // should set hit pos and normal to nearest edge of box
-const aabb = new AABB(new Point(0, 0), new Point(8, 8));
-let hit = assert.notNull(aabb.intersectPoint(new Point(-4, -2)));
-assert.almostEqual(hit.pos.x, -8);
-assert.almostEqual(hit.pos.y, -2);
-assert.almostEqual(hit.delta.x, -4);
-assert.almostEqual(hit.delta.y, 0);
-assert.almostEqual(hit.normal.x, -1);
-assert.almostEqual(hit.normal.y, 0);
+assert.equal(intersectPoint(aabb, [ -4, -2 ], hit), true)
+assert.almostEqual(hit.position[0], -8)
+assert.almostEqual(hit.position[1], -2)
+assert.almostEqual(hit.delta[0], -4)
+assert.almostEqual(hit.delta[1], 0)
+assert.almostEqual(hit.normal[0], -1)
+assert.almostEqual(hit.normal[1], 0)
 
-hit = assert.notNull(aabb.intersectPoint(new Point(4, -2)));
-assert.almostEqual(hit.pos.x, 8);
-assert.almostEqual(hit.pos.y, -2);
-assert.almostEqual(hit.delta.x, 4);
-assert.almostEqual(hit.delta.y, 0);
-assert.almostEqual(hit.normal.x, 1);
-assert.almostEqual(hit.normal.y, 0);
+assert.equal(intersectPoint(aabb, [ 4, -2], hit), true)
+assert.almostEqual(hit.position[0], 8)
+assert.almostEqual(hit.position[1], -2)
+assert.almostEqual(hit.delta[0], 4)
+assert.almostEqual(hit.delta[1], 0)
+assert.almostEqual(hit.normal[0], 1)
+assert.almostEqual(hit.normal[1], 0)
 
-hit = assert.notNull(aabb.intersectPoint(new Point(2, -4)));
-assert.almostEqual(hit.pos.x, 2);
-assert.almostEqual(hit.pos.y, -8);
-assert.almostEqual(hit.delta.x, 0);
-assert.almostEqual(hit.delta.y, -4);
-assert.almostEqual(hit.normal.x, 0);
-assert.almostEqual(hit.normal.y, -1);
+assert.equal(intersectPoint(aabb, [ 2, -4 ], hit), true)
+assert.almostEqual(hit.position[0], 2)
+assert.almostEqual(hit.position[1], -8)
+assert.almostEqual(hit.delta[0], 0)
+assert.almostEqual(hit.delta[1], -4)
+assert.almostEqual(hit.normal[0], 0)
+assert.almostEqual(hit.normal[1], -1)
 
-hit = assert.notNull(aabb.intersectPoint(new Point(2, 4)));
-assert.almostEqual(hit.pos.x, 2);
-assert.almostEqual(hit.pos.y, 8);
-assert.almostEqual(hit.delta.x, 0);
-assert.almostEqual(hit.delta.y, 4);
-assert.almostEqual(hit.normal.x, 0);
-assert.almostEqual(hit.normal.y, 1);
-*/
+assert.equal(intersectPoint(aabb, [ 2, 4 ], hit), true)
+assert.almostEqual(hit.position[0], 2)
+assert.almostEqual(hit.position[1], 8)
+assert.almostEqual(hit.delta[0], 0)
+assert.almostEqual(hit.delta[1], 4)
+assert.almostEqual(hit.normal[0], 0)
+assert.almostEqual(hit.normal[1], 1)
