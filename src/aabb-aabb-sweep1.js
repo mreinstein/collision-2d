@@ -38,6 +38,9 @@ export default function aabbAABBSweep1 (aabb, aabb2, delta, contact) {
 
         contact.position[0] = clamp(contact.position[0] + direction[0] * halfX2, aabb.position[0] - halfX, aabb.position[0] + halfX);
         contact.position[1] = clamp(contact.position[1] + direction[1] * halfY2, aabb.position[1] - halfY, aabb.position[1] + halfY);
+    } else {
+        contact.time = 1
+        vec2.add(aabb2.position, delta, contact.position) 
     }
 
   return result
