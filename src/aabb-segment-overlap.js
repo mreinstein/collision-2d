@@ -14,7 +14,7 @@ https://noonat.github.io/intersect/#aabb-vs-segment
 @param object contact physics contact descriptor. filled when argument isn't null and a collision occurs
 @return bool true if they intersect, false otherwise
 */
-export default function aabbSegmentOverlap (rect, pos, delta, paddingX, paddingY, contact=null) {
+export default function aabbSegmentOverlap (rect, pos, delta, paddingX=0, paddingY=0, contact=null) {
     // if x or y is 0, result will be javascript Infinity
     let scaleX = 1.0 / delta[0]
     let scaleY = 1.0 / delta[1]
