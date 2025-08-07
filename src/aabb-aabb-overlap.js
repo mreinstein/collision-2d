@@ -17,7 +17,7 @@ instead for moving boxes.
 
 @param Object contact  if specified, filled with collision details
 */
-export default function aabbAABBOverlap (rect, rect2, contact=null) {
+export default function aabbOverlap (rect, rect2, contact=null) {
 
     const dx = rect2.position[0] - rect.position[0]
     const px = (rect.width / 2 + rect2.width / 2) - Math.abs(dx)
