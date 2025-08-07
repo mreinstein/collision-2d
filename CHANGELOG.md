@@ -1,3 +1,7 @@
+# 0.5.1
+* add more AABB unit tests
+
+
 # 0.5.0
 * convert all remaining vec2 functions from gl-matrix to wgpu-matrix. fixes #17
 
