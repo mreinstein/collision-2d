@@ -38,8 +38,11 @@ export default function raySphereOverlap (p1, p2, sc, r, contact) {
       return false
    }
 
-   contact.mu1 = (-b + Math.sqrt(bb4ac)) / (2 * a)
-   contact.mu2 = (-b - Math.sqrt(bb4ac)) / (2 * a)
+   const sqrtBB4ac = Math.sqrt(bb4ac)
+   const denom = 2 * a
+
+   contact.mu1 = (-b + sqrtBB4ac) / denom
+   contact.mu2 = (-b - sqrtBB4ac) / denom
 
    return true
 }
