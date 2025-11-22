@@ -1,3 +1,7 @@
+# 0.6.0
+* BREAKING: rename `sphere` to `circle` everywhere. Resolves #19
+
+
 # 0.5.1
 * add more AABB unit tests
 
