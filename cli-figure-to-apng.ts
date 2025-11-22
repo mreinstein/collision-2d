@@ -3,14 +3,14 @@ import Canvas, { CanvasRenderingContext2D, dataURLtoFile } from 'https://deno.la
 
 let m, c, o;
 
-for (let i=0; i < Deno.args.length - 1; i++) {
+for (let i = 0; i < Deno.args.length - 1; i++) {
     const a = Deno.args[i]
     if (a === '--module' || a === '-m')
-        m = Deno.args[i+1]
+        m = Deno.args[i + 1]
     else if (a === '--count')
-        c = parseInt(Deno.args[i+1], 10)
+        c = parseInt(Deno.args[i + 1], 10)
     else if (a === '--output')
-        o = Deno.args[i+1]
+        o = Deno.args[i + 1]
 }
 
 if (!m) {
@@ -44,14 +44,14 @@ const ex = figure.default.init(ctx, CANVAS_WIDTH, CANVAS_HEIGHT)
 
 //const FPS = 60
 
-// setting this to 1/ 60 causes the sphere/segment collision test to not work
+// setting this to 1/ 60 causes the circle/segment collision test to not work
 // probably due to differences in rounding precision between deno and v8?
 // hardcoding this to a very close approximation seems to solve the problem
 const DT = 0.01666 //1 / FPS
 
 const padLength = ('' + c).length
 
-for (let i=0; i < c; i++) {
+for (let i = 0; i < c; i++) {
     figure.default.draw(ex, DT)
     const data = dataURLtoFile(canvas.toDataURL())
     const padded = ('' + i).padStart(padLength, '0')
@@ -59,11 +59,11 @@ for (let i=0; i < c; i++) {
 }
 
 await Deno.run({
-    cmd: [ 'apngasm', '-o', o, 'out_*.png', '--delay=16', '--force' ]
+    cmd: ['apngasm', '-o', o, 'out_*.png', '--delay=16', '--force']
 }).status()
 
 
-for (let i=0; i < c; i++) {
+for (let i = 0; i < c; i++) {
     const padded = ('' + i).padStart(padLength, '0')
     Deno.removeSync(`out_${padded}.png`)
 }

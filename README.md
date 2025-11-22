@@ -121,59 +121,59 @@ const distance = Plane.rayDistance(p, rayOrigin, rayVector)
 ```
 
 
-### ray-sphere overlap
+### ray-circle overlap
 
-![alt text](docs/ray-sphere-overlap.png "ray-sphere overlap test")
+![alt text](docs/ray-circle-overlap.png "ray-circle overlap test")
 
 ```javascript
-import { raySphereOverlap } from '@footgun/collision-2d'
+import { rayCircleOverlap } from '@footgun/collision-2d'
 
 
 // declare 2 points that lie on an infinite ray
 const p1 = [ 100, 100 ]
 const p2 = [ 200, 100 ]
 
-const sphereCenter: [ 250, 100 ]
-const sphereRadius: 50
+const circleCenter: [ 250, 100 ]
+const circleRadius: 50
 const contact = { mu1: NaN, mu2: NaN }
-const overlaps = raySphereOverlap(p1, p2, sphereCenter, sphereRadius, contact)
+const overlaps = rayCircleOverlap(p1, p2, circleCenter, circleRadius, contact)
 
-// mu1 and mu2 are the points along the line segment from p1 to p2 where the sphere intersection occurs:
+// mu1 and mu2 are the points along the line segment from p1 to p2 where the circle intersection occurs:
 //   intersection1 = p1 + contact.mu1  * (p2 - p1)
 //   intersection2 = p1 + contact.mu2  * (p2 - p1)
 if (overlaps) {
-    console.log('sphere intersection time 1:', contact.mu1)
-    console.log('sphere intersection time 2', contact.mu2)
+    console.log('circle intersection time 1:', contact.mu1)
+    console.log('circle intersection time 2', contact.mu2)
 }
 ```
 
 
-### segment-sphere overlap
+### segment-circle overlap
 
-![alt text](docs/segment-sphere-overlap.png "segment-sphere overlap test")
+![alt text](docs/segment-circle-overlap.png "segment-circle overlap test")
 
 ```javascript
-import { segSphereOverlap } from '@footgun/collision-2d'
+import { segCircleOverlap } from '@footgun/collision-2d'
 
 
 // declare 2 points that lie on a line segment
 const p1 = [ 100, 100 ]
 const p2 = [ 200, 100 ]
 
-const sphereCenter: [ 250, 100 ]
-const sphereRadius: 50
+const circleCenter: [ 250, 100 ]
+const circleRadius: 50
 const contact = { intersectionCount: 0, mu1: NaN, mu2: NaN }
-const overlaps = segSphereOverlap(p1, p2, sphereCenter, sphereRadius, contact)
+const overlaps = segCircleOverlap(p1, p2, circleCenter, circleRadius, contact)
 
-// mu1 and mu2 are the points along the line segment from p1 to p2 where the sphere intersection occurs:
+// mu1 and mu2 are the points along the line segment from p1 to p2 where the circle intersection occurs:
 //   intersection1 = p1 + contact.mu1  * (p2 - p1)
 //   intersection2 = p1 + contact.mu2  * (p2 - p1)
 if (overlaps) {
-    // the segment interesects the sphere, intersectionCount is 1 or 2
+    // the segment interesects the circle, intersectionCount is 1 or 2
     // either mu1 or mu2 will be NaN if there's not 2 intersections
     console.log('intersection count:', contact.intersectionCount)
-    console.log('sphere intersection time 1:', contact.mu1)
-    console.log('sphere intersection time 2', contact.mu2)
+    console.log('circle intersection time 1:', contact.mu1)
+    console.log('circle intersection time 2', contact.mu2)
 } else {
     // no overlap, contact.intersectionCount is 0
 }
@@ -248,24 +248,24 @@ if there is a collision, `contact.collider` will be an integer indicating the in
 
 
 
-### segments-sphere-sweep 1
+### segments-circle-sweep 1
 
-![alt text](docs/segments-sphere-sweep1.png "segments-sphere sweep test")
+![alt text](docs/segments-circle-sweep1.png "segments-circle sweep test")
 
 
 ```javascript
-import { segsSphereSweep1 } from '@footgun/collision-2d'
+import { segsCircleSweep1 } from '@footgun/collision-2d'
 
-const collided = segsSphereSweep1(segments, position, radius, delta, contact)
+const collided = segsCircleSweep1(segments, position, radius, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
 
 
-### segments-sphere-sweep-1-indexed
+### segments-circle-sweep-1-indexed
 
 ```javascript
-import { segsSphereSweep1Indexed } from '@footgun/collision-2d'
+import { segsCircleSweep1Indexed } from '@footgun/collision-2d'
 
 const segs = [
     [ p0, p1 ],
@@ -274,42 +274,42 @@ const segs = [
 ]
 const indices = [ 0, 2 ]  // indices into the segs array
 
-const segmentCount = 2    // only run the segmentsSphereSweep tests on [ p0, p1 ] and [ p4, p5 ]
+const segmentCount = 2    // only run the segmentsCircleSweep tests on [ p0, p1 ] and [ p4, p5 ]
 
-const collided = segsSphereSweep1Indexed(segments, indices, segmentCount, position, radius, delta, contact)
+const collided = segsCircleSweep1Indexed(segments, indices, segmentCount, position, radius, delta, contact)
 ```
 
 if there is a collision, `contact.collider` will be an integer indicating the index of which segment in the `segments` array collided.
 
 
-### sphere-sphere-overlap
+### circle-circle-overlap
 
-![alt text](docs/sphere-sphere-overlap.png "sphere-sphere overlap test")
-
-```javascript
-import { sphereOverlap } from '@footgun/collision-2d'
-
-const collided = sphereOverlap(centerA, radiusA, centerB, radiusB, contact) // collided is true or false
-```
-
-if there is a collision, `contact.delta` is a vector that can be added to sphere A’s position to move them into a non-colliding state.
-`contact.position` is the point of contact of these 2 spheres
-
-Note: `contact` is an optional parameter. if you only want to determine if the 2 spheres overlap, omit `contact` which will be faster.
-
-
-### sphere-sphere-sweep2
+![alt text](docs/circle-circle-overlap.png "circle-circle overlap test")
 
 ```javascript
-import { sphereSweep2 } from '@footgun/collision-2d'
+import { circleOverlap } from '@footgun/collision-2d'
 
-const collided = sphereSweep2(radiusA, A0, A1, radiusB, B0, B1, contact)
+const collided = circleOverlap(centerA, radiusA, centerB, radiusB, contact) // collided is true or false
 ```
 
-* `A0` is the previous position of sphere A
-* `A1` is the new position of sphere A
-* `B0` is the previous position of sphere B
-* `B1` is the new position of sphere B
+if there is a collision, `contact.delta` is a vector that can be added to circle A’s position to move them into a non-colliding state.
+`contact.position` is the point of contact of these 2 circles
+
+Note: `contact` is an optional parameter. if you only want to determine if the 2 circles overlap, omit `contact` which will be faster.
+
+
+### circle-circle-sweep2
+
+```javascript
+import { circleSweep2 } from '@footgun/collision-2d'
+
+const collided = circleSweep2(radiusA, A0, A1, radiusB, B0, B1, contact)
+```
+
+* `A0` is the previous position of circle A
+* `A1` is the new position of circle A
+* `B0` is the previous position of circle B
+* `B1` is the new position of circle B
 
 If there is a collision `contact.position` will contain the point where the collision occurred. `contact.time` has the normalized time
 where the collision happened.
@@ -395,7 +395,7 @@ The data structure populated when a collision occurs
 
 ```javascript
 {
-    // for segments-segment-overlap and segments-sphere-sweep1 this is set to the index
+    // for segments-segment-overlap and segments-circle-sweep1 this is set to the index
     // in the array of line segments passed into the collision routine
     // for all other routines, collider is a reference to the colliding object itself
     collider : null,
@@ -428,7 +428,7 @@ Most of these collision checks were adapted from existing open source modules:
 
 * https://github.com/noonat/intersect
 * The diagrams are modified from noonat: https://noonat.github.io/intersect/
-* https://github.com/kevzettler/gl-swept-sphere-triangle
+* https://github.com/kevzettler/gl-swept-circle-triangle
 * https://gist.github.com/toji/2802287
 * segment-point-overlap from https://gist.github.com/mattdesl/47412d930dcd8cd765c871a65532ffac
 * segment-segment overlap from https://github.com/tmpvar/segseg

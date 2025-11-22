@@ -3,35 +3,25 @@ import toji from "./toji-tris.js";
 import { vec2 } from "wgpu-matrix";
 
 const traceInfo = new TraceInfo();
-const p0 = vec2.create();
-const p1 = vec2.create();
 const endPoint = vec2.create();
 
-export default function segmentsEllipsoid1Indexed(
+export default function segmentsCircleSweep1(
     lines,
-    indices,
-    lineCount,
     position,
-    ellipsoid,
+    radius,
     delta,
     contact,
 ) {
     vec2.add(position, delta, endPoint);
 
-    const radius = 1;
     traceInfo.resetTrace(position, endPoint, radius);
 
     let collider = -1;
-    for (let i = 0; i < lineCount; i++) {
-        const idx = indices[i];
-        const line = lines[idx];
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
         const oldT = traceInfo.t;
-
-        vec2.divide(line[0], ellipsoid, p0);
-        vec2.divide(line[1], ellipsoid, p1);
-
-        toji.traceCircleTriangle(p0, p1, traceInfo);
-        if (traceInfo.collision && oldT !== traceInfo.t) collider = idx;
+        toji.traceCircleTriangle(line[0], line[1], traceInfo);
+        if (traceInfo.collision && oldT !== traceInfo.t) collider = i;
     }
 
     if (traceInfo.collision) {

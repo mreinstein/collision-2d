@@ -1,7 +1,6 @@
-import contact       from './contact.js'
-import sphereOverlap from './sphere-sphere-overlap.js'
-import { vec2 }      from 'wgpu-matrix'
-
+import contact from "./contact.js";
+import circleOverlap from "./circle-circle-overlap.js";
+import { vec2 } from "wgpu-matrix";
 
 // TODO: make this function actually work.  Right now the data structure is hardcoded to
 // use crossroads entity data structures that have no analog in collision-2d (rigidBody, transform components)
@@ -15,13 +14,13 @@ const tmpContact = contact()
 
 
 // collide 2 spherical rigid bodies, updating their positions and velocities
-export default function sphereSphereCollisionResponse (sphere1, sphere2, restitution=0.85) {
-    const body1 = sphere1.rigidBody
-    const body2 = sphere2.rigidBody
+export default function circleCircleCollisionResponse (circle1, circle2, restitution=0.85) {
+    const body1 = circle1.rigidBody
+    const body2 = circle2.rigidBody
 
-    const overlap = sphereOverlap(sphere1.transform.position,
+    const overlap = circleOverlap(circle1.transform.position,
                                   body1.radius,
-                                  sphere2.transform.position,
+                                  circle2.transform.position,
                                   body2.radius,
                                   tmpContact)
 
@@ -37,11 +36,11 @@ export default function sphereSphereCollisionResponse (sphere1, sphere2, restitu
     // push-pull them apart
     // 0 mass means static body unmoved by collisions (doors, machines, etc.)
     if (body1.mass !== 0)
-        vec2.addScaled(sphere1.transform.position, mtd, im1 / (im1 + im2), sphere1.transform.position)
+        vec2.addScaled(circle1.transform.position, mtd, im1 / (im1 + im2), circle1.transform.position)
 
     if (body2.mass !== 0) {
         vec2.scale(mtd, im2 / (im1 + im2), scaled)
-        vec2.subtract(sphere2.transform.position, scaled, sphere2.transform.position)
+        vec2.subtract(circle2.transform.position, scaled, circle2.transform.position)
     }
 
     // impact speed
@@ -49,7 +48,7 @@ export default function sphereSphereCollisionResponse (sphere1, sphere2, restitu
     vec2.normalize(mtd, normalized)
     const vn = vec2.dot(v, normalized)
 
-    // sphere intersecting but moving away from each other already
+    // circle intersecting but moving away from each other already
     if (vn > 0.0)
         return
 

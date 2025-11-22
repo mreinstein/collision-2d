@@ -22,14 +22,14 @@ deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-f
 
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segments-segment-overlap.js --count 1200 --output docs/segments-segment-overlap.png
 
-deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segments-sphere-sweep1.js --count 122 --output docs/segments-sphere-sweep1.png
+deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segments-circle-sweep1.js --count 122 --output docs/segments-circle-sweep1.png
 
-deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/sphere-sphere-overlap.js --count 245 --output docs/sphere-sphere-overlap.png
+deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/circle-circle-overlap.js --count 245 --output docs/circle-circle-overlap.png
 
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/triangle-point-overlap.js --count 1200 --output docs/triangle-point-overlap.png
 
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/cone-point-overlap.js --count 1200 --output docs/cone-point-overlap.png
 
-deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/ray-sphere-overlap.js --count 1200 --output docs/ray-sphere-overlap.png
+deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/ray-circle-overlap.js --count 1200 --output docs/ray-circle-overlap.png
 
-deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segment-sphere-overlap.js --count 1200 --output docs/segment-sphere-overlap.png
+deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segment-circle-overlap.js --count 1200 --output docs/segment-circle-overlap.png

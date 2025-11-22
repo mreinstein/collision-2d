@@ -53,13 +53,13 @@ import aabbSegmentSweep1         from './figures/aabb-segment-sweep1.js'
 import aabbSegmentsSweep1Indexed from './figures/aabb-segments-sweep1-indexed.js'
 import conePointOverlap          from './figures/cone-point-overlap.js'
 import rayPlaneDistance          from './figures/ray-plane-distance.js'
-import raySphereOverlap          from './figures/ray-sphere-overlap.js'
+import rayCircleOverlap          from './figures/ray-circle-overlap.js'
 import segmentPointOverlap       from './figures/segment-point-overlap.js'
 import segmentSegmentOverlap     from './figures/segment-segment-overlap.js'
-import segmentSphereOverlap      from './figures/segment-sphere-overlap.js'
+import segmentCircleOverlap      from './figures/segment-circle-overlap.js'
 import segmentsSegmentOverlap    from './figures/segments-segment-overlap.js'
-import segmentsSphereSweep1      from './figures/segments-sphere-sweep1.js'
-import sphereSphereOverlap       from './figures/sphere-sphere-overlap.js'
+import segmentsCircleSweep1      from './figures/segments-circle-sweep1.js'
+import circleCircleOverlap       from './figures/circle-circle-overlap.js'
 import triPointOverlap           from './figures/triangle-point-overlap.js'
 
 
@@ -99,15 +99,15 @@ function animate (t) {
     segmentPointOverlap.draw(example6, dt)
     segmentSegmentOverlap.draw(example7, dt)
     segmentsSegmentOverlap.draw(example8, dt)
-    segmentsSphereSweep1.draw(example9, dt)
+    segmentsCircleSweep1.draw(example9, dt)
     rayPlaneDistance.draw(example10, dt)
-    sphereSphereOverlap.draw(example11, dt)
+    circleCircleOverlap.draw(example11, dt)
     triPointOverlap.draw(example12, dt)
     aabbSegmentSweep1.draw(example13, dt)
     aabbSegmentsSweep1Indexed.draw(example14, dt)
     conePointOverlap.draw(example15, dt)
-    raySphereOverlap.draw(example16, dt)
-    segmentSphereOverlap.draw(example17, dt)
+    rayCircleOverlap.draw(example16, dt)
+    segmentCircleOverlap.draw(example17, dt)
     
     requestAnimationFrame(animate)
 }
@@ -121,15 +121,15 @@ const example5 = createExample(aabbAabbSweep2)
 const example6 = createExample(segmentPointOverlap)
 const example7 = createExample(segmentSegmentOverlap)
 const example8 = createExample(segmentsSegmentOverlap)
-const example9 = createExample(segmentsSphereSweep1)
+const example9 = createExample(segmentsCircleSweep1)
 const example10 = createExample(rayPlaneDistance)
-const example11 = createExample(sphereSphereOverlap)
+const example11 = createExample(circleCircleOverlap)
 const example12 = createExample(triPointOverlap)
 const example13 = createExample(aabbSegmentSweep1)
 const example14 = createExample(aabbSegmentsSweep1Indexed)
 const example15 = createExample(conePointOverlap)
-const example16 = createExample(raySphereOverlap)
-const example17 = createExample(segmentSphereOverlap)
+const example16 = createExample(rayCircleOverlap)
+const example17 = createExample(segmentCircleOverlap)
 
 requestAnimationFrame(animate)
 
