@@ -28,6 +28,10 @@ deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-f
 
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/triangle-point-overlap.js --count 1200 --output docs/triangle-point-overlap.png
 
+deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/obb-obb-overlap.js --count 1200 --output docs/obb-obb-overlap.png
+
+deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/obb-triangle-overlap.js --count 1200 --output docs/obb-triangle-overlap.png
+
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/cone-point-overlap.js --count 1200 --output docs/cone-point-overlap.png
 
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/ray-circle-overlap.js --count 1200 --output docs/ray-circle-overlap.png

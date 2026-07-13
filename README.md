@@ -337,6 +337,36 @@ const collided = trianglePointOverlap(v0, v1, v2, point) // collided is true or 
 ```
 
 
+### obb-obb overlap
+
+![alt text](docs/obb-obb-overlap.png "OBB-OBB overlap test")
+
+Separating axis test between 2 oriented (rotated) bounding boxes.
+
+```javascript
+import { obbOverlap } from '@footgun/collision-2d'
+
+const collided = obbOverlap(obb, obb2, contact) // collided is true or false
+```
+
+When `contact` is supplied, `contact.delta` is the vector to add to `obb2`'s position to move it out of collision, and `contact.normal` points from `obb` toward `obb2`.
+
+
+### obb-triangle overlap
+
+![alt text](docs/obb-triangle-overlap.png "OBB-triangle overlap test")
+
+Separating axis test between an oriented bounding box and a triangle.
+
+```javascript
+import { obbTriangleOverlap } from '@footgun/collision-2d'
+
+const collided = obbTriangleOverlap(obb, v0, v1, v2, contact) // collided is true or false
+```
+
+When `contact` is supplied, `contact.delta` is the vector to add to the triangle's points to move it out of collision.
+
+
 ## entities
 
 The collision routines all use these entity definitions
@@ -362,6 +392,19 @@ const aabb = {
     position: [ 200, 100 ],  // center point of the AABB
     width: 50,
     height: 50
+}
+```
+
+
+### obb
+
+an oriented (rotated) bounding box
+```javascript
+const obb = {
+    position: [ 200, 100 ],  // center point of the OBB
+    width: 50,
+    height: 50,
+    rotation: 0              // rotation in radians
 }
 ```
 
