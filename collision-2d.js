@@ -10,6 +10,8 @@ export * as AABB from "./src/AABB.js";
 export { default as conePointOverlap } from "./src/cone-point-overlap.js";
 export { default as contactCopy } from "./src/contact-copy.js";
 export { default as contact } from "./src/contact.js";
+export { default as obbOverlap } from "./src/obb-obb-overlap.js";
+export { default as obbTriangleOverlap } from "./src/obb-triangle-overlap.js";
 export { default as Plane } from "./src/Plane.js";
 export { default as pointPolygonOverlap } from "./src/point-polygon-overlap.js";
 export * as Polygon from "./src/Polygon.js";

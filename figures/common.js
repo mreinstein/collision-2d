@@ -21,6 +21,36 @@ function drawAABB (data, box, color='#fff', thickness=1) {
 }
 
 
+function drawOBB (data, box, color='#fff', thickness=1) {
+    const { origin, context } = data
+
+    const c = Math.cos(box.rotation)
+    const s = Math.sin(box.rotation)
+    const hw = box.width / 2
+    const hh = box.height / 2
+    const px = origin[0] + box.position[0]
+    const py = origin[1] + box.position[1]
+
+    // local corners CCW: (-hw,-hh),(hw,-hh),(hw,hh),(-hw,hh) rotated into place
+    const lx = [ -hw, hw, hw, -hw ]
+    const ly = [ -hh, -hh, hh, hh ]
+
+    context.beginPath()
+    for (let i = 0; i < 4; i++) {
+        const x = Math.floor(px + lx[i] * c - ly[i] * s)
+        const y = Math.floor(py + lx[i] * s + ly[i] * c)
+        if (i === 0)
+            context.moveTo(x, y)
+        else
+            context.lineTo(x, y)
+    }
+    context.closePath()
+    context.lineWidth = thickness
+    context.strokeStyle = color
+    context.stroke()
+}
+
+
 function drawCircle (data, center, radius, color='#fff', thickness=1) {
     const { origin, context } = data
 
@@ -144,4 +174,4 @@ function clear (data) {
 }
 
 
-export default { drawAABB, drawCircle, drawCone, drawPoint, drawRay, drawSegment, drawTriangle, init, clear }
+export default { drawAABB, drawOBB, drawCircle, drawCone, drawPoint, drawRay, drawSegment, drawTriangle, init, clear }
