@@ -24,6 +24,8 @@ deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-f
 
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segments-segment-overlap.js --count 1200 --output docs/segments-segment-overlap.png
 
+deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segseg-closest.js --count 1200 --output docs/segseg-closest.png
+
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segments-circle-sweep1.js --count 122 --output docs/segments-circle-sweep1.png
 
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/circle-circle-overlap.js --count 245 --output docs/circle-circle-overlap.png

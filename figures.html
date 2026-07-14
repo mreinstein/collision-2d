@@ -59,6 +59,7 @@ import segmentPointOverlap       from './figures/segment-point-overlap.js'
 import segmentSegmentOverlap     from './figures/segment-segment-overlap.js'
 import segmentCircleOverlap      from './figures/segment-circle-overlap.js'
 import segmentsSegmentOverlap    from './figures/segments-segment-overlap.js'
+import segsegClosest             from './figures/segseg-closest.js'
 import segmentsCircleSweep1      from './figures/segments-circle-sweep1.js'
 import circleCircleOverlap       from './figures/circle-circle-overlap.js'
 import triPointOverlap           from './figures/triangle-point-overlap.js'
@@ -114,6 +115,7 @@ function animate (t) {
     obbOverlap.draw(example18, dt)
     obbTriangleOverlap.draw(example19, dt)
     aabbAabbContain.draw(example20, dt)
+    segsegClosest.draw(example21, dt)
 
     requestAnimationFrame(animate)
 }
@@ -139,6 +141,7 @@ const example17 = createExample(segmentCircleOverlap)
 const example18 = createExample(obbOverlap)
 const example19 = createExample(obbTriangleOverlap)
 const example20 = createExample(aabbAabbContain)
+const example21 = createExample(segsegClosest)
 
 requestAnimationFrame(animate)
 

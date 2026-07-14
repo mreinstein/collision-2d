@@ -216,6 +216,27 @@ if (segOverlap(seg1Point1, seg1Point2, seg2Point1, seg2Point2, intersectionPoint
 ```
 
 
+### segseg-closest
+
+![alt text](docs/segseg-closest.png "segment-segment closest point test")
+
+Finds the closest point between two line segments. Returns the shortest distance; the optional `detail` object is filled in with the segment parameters (`sc`, `tc`, both `0..1`) and `closestDistance`.
+
+```javascript
+import { segClosest } from '@footgun/collision-2d'
+
+const s1 = [ [ x0, y0 ], [ x1, y1 ] ]  // segment 1: [ start, end ]
+const s2 = [ [ x0, y0 ], [ x1, y1 ] ]  // segment 2: [ start, end ]
+
+const detail = {}
+const distance = segClosest(s1, s2, detail)
+
+// closest point on each segment, from the returned parameters:
+// p1 = s1[0] + detail.sc * (s1[1] - s1[0])
+// p2 = s2[0] + detail.tc * (s2[1] - s2[0])
+```
+
+
 ### segments-segment-overlap
 
 ![alt text](docs/segments-segment-overlap.png "segments-segment overlap test")
