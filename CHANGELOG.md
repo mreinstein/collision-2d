@@ -1,5 +1,11 @@
+# 0.7.0
+* add `obb-obb-overlaps` and `obb-triangle-overlaps`
+* document segseg closest. fixes #8
+* add visual tests for `aabb-contains`. fixes #13
+
+
 # 0.6.0
-* BREAKING: rename `sphere` to `circle` everywhere. Resolves #19
+* BREAKING: rename `sphere` to `circle` everywhere. fixes #19
 
 
 # 0.5.1
