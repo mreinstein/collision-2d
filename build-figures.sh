@@ -41,3 +41,5 @@ deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-f
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/ray-circle-overlap.js --count 1200 --output docs/ray-circle-overlap.png
 
 deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/segment-circle-overlap.js --count 1200 --output docs/segment-circle-overlap.png
+
+deno run --allow-read --allow-write --allow-run --allow-net --allow-import cli-figure-to-apng.ts --module figures/point-polygon-overlap.js --count 1200 --output docs/point-polygon-overlap.png

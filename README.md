@@ -360,6 +360,33 @@ const collided = trianglePointOverlap(v0, v1, v2, point) // collided is true or 
 ```
 
 
+### point-polygon-overlap
+
+![alt text](docs/point-polygon-overlap.png "point-polygon overlap test")
+
+Determines if a point is inside a polygon using a ray-casting (even-odd) test. Works on convex and concave polygons and is independent of vertex winding order. The polygon is described as an array of `segment`s forming a closed loop.
+
+```javascript
+import { pointPolygonOverlap } from '@footgun/collision-2d'
+
+// polygon as a closed loop of line segments
+const segments = [
+    [ [ 0, 0 ], [ 50, 0 ] ],
+    [ [ 50, 0 ], [ 50, 50 ] ],
+    [ [ 50, 50 ], [ 0, 50 ] ],
+    [ [ 0, 50 ], [ 0, 0 ] ]
+]
+
+const point = [ 25, 25 ]
+
+// polygonOffset is optional; added to every segment vertex so a shared
+// polygon can be positioned without rebuilding its segments each frame
+const polygonOffset = [ 0, 0 ]
+
+const inside = pointPolygonOverlap(point, segments, polygonOffset) // true or false
+```
+
+
 ### obb-obb overlap
 
 ![alt text](docs/obb-obb-overlap.png "OBB-OBB overlap test")

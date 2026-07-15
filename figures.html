@@ -65,6 +65,7 @@ import circleCircleOverlap       from './figures/circle-circle-overlap.js'
 import triPointOverlap           from './figures/triangle-point-overlap.js'
 import obbOverlap                 from './figures/obb-obb-overlap.js'
 import obbTriangleOverlap         from './figures/obb-triangle-overlap.js'
+import pointPolygonOverlap        from './figures/point-polygon-overlap.js'
 
 
 function createExample (impl) {
@@ -116,6 +117,7 @@ function animate (t) {
     obbTriangleOverlap.draw(example19, dt)
     aabbAabbContain.draw(example20, dt)
     segsegClosest.draw(example21, dt)
+    pointPolygonOverlap.draw(example22, dt)
 
     requestAnimationFrame(animate)
 }
@@ -142,6 +144,7 @@ const example18 = createExample(obbOverlap)
 const example19 = createExample(obbTriangleOverlap)
 const example20 = createExample(aabbAabbContain)
 const example21 = createExample(segsegClosest)
+const example22 = createExample(pointPolygonOverlap)
 
 requestAnimationFrame(animate)
 
