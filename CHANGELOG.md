@@ -1,3 +1,7 @@
+# 0.7.1
+* make points lying on triangle edge considered overlapping in `triangle-point-overlap`
+
+
 # 0.7.0
 * add `obb-obb-overlaps` and `obb-triangle-overlaps`
 * document segseg closest. fixes #8
